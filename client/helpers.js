@@ -35,3 +35,7 @@ Template.registerHelper("timeToNow", function(date) {
 	return moment([date.getFullYear(), date.getMonth(), date.getDate()]).toNow();
 	// return moment(date).toNow();
 });
+Template.registerHelper("print", function(argument){
+	console.log(argument);
+	return argument;
+});
