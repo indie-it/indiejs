@@ -1,0 +1,21 @@
+<template name="update">
+    {{setTitle 'Mon profil'}}
+    <ul class="nav nav-pills">
+        <li role="presentation"><a href="{{pathFor 'profile.view'}}">Afficher</a></li>
+        <li role="presentation" class="active"><a href="#">Profil</a></li>
+        <li role="presentation"><a href="#">Description</a></li>
+        <li role="presentation"><a href="#">Expériences <span class="badge">2</span></a></li>
+        <li role="presentation"><a href="#">Compétences <span class="badge">7</span></a></li>
+        <li role="presentation"><a href="#">Recommandations <span class="badge">3</span></a></li>
+        <li role="presentation"><a href="#">Amis <span class="badge">7</span></a></li>
+    </ul>
+
+    <h2>Mon profil</h2>
+
+    {{#if userHasProfile }}
+        {{> quickForm collection="UserProfiles" id="userprofile.update" doc=profile }}
+    {{else}}
+        {{> quickForm collection="UserProfiles" id="userprofile.create" }}
+    {{/if}}
+
+</template>

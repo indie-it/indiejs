@@ -1,0 +1,51 @@
+<template name="mission">
+
+    <h3>{{mission.name}} {{#if mission.organization}} @{{mission.organization}} {{/if}}</h3>
+
+    <div class="container">
+        <div class="row">
+
+            <!-- A GAUCHE -->
+            <div class="col-md-7">
+
+                <h5>
+                    {{#if mission.type}}<span class="label label-primary">{{mission.type}}</span>&nbsp;{{/if}}
+                    {{#if mission.level}}<span class="label label-primary">{{mission.level}}</span>&nbsp;{{/if}}
+                    {{#each mission.technos}}<span class="label label-info">{{this}}</span>&nbsp;{{/each}}
+                </h5>
+
+                {{#if mission.shortDescription}}<h4><small>{{mission.shortDescription}}</small></h4>{{/if}}
+
+                <div class="well">{{#markdown}}{{mission.description}}{{/markdown}}</div>
+
+            </div>
+
+            <!-- A DROITE -->
+            <div class="col-md-5">
+                <h4>Lieu: {{mission.location}}</h4>
+                <h4>Début:&nbsp;{{getMissionStart}}</h4>
+                <h4>Durée: 6 mois</h4>
+                <h4>TJM: {{mission.averageDailyRate}}€/j</h4>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Boutons -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <a id="interested" class="btn btn-default" href="#" role="button">Intéressé</a>
+                <a id="notinterested" class="btn btn-default" href="#" role="button">Pas intéressé</a>
+            </div>
+        </div>
+    </div>
+    <!-- <br/>
+    <div class="bs-example bs-example-standalone" data-example-id="dismissible-alert-js">
+        <div class="alert alert-warning alert-dismissible fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <strong>Holy guacamole!</strong> Best check yo self, you're not looking too good.
+        </div>
+    </div> -->
+
+</template>

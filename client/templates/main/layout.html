@@ -1,0 +1,30 @@
+<template name="layout">
+
+<head>
+    <title>{{setTitle}}</title>
+    <meta charset="utf-8" />
+</head>
+
+<body>
+
+    {{> sAlert}}
+
+    {{>navigation}}
+
+      <div class="container">
+
+          <!-- <div class="row"> -->
+              <!-- <nav class="col-md-2">{{> menu}}</nav> -->
+              <!-- <section class="col-md-12"> -->
+                  {{> yield}}
+              <!-- </section> -->
+          <!-- </div> -->
+
+          {{> footer}}
+
+      </div>
+
+
+</body>
+
+</template>

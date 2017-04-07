@@ -1,0 +1,23 @@
+<template name="register">
+  <h1 class="text-center">Enregistrement</h1>
+  {{#autoForm collection="Meteor.users" id="insertUser"}}
+    <fieldset>
+      <legend>Informations obligatoires</legend>
+      {{> afQuickField name="username"}}
+      {{> afQuickField name="password"}}
+      {{> afQuickField name="confirmation"}}
+      {{> afQuickField name="emails"}}
+    </fieldset>
+    <!-- <fieldset>
+      <legend>Informations facultatives</legend>
+      {{> afQuickField name="profile.firstName"}}
+      {{> afQuickField name="profile.lastName"}}
+      {{> afQuickField name="profile.birthDay"}}
+      {{> afQuickField name="profile.gender"}}
+      {{> afQuickField name="profile.organization"}}
+      {{> afQuickField name="profile.website"}}
+      {{> afQuickField name="profile.bio"}}
+    </fieldset> -->
+    <button type="submit" class="btn btn-primary">Valider</button>
+  {{/autoForm}}
+</template>

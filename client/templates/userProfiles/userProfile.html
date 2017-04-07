@@ -1,0 +1,103 @@
+<template name="profile">
+
+    <!-- Profil -->
+    <div class="col-md-9">
+        <section id="top">
+            <div class="row">
+                <div class="col-md-8">
+                    <h1 id="profile">{{profile.firstName}} {{allcaps profile.lastName}}
+                        {{#if isSelfProfile}}
+                            &nbsp;&nbsp;
+                            <small><a href="{{pathFor 'profile.update'}}">Modifier</a></small>
+                        {{/if}}
+                    </h1>
+                    <h3>{{profile.title}}</h3>
+                </div>
+                <div class="col-md-4">
+                    <div class="well well-sm">
+                        <h5>
+                        {{#if profile.isAvailable}}
+                            Disponible
+                        {{else}}
+                            Disponible au {{formatDate profile.availDate}}
+                        {{/if}}
+                        </h5>
+                        <h5>
+                        {{#if profile.isEnRecherche}}
+                            En recherche de mission
+                        {{else}}
+                            -
+                        {{/if}}
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="description">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="well well-lg">
+                        {{#markdown}}{{profile.description}}{{/markdown}}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <canvas id="radar"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2>Education/Formation</h2>
+            {{#each profile.education}}
+                {{> education}}
+            {{/each}}
+        </section>
+
+        <section id="experiences">
+            <h2>Expériences</h2>
+            {{#each profile.experiences}}
+            <section id={{getSectionIdFromExperience this}}>
+                {{> experience}}
+            </section>
+            {{/each}}
+        </section>
+
+        <section id="skills">
+            <h2>Compétences</h2>
+        </section>
+
+        <section id="recommendations">
+            <h2>Recommandations</h2>
+        </section>
+
+        <section id="friends">
+            <h2>Amis</h2>
+        </section>
+
+        <p>Profil mis à jour le {{formatDate updated}}</p>
+    </div>
+    <!-- /Profil -->
+
+    <!-- Navigation profil -->
+    <div class="col-md-3 scrollspy">
+        <ul id="nav" class="nav hidden-xs hidden-sm" data-spy="affix">
+            <li><a href="#profile">Profil</a></li>
+            <li><a href="#description">Description</a></li>
+            <li><a href="#education">Education <span class="badge">{{getCountEducation}}</span></a></li>
+            <li>
+                <a href="#experiences">Expériences <span class="badge">{{getCountExperiences}}</span></a>
+                <ul class="nav">
+                    {{#each profile.experiences}}
+                    <li><a href='#{{getSectionIdFromExperience this}}'><span class="fa fa-angle-double-right"></span>{{company}}</a></li>
+                    {{/each}}
+                </ul>
+            </li>
+            <li><a href="#skills">Compétences <span class="badge">{{getCountSkills}}</span></a></li>
+            <li><a href="#recommendations">Recommandations <span class="badge">{{getCountRecommendations}}</span></a></li>
+            <li><a href="#friends">Amis <span class="badge">{{getCountFriends}}</span></a></li>
+        </ul>
+    </div>
+    <!-- /Navigation profil -->
+
+</template>

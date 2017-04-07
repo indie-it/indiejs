@@ -1,0 +1,35 @@
+<template name="list">
+    {{setTitle 'Liste des profils'}}
+    <h2>Liste des profils</h2>
+    <!-- <ul>
+    {{#each profiles}}
+        <li>{{title}}</li>
+    {{/each}}
+    </ul> -->
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Titre</th>
+          <th>Disponibilité</th>
+          <!-- <th>Date</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        {{#each profiles}}
+        <tr>
+          <th scope="row"><a href="{{pathFor route='profile'}}">{{ title }}</a></th>
+          <td>
+              {{#if isAvailable }}
+              Oui
+              {{else}}
+                  {{#if availDate}}
+                  {{formatDate availDate}}
+                  {{/if}}
+              {{/if}}</td>
+          <!-- <td>{{ formatDate updated }}</td> -->
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+</template>

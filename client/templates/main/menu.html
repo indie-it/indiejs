@@ -1,0 +1,15 @@
+<template name="menu">
+  <h3>Menu</h3>
+  <ul class="nav nav-pills nav-stacked">
+    <li><a href="{{pathFor route='home'}}">Accueil</a></li>
+
+    {{#if currentUser}}
+    <li><a href="{{pathFor route='missionCreate'}}">Créer mission</a></li>
+    <li><a href="{{pathFor route='missionsList'}}">Liste des missions</a></li>
+
+    <li><a href="{{pathFor route='profile.update'}}">Mon profil</a></li>
+    <li><a href="{{pathFor route='profile.list'}}">Liste des profils</a></li>
+    {{/if}}
+
+  </ul>
+</template>
