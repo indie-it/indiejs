@@ -1,41 +1,45 @@
 AutoForm.hooks({
-    'insertUser': {
+	'insertUser': {
 
-        onSubmit: function(doc) { // Gestion du formulaire d'inscription
-            // console.log(doc);
-            var error = null;
-            var password = doc.password;
-            var email = doc.emails[0].address;
+		onSubmit: function (doc) { // Gestion du formulaire d'inscription
 
-            Accounts.createUser({
-                username: doc.username,
-                email: email,
-                password: password,
-                profile: doc.profile ? doc.profile : {}
-            }, function(err) {
-                if(err) {
-                    error = new Error("Une erreur s'est produite");
-                }
-            });
+			console.log(doc);
 
-            if (error === null) {
-                this.done(); // Appelle onSuccess
-            }
-            else {
-                this.done(error); // Appelle onError
-            }
+			if (!doc.username || !doc.password || !doc.emails) {
+				sAlert.error("Veuillez renseigner les champs obligatoires.");
+				return false;
+			}
+			var email = doc.emails[0].address;
 
-            return false; // Dans tous les cas, arrête la soumission des donneés.
-        },
+			var self = this;
 
-        onSuccess: function() {
-            Router.go(Utils.pathFor('home'));
-        },
+			Accounts.createUser({
+				username: doc.username,
+				email: email,
+				password: doc.password,
+				profile: doc.profile ? doc.profile : {}
+			}, function (err) {
+				console.log(err);
+				if (!err) {
+					self.done(); // Appelle onSuccess
+				}
+				else {
+					self.done(error); // Appelle onError
+				}
+			});
 
-        onError: function(formType, err) {
-          var error = err.reason ? err.reason : err;
-          alert(error);
-        }
+			return false; // Dans tous les cas, arrête la soumission des donneés.
+		},
 
-    }
+		onSuccess: function () {
+			sAlert.success("Utilisateur créé!");
+			Router.go(Utils.pathFor('home'));
+		},
+
+		onError: function (formType, err) {
+			console.log(err);
+			sAlert.error(err.message);
+		}
+
+	}
 });

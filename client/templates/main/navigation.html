@@ -35,7 +35,7 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     {{#if currentUser}}
-                    <li><a href="{{pathFor route='profile.update'}}">Profil ({{currentUser.username}})</a></li>
+                    <li class="{{getCurrentClass 'profile.update'}}"><a href="{{pathFor route='profile.update'}}">Profil ({{currentUser.username}})</a></li>
                     <li><a href="#" class="logout">Déconnexion</a></li>
                     {{/if}}
                 </ul>
