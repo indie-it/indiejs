@@ -1,0 +1,45 @@
+﻿<template name="action">
+	<li>{{timeFromNow createdAt}} - {{> Template.dynamic template=getTemplateName data=options}} </li>
+</template>
+
+<template name="action-mission-create">
+	<strong>{{username}}</strong> a ajouté la mission
+	<a href="{{pathFor 'mission' _id=missionid }}"><strong>{{mission}}</strong></a>.
+</template>
+
+<template name="action-mission-update">
+	<strong>{{username}}</strong> a mis à jour la mission
+	<strong>{{mission}}</strong>.
+</template>
+
+<template name="action-profile-create">
+	<strong>{{username}}</strong> a créé un nouveau profil 
+	<a href="{{pathFor 'profile' _id=profileid}}"><strong>{{profile}}</strong></a>.
+</template>
+
+<template name="action-profile-update">
+	<strong>{{username}}</strong> a mis à jour le profil 
+	<a href="{{pathFor 'profile' _id=profileid}}"><strong>{{profile}}</strong></a>.
+</template>
+
+<template name="action-user-sign-in">
+	<strong>{{username}}</strong> s'est inscrit à indie-it.
+</template>
+
+<template name="action-user-interested">
+	<strong>{{username}}</strong> est intéressé par la mission
+	<a href="{{pathFor 'mission' _id=missionid}}"><strong>{{mission}}</strong></a>.
+</template>
+
+<template name="action-user-not-interested">
+	<strong>{{username}}</strong> n'est pas intéressé par la mission
+	<a href="{{pathFor 'mission' _id=missionid}}"><strong>{{mission}}</strong></a>.
+</template>
+
+<template name="action-user-log-in">
+	<strong>{{username}}</strong> s'est connecté à indie-it.
+</template>
+
+<template name="action-user-log-off">
+	<strong>{{username}}</strong> s'est déconnecté d'indie-it.
+</template>

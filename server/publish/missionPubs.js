@@ -1,9 +1,9 @@
 import SimpleSchema from 'simpl-schema';
 
 
-Meteor.publish('missions', function() {
-	return Missions.find();
-});
+//Meteor.publish('missions', function() {
+//	return Missions.find();
+//});
 
 Meteor.publish('allMissions', function() {
 	console.log("Meteor.publish('allMissions', ... )");
