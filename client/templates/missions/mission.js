@@ -1,39 +1,60 @@
 import { Meteor } from 'meteor/meteor';
-//import { Router } from 'meteor/iron:router'
 
 Template.mission.helpers({
-	getMissionStart: function() {
+	"getMissionStart": function () {
 		console.log("getMissionStart");
 		if (!!this.mission.isEarliestStart) {
 			return "au plus tôt";
 		}
 		return Utils.formatDate(this.mission.start);
 	},
-	interested: function() {
-		console.log("interested");
+	"getMissionDuration": function () {
+		return !this.mission.duration ? "" : moment.duration( this.mission.duration, 'days').humanize();
+	},
+	"userHasAnswered": function () {
 
-	},
-	notinterested: function() {
-		console.log("notinterested");
+		var answered = false;
 
+		if (this.mission.interestedUserIds && _.indexOf(this.mission.interestedUserIds, Meteor.userId()) != -1) {
+			answered = true;
+		}
+
+		if (this.mission.notinterestedUserIds && _.indexOf(this.mission.notinterestedUserIds, Meteor.userId()) != -1) {
+			answered = true;
+		}
+
+		return answered;
 	},
-	create: function() {
-		console.log("create");
+	"getAnswerText": function () {
+		var answerText = "";
+		if (this.mission.interestedUserIds && _.indexOf(this.mission.interestedUserIds, Meteor.userId()) != -1) {
+			answerText = "Vous êtes intéressé(e) par cette mission.";
+		}
+
+		if (this.mission.notinterestedUserIds && _.indexOf(this.mission.notinterestedUserIds, Meteor.userId()) != -1) {
+			answerText = "Vous n'êtes pas intéressé(e) par cette mission.";
+		}
+
+		return answerText;
 	},
-	rendered: function() {
-		console.log("rendered");
-	},
-	destroyed: function() {
-		console.log("destroyed");
+	"getAnswerClass": function () {
+		var aclass = "";
+		if (this.mission.interestedUserIds && _.indexOf(this.mission.interestedUserIds, Meteor.userId()) != -1) {
+			aclass = "up";
+		}
+		if (this.mission.notinterestedUserIds && _.indexOf(this.mission.notinterestedUserIds, Meteor.userId()) != -1) {
+			aclass = "down";
+		}
+		return aclass;
 	},
 });
 
 Template.mission.events({
-	"click #interested": function(event, template) {
+	"click #interested": function (event, template) {
 		console.log("interested");
 		console.log(this.mission._id);
 
-		Meteor.call("mission.interested", this.mission._id, function(error, result) {
+		Meteor.call("mission.interested", this.mission._id, function (error, result) {
 			if (error) {
 				console.log("error", error);
 			}
@@ -45,10 +66,10 @@ Template.mission.events({
 		});
 
 	},
-	"click #notinterested": function(event, template) {
+	"click #notinterested": function (event, template) {
 		console.log("notinterested");
 
-		Meteor.call("mission.notinterested", this.mission._id, function(error, result) {
+		Meteor.call("mission.notinterested", this.mission._id, function (error, result) {
 			if (error) {
 				console.log("error", error);
 			}
