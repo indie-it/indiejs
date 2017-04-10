@@ -1,8 +1,12 @@
 ﻿<template name="mission">
 
-	<h3>{{mission.name}} {{#if mission.organization}} @{{mission.organization}} {{/if}}</h3>
-
 	<div class="container">
+
+		<div class="row">
+
+			<h3>{{mission.name}} {{#if mission.organization}} @{{mission.organization}} {{/if}}</h3>
+		</div>
+
 		<div class="row">
 
 			<!-- A GAUCHE -->
@@ -16,7 +20,7 @@
 
 				{{#if mission.shortDescription}}<h4><small>{{mission.shortDescription}}</small></h4>{{/if}}
 
-				<div >{{#markdown}}{{mission.description}}{{/markdown}}</div>
+				<div>{{#markdown}}{{mission.description}}{{/markdown}}</div>
 
 			</div>
 
@@ -26,7 +30,7 @@
 
 					{{#if mission.location}}<p><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>&nbsp;{{mission.location}}</p>{{/if}}
 
-					<p><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{getMissionStart}}</p>
+					<p><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;Début {{getMissionStart}}</p>
 
 					{{#if mission.duration}}
 					<p><span class="glyphicon glyphicon-time" aria-hidden="true"></span>&nbsp;{{getMissionDuration}}</p>
@@ -39,22 +43,22 @@
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<!-- Boutons -->
-	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				{{#if userHasAnswered }}
-
-				<strong><span class="glyphicon glyphicon-thumbs-{{ getAnswerClass }}" aria-hidden="true"></span>&nbsp;{{ getAnswerText }}</strong>
-
-
-
+				<p><strong><span class="glyphicon glyphicon-thumbs-{{ getAnswerClass }}" aria-hidden="true"></span>&nbsp;{{ getAnswerText }}</strong></p>
 				{{else}}
-				<a id="interested" class="btn btn-default" href="#" role="button">Intéressé</a>
-				<a id="notinterested" class="btn btn-default" href="#" role="button">Pas intéressé</a>
+				<h3>
+					<a id="interested" class="btn btn-primary" href="#" role="button">Intéressé</a>
+					<a id="notinterested" class="btn btn-default" href="#" role="button">Pas intéressé</a>
+				</h3>
 				{{/if}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<p><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp;{{ getInterestedUsersText }}</p>
 			</div>
 		</div>
 	</div>

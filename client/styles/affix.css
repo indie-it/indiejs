@@ -1,0 +1,60 @@
+/*Bootstrap Affix*/
+
+.affix {
+	top: 60px;
+	width: 213px;
+	/*width: 250px;*/
+}
+
+@media (min-width: 1200px) {
+	.affix {
+		width: 263px;
+	}
+}
+
+.affix-bottom {
+	position: absolute;
+	width: 213px;
+}
+
+@media (min-width: 1200px) {
+	.affix-bottom {
+		width: 263px;
+	}
+}
+
+#nav .active {
+	font-weight: bold;
+	background: #f5f5f5;
+}
+
+.nav .nav {
+	display: none;
+}
+
+.nav .active .nav {
+	display: block;
+}
+
+.nav .nav a {
+	font-weight: normal;
+	font-size: .85em;
+}
+
+.nav .nav span {
+	margin: 0 5px 0 2px;
+}
+
+.nav .nav .active a,
+.nav .nav .active:hover a,
+.nav .nav .active:focus a {
+	font-weight: bold;
+	padding-left: 30px;
+	/*border-left: 5px solid black;*/
+}
+
+.nav .nav .active span,
+.nav .nav .active:hover span,
+.nav .nav .active:focus span {
+	display: none;
+}

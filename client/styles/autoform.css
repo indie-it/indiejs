@@ -1,0 +1,6 @@
+
+/*AutoForm : met une astérisque à côté des champs obligatoires*/
+
+[data-required] label:after {
+	content: '*'
+}

@@ -47,6 +47,25 @@ Template.mission.helpers({
 		}
 		return aclass;
 	},
+	"getInterestedUsersText": function () {
+		console.log("this.mission.interestedUserIds.length: " + this.mission.interestedUserIds.length);
+		var isUserInterested = _.indexOf(this.mission.interestedUserIds, Meteor.userId()) != -1;
+		var isUserNotInterested = _.indexOf(this.mission.notinterestedUserIds, Meteor.userId()) != -1;
+
+		if (!this.mission.interestedUserIds || this.mission.interestedUserIds.length === 0) {
+			return "Cette mission n'intéresse encore personne."
+		}
+		if (isUserInterested) {
+			if (this.mission.interestedUserIds.length > 1) {
+				return "Cette mission intéresse aussi " + (this.mission.interestedUserIds.length - 1) + " autre(s) personne(s).";
+			}
+			if (this.mission.interestedUserIds.length === 1) {
+				return "Vous êtes la seule personne intéressée par cette mission pour l'instant.";
+			}
+
+		}
+		return "Cette mission intéresse " + this.mission.interestedUserIds.length + " personne(s).";
+	},
 });
 
 Template.mission.events({
