@@ -1,12 +1,15 @@
 import SimpleSchema from 'simpl-schema';
 
-Meteor.publish('actions.all.sortedByDateDesc', function () {
+Meteor.publish('actions.missions.sortedByDateDesc', function () {
 	//if (!this.userId) {
 	//	return;
 	//}
-	console.log("[actions.all.sortedByDateDesc]");
-	return Actions.find({}, {
-		sort: { createdAt: -1 },
-		limit: 15
-	});
+	console.log("[actions.missions.sortedByDateDesc]");
+	return Actions.find({
+		$or: [
+			{ actionType: 'mission-create' },
+			{ actionType: 'mission-update' },
+			//{ actionType: 'user-interested' }
+		]
+	}, { sort: { createdAt: -1 }, limit: 15 });
 });

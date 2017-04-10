@@ -1,6 +1,5 @@
-import {
-	Meteor
-} from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor';
+//import { Router } from 'meteor/iron:router'
 
 Template.mission.helpers({
 	getMissionStart: function() {
@@ -34,15 +33,14 @@ Template.mission.events({
 		console.log("interested");
 		console.log(this.mission._id);
 
-		// Meteor.subscribe("mission.interested", this.mission._id);
-
 		Meteor.call("mission.interested", this.mission._id, function(error, result) {
 			if (error) {
 				console.log("error", error);
 			}
 			if (result) {
 				console.log(result);
-				sAlert.success("Avis pris en compte.");
+				sAlert.success("Avis pris en compte.", { onRouteClose: false });
+				Router.go(Utils.pathFor('missionsList'));
 			}
 		});
 
@@ -56,7 +54,8 @@ Template.mission.events({
 			}
 			if (result) {
 				console.log(result);
-				sAlert.success("Avis pris en compte.");
+				sAlert.success("Avis pris en compte.", { onRouteClose: false });
+				Router.go(Utils.pathFor('missionsList'));
 			}
 		});
 	},

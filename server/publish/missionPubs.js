@@ -1,18 +1,20 @@
-import SimpleSchema from 'simpl-schema';
+﻿import SimpleSchema from 'simpl-schema';
 
 
 //Meteor.publish('missions', function() {
 //	return Missions.find();
 //});
 
-Meteor.publish('allMissions', function() {
+Meteor.publish('allMissions', function () {
 	console.log("Meteor.publish('allMissions', ... )");
 	return Missions.find({});
 });
 
-Meteor.publish('allMissionsHeader', function() {
-	console.log("Meteor.publish('allMissionsHeader', ... )");
-	return Missions.find({}, {
+Meteor.publish('missions.headers', function () {
+	console.log("Meteor.publish('missions.headers', ... )");
+	return Missions.find({
+		notinterestedUserIds: { $ne: this.userId }
+	}, {
 		fields: {
 			description: 0,
 			author: 0
@@ -23,7 +25,7 @@ Meteor.publish('allMissionsHeader', function() {
 	});
 });
 
-Meteor.publish("missionById", function(missionId) {
+Meteor.publish("missionById", function (missionId) {
 	// We need to check the `listId` is the type we expect
 	new SimpleSchema({
 		missionId: {

@@ -44,13 +44,13 @@ module.exports = {
 			MONGO_URL: 'mongodb://localhost/meteor',
 		},
 
-		// ssl: {
-		// 	// Enables let's encrypt (optional)
-		// 	autogenerate: {
-		// 		email: 'email.address@domain.com',
-		// 		domains: 'website.com,www.website.com' // comma seperated list of domains
-		// 	}
-		// },
+		ssl: {
+			// Enables let's encrypt (optional)
+			autogenerate: {
+				email: 'indieitblog@gmail.com',
+				domains: 'ec2-52-33-204-40.us-west-2.compute.amazonaws.com' //'website.com,www.website.com' // comma seperated list of domains
+			}
+		},
 
 
 		// This is the maximum time in seconds it will wait
