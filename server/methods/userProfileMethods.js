@@ -8,9 +8,16 @@ Meteor.methods({
 		insertdoc.userid = this.userId;
 		insertdoc.createdAt = new Date();
 
+		// force la mise à jour du champ availDate.
+		if (insertdoc.isAvailable === true) {
+			insertdoc.availDate = new Date();
+		}
+
+		// validation de l'objet
 		Globals.schemas.UserProfileSchema.validate(insertdoc);
 
 		return UserProfiles.insert(insertdoc, function (err, objectid) {
+
 			if (err) {
 				throw new Meteor.Error(500, err.message);
 			}
@@ -46,7 +53,15 @@ Meteor.methods({
 		updatedoc.$set.userid = this.userId;
 		updatedoc.$set.createdAt = profile.createdAt;
 
+		// force la mise à jour du champ availDate.
+		if (updatedoc.$set.isAvailable === true) {
+			updatedoc.$set.availDate = new Date();
+			console.log("updatedoc.$set.availDate: " + updatedoc.$set.availDate);
+		}
+
 		Globals.schemas.UserProfileSchema.validate(updatedoc.$set);
+
+
 
 		UserProfiles.update(profile._id, updatedoc, function (err) {
 			if (err) {

@@ -1,39 +1,23 @@
 AutoForm.hooks({
 
-	'userprofile.create': {
-		// Called when form does not have a `type` attribute
-		onSubmit: function(doc) {
+	'userprofile.createorupdate': {
+		onSubmit: function (insertdoc, updatedoc, currentdoc) {
 			var self = this;
-			Meteor.call("userprofile.insert", doc, function(error, result) {
-				if (error) {
-					console.log("error", error);
-					self.done(error); // Appelle onError
-					return;
-				}
-				if (result) {
+			if (!currentdoc) {
+				// création de profil
+				Meteor.call("userprofile.insert", insertdoc, function (err, result) {
+					if (err) {
+						console.log("error", err);
+						self.done(err); // Appelle onError
+						return;
+					}
 					self.done(); // Appelle onSuccess
-				}
-			});
-			return false;
-		},
-		// Called when any submit operation succeeds
-		onSuccess: function() {
-			sAlert.success('Le profil a bien été créé!', {
-				onRouteClose: false
-			});
-			Router.go(Utils.pathFor('home'));
-		},
-		// Called when any submit operation fails
-		onError: function(formType, err) {
-			var error = err.reason ? err.reason : err;
-			sAlert.error('Erreur! ' + error);
-		},
-	},
+				});
+				return false;
+			}
 
-	'userprofile.update': {
-		onSubmit: function(insertdoc, updatedoc, currentdoc) {
-			var self = this;
-			Meteor.call("userprofile.update", updatedoc, function(error) {
+			// Mise à jour de profil
+			Meteor.call("userprofile.update", updatedoc, function (error) {
 				if (error) {
 					console.log("error", error);
 					self.done(error); // Appelle onError
@@ -43,10 +27,11 @@ AutoForm.hooks({
 			});
 			return false;
 		},
-		onSuccess: function() {
-			sAlert.success('Le profil a bien été mis à jour!', { onRouteClose: false });
+		onSuccess: function () {
+			sAlert.success("Modifications sauvegardées", { onRouteClose: false });
+			Router.go(Utils.pathFor('home'));
 		},
-		onError: function(formType, err) {
+		onError: function (formType, err) {
 			var error = err.reason ? err.reason : err;
 			sAlert.error('Erreur! ' + error);
 		}

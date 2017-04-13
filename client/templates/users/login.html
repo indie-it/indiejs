@@ -1,15 +1,42 @@
-<template name="login">
-    <h1 class="text-center">Se connecter</h1>
-    <form>
-        <div class="form-group">
-            <label for="username">Nom d'utilisateur ou email</label>
-            <input id="username" class="form-control" type="text" />
-        </div>
-        <div class="form-group">
-            <label for="password">Mot de passe</label>
-            <input id="password" class="form-control" type="password" />
-        </div>
-        <p><a href="{{pathFor route='user.register'}}">Pas encore membre ?</a></p>
-        <button class="btn btn-primary">Connexion</button>
-    </form>
+﻿<template name="login">
+	<div class="container">
+		<div class="row">
+			<h1>Se connecter</h1>
+		</div>
+
+		<div class="row">
+
+			<div class="col-md-6 col-lg-6">
+				<form>
+					<div class="form-group">
+						<label for="username">Nom d'utilisateur ou email</label>
+						<input id="username" class="form-control" type="text" />
+					</div>
+					<div class="form-group">
+						<label for="password">Mot de passe</label>
+						<input id="password" class="form-control" type="password" />
+					</div>
+					<br />
+					<!--<p><a href="{{pathFor route='user.register'}}">Pas encore membre ?</a></p>-->
+					<button class="btn btn-primary">Connexion</button>
+				</form>
+				<br />
+			</div>
+
+			<div class="col-md-6 col-lg-6 well well-info">
+				<h4>Pas encore membre?</h4>
+				<p>Rejoignez la communauté des indépendants IT!</p>
+
+				<ul class="fa-ul">
+					<li><i class="fa-li fa fa-check-square text-success"></i>Site entièrement gratuit</li>
+					<li><i class="fa-li fa fa-check-square text-success"></i>Commission de 5% sur votre rémunération</li>
+					<li><i class="fa-li fa fa-check-square text-success"></i>Communauté d'entraide et partage</li>
+					<li><i class="fa-li fa fa-check-square text-success"></i>Garanti sans SSII</li>
+				</ul>
+
+				<a href="{{pathFor route='user.register'}}" class="btn btn-primary">Je m'inscris</a>
+
+			</div>
+		</div>
+	</div>
 </template>

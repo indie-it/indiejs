@@ -102,5 +102,5 @@ function configureAfix(){
 
 Template.profile.rendered = function() {
 	configureAfix();
-	Tracker.autorun(drawChart);
+	//Tracker.autorun(drawChart);
 };

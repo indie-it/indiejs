@@ -34,6 +34,19 @@ Globals.schemas.MissionSchema = new SimpleSchema({
 	},
 	'technos.$': String,
 
+	categories: {
+		type: Array,
+		minCount: 1,
+		label: "Catégories",
+		autoform: {
+			type: 'select2',
+			multiple: true,
+			options: Lists.categories
+		}
+	},
+	'categories.$': String,
+
+
 	shortDescription: {
 		type: String,
 		label: "Description (courte)",

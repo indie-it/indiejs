@@ -1,12 +1,6 @@
 <template name="education">
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h3 class="panel-title"><strong>{{getYear date}}</strong> - {{title}}</h3>
-        </div>
-        <div class="panel-body">
-            <h5>
-                <span class="label label-info">{{levels}}</span>&nbsp;{{school}} - {{city}}
-            </h5>
-        </div>
-    </div>
+	<div class="profile">
+		<p class="panel-title"><strong>{{getYear date}}</strong> - {{title}}</p>
+		<p><span class="label label-info">{{levels}}</span>&nbsp;{{school}} ({{city}})</p>
+	</div>
 </template>

@@ -24,7 +24,7 @@ AutoForm.hooks({
 					self.done(); // Appelle onSuccess
 				}
 				else {
-					self.done(error); // Appelle onError
+					self.done(err); // Appelle onError
 				}
 			});
 

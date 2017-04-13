@@ -1,19 +1,22 @@
 <template name="update">
 	{{setTitle 'Mon profil'}}
 
-	<ul class="nav nav-pills">
-		<li role="presentation"><a href="{{pathFor 'profile.view'}}">Afficher</a></li>
-		<li role="presentation"><a href="#coord-search">Coordonnées/Recherche</a></li>
-		<li role="presentation"><a href="#skills">Compétences</a></li>
-		<li role="presentation"><a href="#education">Education</a></li>
-		<li role="presentation"><a href="#experiences">Expériences</a></li>
-	</ul>
+	<div class="container">
 
-	{{#if userHasProfile }}
-	<!-- {{> quickForm collection="UserProfiles" id="userprofile.update" doc=profile }} -->
-	{{#autoForm collection="UserProfiles" id="userprofile.update" doc=profile}}
-	<section id="coord-search">
 		<div class="row">
+			<ul class="nav nav-pills">
+				<li role="presentation"><a href="{{pathFor 'profile.view'}}">Afficher</a></li>
+				<li role="presentation"><a href="#coord-search">Coordonnées/Recherche</a></li>
+				<li role="presentation"><a href="#skills">Compétences</a></li>
+				<li role="presentation"><a href="#education">Education</a></li>
+				<li role="presentation"><a href="#experiences">Expériences</a></li>
+			</ul>
+		</div>
+
+
+		{{#autoForm collection="UserProfiles" id="userprofile.createorupdate" doc=profile }}
+
+		<section id="coord-search" class="row">
 			<div class="col-md-6">
 				<fieldset>
 					<legend>Coordonnées</legend>
@@ -28,35 +31,35 @@
 					{{> afQuickField name='isEnRecherche'}}
 					{{> afQuickField name='isAvailable'}}
 					{{> afQuickField name='availDate'}}
+					{{> afQuickField name='categories'}}
 				</fieldset>
 			</div>
-		</div>
-	</section>
+		</section>
 
-	<section id="profile">
-		<fieldset>
-			<legend>Profil</legend>
-			{{> afQuickField name='title'}}
-			{{> afQuickField name='description' rows=6}}
-		</fieldset>
-	</section>
+		<section id="profile">
+			<fieldset>
+				<legend>Profil</legend>
+				{{> afQuickField name='private'}}
+				{{> afQuickField name='title'}}
+				{{> afQuickField name='description' rows=6}}
+			</fieldset>
+		</section>
 
-	<section id="skills">
-		{{> afQuickField name='skills'}}
-	</section>
+		<section id="skills">
+			{{> afQuickField name='skills'}}
+		</section>
 
-	<section id="education">
-		{{> afQuickField name='education'}}
-	</section>
+		<section id="education">
+			{{> afQuickField name='education'}}
+		</section>
 
-	<section id="experiences">
-		{{> afQuickField name='experiences' }}
-	</section>
+		<section id="experiences">
+			{{> afQuickField name='experiences' }}
+		</section>
 
-	<button type="submit" class="btn btn-primary">Mettre à jour</button>
-	{{/autoForm}}
-	{{else}}
-	{{> quickForm collection="UserProfiles" id="userprofile.create" }}
-	{{/if}}
+		<button type="submit" class="btn btn-primary">{{#if userHasProfile }}Mettre à jour{{else}}Créer le profil{{/if}}</button>
+
+		{{/autoForm}}
+	</div>
 
 </template>

@@ -3,20 +3,27 @@
 	<div class="container">
 
 		<div class="row">
-
-			<h3>{{mission.name}} {{#if mission.organization}} @{{mission.organization}} {{/if}}</h3>
+			<h3>{{mission.name}}</h3>
 		</div>
 
 		<div class="row">
 
 			<!-- A GAUCHE -->
-			<div class="col-md-8">
+			<div class="col-sm-8 col-md-9">
 
-				<p>
+				
+				{{#if mission.categories}}
+				<h4>
+					<i class="fa fa-tags" aria-hidden="true"></i> {{#each mission.categories}}<span class="label label-default">{{this}}</span> {{/each}}
+				</h4>
+				{{/if}}
+				<h4>
+					<i class="fa fa-tags" aria-hidden="true"></i> 
+					{{#each mission.technos}}<span class="label label-info">{{this}}</span> {{/each}}
+					<i class="fa fa-tags" aria-hidden="true"></i> 
 					{{#if mission.type}}<span class="label label-primary">{{mission.type}}</span>{{/if}}
 					{{#if mission.level}}<span class="label label-primary">{{mission.level}}</span>{{/if}}
-					{{#each mission.technos}}<span class="label label-info">{{this}}</span> {{/each}}
-				</p>
+				</h4>
 
 				{{#if mission.shortDescription}}<h4><small>{{mission.shortDescription}}</small></h4>{{/if}}
 
@@ -25,21 +32,21 @@
 			</div>
 
 			<!-- A DROITE -->
-			<div class="col-md-4">
+			<div class="col-sm-4 col-md-3">
 				<div class="alert alert-info" role="alert">
+					<p class="hidden-xs">
+						{{#each mission.categories}}<span class="label label-default">{{this}}</span> {{/each}}
+						{{#if mission.type}}<span class="label label-primary">{{mission.type}}</span>{{/if}}
+						{{#if mission.level}}<span class="label label-primary">{{mission.level}}</span>{{/if}}
+						{{#each mission.technos}}<span class="label label-info">{{this}}</span> {{/each}}
+					</p>
 
-					{{#if mission.location}}<p><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>&nbsp;{{mission.location}}</p>{{/if}}
 
-					<p><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;Début {{getMissionStart}}</p>
-
-					{{#if mission.duration}}
-					<p><span class="glyphicon glyphicon-time" aria-hidden="true"></span>&nbsp;{{getMissionDuration}}</p>
-					{{/if}}
-
-					{{#if mission.averageDailyRate}}
-					<p><span class="glyphicon glyphicon-euro" aria-hidden="true"></span>&nbsp;{{mission.averageDailyRate}}€/j</p>
-					{{/if}}
-
+					{{#if mission.organization}}<p><i class="fa fa-building-o fa-fw"></i> {{mission.organization}}</p>{{/if}}
+					{{#if mission.location}}<p><i class="fa fa-map-marker fa-fw"></i> {{mission.location}}</p>{{/if}}
+					<p><i class="fa fa-calendar fa-fw"></i> Début {{getMissionStart}}</p>
+					{{#if mission.duration}}<p><i class="fa fa-clock-o fa-fw"></i> {{getMissionDuration}}</p>{{/if}}
+					{{#if mission.averageDailyRate}}<p><i class="fa fa-eur fa-fw"></i> {{mission.averageDailyRate}}€/j</p>{{/if}}
 				</div>
 			</div>
 		</div>

@@ -1,24 +1,26 @@
 <template name="home">
 	{{setTitle 'Accueil'}}
+	<div class="container">
 
-	<div class="row">
-		<header class="col-md-12">
-			<!-- <img src="/img/logo-indie-it.jpg"/> -->
-			<h1>{{getGlobal 'appName'}}{{#if getGlobal 'appDesc' }}&nbsp;<small>{{getGlobal 'appDesc'}}</small>{{/if}}</h1>
-		</header>
+		<div class="row">
+			<header class="col-md-12">
+				<!-- <img src="/img/logo-indie-it.jpg"/> -->
+				<h1>{{getGlobal 'appName'}}{{#if getGlobal 'appDesc' }}&nbsp;<small>{{getGlobal 'appDesc'}}</small>{{/if}}</h1>
+			</header>
+		</div>
+
+		{{#if currentUser}}
+		<div class="row">
+			<h3>Bonjour <strong>{{ currentUser.username }}</strong>!</h3>
+			<h4><i class="fa fa-briefcase fa-lg"></i> Les dernières missions</h4>
+			<ul id="actions">
+				{{#each actions}}
+				{{>action}}
+				{{/each}}
+			</ul>
+		</div>
+		{{/if}}
 	</div>
-
-	{{#if currentUser}}
-	<h3>Bonjour <strong>{{ currentUser.username }}</strong>!</h3>
-
-	<h4>Les dernières missions</h4>
-	<ul id="actions">
-		{{#each actions}}
-		{{>action}}
-		{{/each}}
-	</ul>
-
-	{{/if}}
 
 </template>
 

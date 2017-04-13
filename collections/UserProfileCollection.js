@@ -53,6 +53,11 @@ Globals.schemas.UserProfileSchema = new SimpleSchema({
 			}
 		}
 	},
+	private: {
+		type: Boolean,
+		label: "Profil privé?"
+	},
+
 	userid: {
 		type: String,
 		label: "Identifiant utilisateur",
@@ -85,7 +90,7 @@ Globals.schemas.UserProfileSchema = new SimpleSchema({
 		label: "Date de mise à jour",
 		autoValue: function() {
 			// if (this.isUpdate) {
-			return new Date;
+			return new Date();
 			// }
 		},
 		optional: true,
@@ -108,12 +113,23 @@ Globals.schemas.UserProfileSchema = new SimpleSchema({
 		optional: true,
 		custom: function() {
 			var isAvailable = this.field('isAvailable').value;
-			console.log("### isAvailable: " + isAvailable + ", this.value: " + this.value);
+			//console.log("### isAvailable: " + isAvailable + ", this.value: " + this.value);
 			if (!this.value && isAvailable === false) {
 				return "Le champ 'Date de disponibilité' doit être rempli lorsque le champ 'Disponible' n'est pas coché.";
 			}
 		}
 	},
+	categories: {
+		type: Array,
+		minCount: 1,
+		label: "Catégories",
+		autoform: {
+			type: 'select2',
+			multiple: true,
+			options: Lists.categories
+		}
+	},
+	'categories.$': String,
 
 	// gender: {
 	// 	type: String,
@@ -152,8 +168,10 @@ Globals.schemas.UserProfileSchema = new SimpleSchema({
 		label: 'Compétence',
 		autoform: {
 			type: 'select2',
+			tags: true,
 			multiple: false,
-			options: Lists.technos
+			options: Lists.technos,
+			newOption: true
 		}
 	},
 	"skills.$.name.$": String,
@@ -316,6 +334,7 @@ Globals.schemas.UserSchema = new SimpleSchema({
 			omit: true
 		}
 	},
+
 	createdAt: {
 		type: Date,
 		autoValue: function() {

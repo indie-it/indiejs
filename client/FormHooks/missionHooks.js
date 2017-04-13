@@ -30,9 +30,7 @@ AutoForm.hooks({
 
 		// Called when any submit operation fails
 		onError: function(formType, err) {
-			console.log("onError called! " + err);
-			sAlert.error(err || err.reason);
-			//alert(err || err.reason);
+			sAlert.error(err.message);
 		},
 
 	}

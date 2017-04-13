@@ -16,6 +16,8 @@ Template.registerHelper("formatDateMoisAnnee", function (date) {
 	return moment(date).format('MMMM YYYY');
 });
 Template.registerHelper('formatDate', function (date) {
+	if (!date)
+		return "";
 	return moment(date).format('DD/MM/YYYY');
 });
 Template.registerHelper('formatDate2', function (date) {

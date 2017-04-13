@@ -1,5 +1,8 @@
 <template name="missionCreate">
-  {{setTitle 'Nouvelle mission'}}
-  <!-- {{> afQuickField name="typeTest" type="bootstrap-datepicker"}} -->
-  {{> quickForm collection="Missions" id="insertMissionForm" }}
+	{{setTitle 'Nouvelle mission'}}
+
+	<div class="container">
+		<h2>Nouvelle mission</h2>
+		{{> quickForm collection="Missions" id="insertMissionForm" }}
+	</div>
 </template>

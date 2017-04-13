@@ -1,12 +1,6 @@
 /*Body padding required*/
-
-
 /* The fixed navbar will overlay your other content,                            */
-
-
 /* unless you add padding to the top of the <body>. Try out your own values or  */
-
-
 /* use our snippet below. Tip: By default, the navbar is 50px high.             */
 
 body {
@@ -46,4 +40,40 @@ body {
     height: 300px;
 }
 
-
+h1#profile {
+	margin-top: 10px;
+	font-weight: bold;
+}
+h3.profile-title {
+	margin-top: 12px;
+	color: #337ab7;
+}
+img.profile-pic{
+	width: 200px;
+	height: 200px;
+}
+section.profile-header{
+	align-content:center;
+	text-align:center;
+}
+div.profile-description {
+	text-align: justify;
+}
+h2.profile {
+	color: #337ab7;
+	font-size: 18px;
+}
+.center {
+	align-content: center;
+	text-align: center;
+}
+.align-left {
+	text-align: left;
+}
+div.experience h3 {
+	font-size: 17px;
+	margin-top: 10px;
+}
+.well-info {
+	background: rgba(51, 122, 183, 0.1);
+}
