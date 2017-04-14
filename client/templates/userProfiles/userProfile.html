@@ -21,7 +21,11 @@
 				{{#if profile.isAvailable}}
 				<p><i class="fa fa-check-circle text-success" aria-hidden="true"></i> Disponible</p>
 				{{else}}
-				<p><i class="fa fa-calendar-o" aria-hidden="true"></i> Disponible au {{formatDate profile.availDate}}</p>
+					{{#if profile.availDate}}
+					<p><i class="fa fa-calendar-o" aria-hidden="true"></i> Disponible au {{formatDate profile.availDate}}</p>
+					{{else}}
+					<p><i class="fa fa-calendar-o" aria-hidden="true"></i> Pas de date de disponibilité</p>
+					{{/if}}
 				{{/if}}
 
 				{{#if profile.isEnRecherche}}
