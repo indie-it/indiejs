@@ -38,7 +38,7 @@
 			</div>
 
 			<!--formation-->
-			<section id="education">
+			<section id="education" class="hidden-xs">
 				<h2 class="profile"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Education/Formation</h2>
 				{{#each profile.education}}
 				{{> education}}
@@ -83,6 +83,13 @@
 				{{#markdown}}{{profile.description}}{{/markdown}}
 			</div>
 			{{/if}}
+
+			<section class="hidden-sm hidden-md hidden-lg">
+				<h2 class="profile"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Education/Formation</h2>
+				{{#each profile.education}}
+				{{> education}}
+				{{/each}}
+			</section>
 
 			<hr />
 			<h2 id="experiences" class="profile"><i class="fa fa-briefcase" aria-hidden="true"></i> Expériences</h2>

@@ -1,4 +1,4 @@
-import { Meteor } from 'meteor/meteor'
+Ôªøimport { Meteor } from 'meteor/meteor'
 import SimpleSchema from 'simpl-schema';
 
 Meteor.methods({
@@ -8,7 +8,7 @@ Meteor.methods({
 		insertdoc.userid = this.userId;
 		insertdoc.createdAt = new Date();
 
-		// force la mise ‡ jour du champ availDate.
+		// force la mise √† jour du champ availDate.
 		if (insertdoc.isAvailable === true) {
 			insertdoc.availDate = new Date();
 		}
@@ -39,7 +39,7 @@ Meteor.methods({
 				if (err) {
 					console.error(err);
 				}
-				console.log("Action enregistrÈe");
+				console.log("Action enregistr√©e");
 			});
 		});
 	},
@@ -53,14 +53,14 @@ Meteor.methods({
 		updatedoc.$set.userid = this.userId;
 		updatedoc.$set.createdAt = profile.createdAt;
 
-		// force la mise ‡ jour du champ availDate.
-		if (updatedoc.$set.isAvailable === true) {
-			updatedoc.$set.availDate = new Date();
-			console.log("updatedoc.$set.availDate: " + updatedoc.$set.availDate);
-		}
-
+		// validation via le sch√©ma d√©fini
 		Globals.schemas.UserProfileSchema.validate(updatedoc.$set);
 
+		//// force la mise √† jour du champ availDate.
+		//if (updatedoc.$set.isAvailable === true) {
+		//	updatedoc.$set.availDate = new Date();
+		//	console.log("updatedoc.$set.availDate: " + updatedoc.$set.availDate);
+		//}
 
 
 		UserProfiles.update(profile._id, updatedoc, function (err) {
@@ -85,7 +85,7 @@ Meteor.methods({
 				if (err) {
 					console.error(err);
 				}
-				console.log("Action enregistrÈe");
+				console.log("Action enregistr√©e");
 			});
 
 			console.log("Update successful!");

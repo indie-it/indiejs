@@ -14,19 +14,16 @@
 
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li class="{{getCurrentClass 'home'}}"><a href="{{pathFor route='home'}}">Accueil</a></li>
+					<li class="{{getCurrentClass 'home'}}"><a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='home'}}">Accueil</a></li>
 
 					{{#if currentUser}}
-					<!-- <li id="li-profile-update"><a href="{{pathFor route='profile.update'}}">Mon profil</a></li> -->
-					<li class="{{getCurrentClass 'profile.list'}}"><a href="{{pathFor route='profile.list'}}">Liste des profils</a></li>
-					<!-- <li id="li-missionsList"><a href="{{pathFor route='missionsList'}}">Liste des missions</a></li>
-					<li id="li-missionCreate"><a href="{{pathFor route='missionCreate'}}">Nouvelle mission</a></li> -->
+					<li class="{{getCurrentClass 'profile.list'}}"><a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='profile.list'}}">Liste des profils</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mission <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<!-- <li><a href="#">Nouveau besoin identifié</a></li> -->
-							<li class="{{getCurrentClass 'missionCreate'}}"><a href="{{pathFor route='missionCreate'}}">Nouvelle mission</a></li>
-							<li class="{{getCurrentClass 'missionsList'}}"><a href="{{pathFor route='missionsList'}}">Liste des missions</a></li>
+							<li class="{{getCurrentClass 'missionCreate'}}"><a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='missionCreate'}}">Nouvelle mission</a></li>
+							<li class="{{getCurrentClass 'missionsList'}}"><a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='missionsList'}}">Liste des missions</a></li>
 						</ul>
 					</li>
 					{{/if}}
@@ -35,9 +32,9 @@
 
 				<ul class="nav navbar-nav navbar-right">
 					{{#if currentUser}}
-					<li class="{{getCurrentClass 'profile.update'}}"><a href="{{pathFor route='profile.update'}}">Profil ({{currentUser.username}})</a></li>
+					<li class="{{getCurrentClass 'profile.update'}}"><a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='profile.update'}}">Profil ({{currentUser.username}})</a></li>
 					<li>
-						<a href="#" class="logout">Déconnexion</a>
+						<a data-toggle="collapse" data-target=".navbar-collapse.in" href="#" class="logout">Déconnexion</a>
 					</li>
 					{{/if}}
 				</ul>

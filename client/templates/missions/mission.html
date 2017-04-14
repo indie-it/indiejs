@@ -1,30 +1,40 @@
 ﻿<template name="mission">
-
 	<div class="container">
 
 		<div class="row">
 			<h3>{{mission.name}}</h3>
 		</div>
 
+		{{#if isInRole 'admin'}}
+		<div class="row">
+			<h3>
+				{{#if canValidate}}<a id="action-validate" class="btn btn-primary" href="#" role="button">Valider</a>{{/if}}
+				{{#if canAccept}}<a id="action-accept" class="btn btn-primary" href="#" role="button">Accepter</a>{{/if}}
+				{{#if canArchive}}<a id="action-archive" class="btn btn-danger" href="#" role="button">Archiver</a>{{/if}}
+			</h3>
+		</div>
+		{{/if}}
+
 		<div class="row">
 
 			<!-- A GAUCHE -->
 			<div class="col-sm-8 col-md-9">
 
-				
 				{{#if mission.categories}}
-				<h4>
+				<p class="h4">
 					<i class="fa fa-tags" aria-hidden="true"></i> {{#each mission.categories}}<span class="label label-default">{{this}}</span> {{/each}}
-				</h4>
+				</p>
 				{{/if}}
-				<h4>
-					<i class="fa fa-tags" aria-hidden="true"></i> 
-					{{#each mission.technos}}<span class="label label-info">{{this}}</span> {{/each}}
-					<i class="fa fa-tags" aria-hidden="true"></i> 
-					{{#if mission.type}}<span class="label label-primary">{{mission.type}}</span>{{/if}}
-					{{#if mission.level}}<span class="label label-primary">{{mission.level}}</span>{{/if}}
-				</h4>
 
+				<p class="h5">
+					<i class="fa fa-tags" aria-hidden="true"></i>
+					{{#each mission.technos}}<span class="label label-info">{{this}}</span> {{/each}}
+				</p>
+				<p class="h5">
+					<i class="fa fa-tags" aria-hidden="true"></i>
+					{{#if mission.level}}<span class="label label-primary">{{mission.level}}</span>{{/if}}
+					{{#if mission.type}}<span class="label label-primary">{{mission.type}}</span>{{/if}}
+				</p>
 				{{#if mission.shortDescription}}<h4><small>{{mission.shortDescription}}</small></h4>{{/if}}
 
 				<div>{{#markdown}}{{mission.description}}{{/markdown}}</div>
@@ -63,11 +73,13 @@
 				{{/if}}
 			</div>
 		</div>
+
 		<div class="row">
 			<div class="col-md-12">
 				<p><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp;{{ getInterestedUsersText }}</p>
 			</div>
 		</div>
+
 	</div>
 
 </template>

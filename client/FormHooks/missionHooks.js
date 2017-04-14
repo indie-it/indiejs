@@ -3,9 +3,6 @@ AutoForm.hooks({
 
 		// Called when form does not have a `type` attribute
 		onSubmit: function(doc) {
-			console.log("onSubmit called! ");
-			console.log(doc);
-
 			var self = this;
 			Meteor.call("mission.insert", doc, function(error, result) {
 				if (error) {
@@ -17,7 +14,6 @@ AutoForm.hooks({
                     self.done(); // Appelle onSuccess
 				}
 			});
-
 			return false;
 		},
 

@@ -1,7 +1,12 @@
 <template name="experience">
 	<div class="experience">
 		<h3><strong>{{title}}</strong></h3>
-		<p><i class="fa fa-building" aria-hidden="true"></i> {{company}} &bull; <i class="fa fa-calendar" aria-hidden="true"></i> {{getPeriode}} ({{ getDuration }})</p>
+
+		<p class="hidden-xs"><i class="fa fa-building" aria-hidden="true"></i> {{company}} &bull; <i class="fa fa-calendar" aria-hidden="true"></i> {{getPeriode}} ({{ getDuration }})</p>
+		
+		<p class="hidden-sm hidden-md hidden-lg"><i class="fa fa-building" aria-hidden="true"></i> {{company}}</p>
+		<p class="hidden-sm hidden-md hidden-lg"><i class="fa fa-calendar" aria-hidden="true"></i> {{getPeriode}} ({{ getDuration }})</p>
+
 		<p><i class="fa fa-tags" aria-hidden="true"></i> {{#each skills}}<span class="label label-info">{{this}}</span> {{/each}}</p>
 		<div>{{#markdown}}{{description}}{{/markdown}}</div>
 		<hr/>

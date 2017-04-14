@@ -1,8 +1,58 @@
-<template name="missionCreate">
+﻿<template name="missionCreate">
 	{{setTitle 'Nouvelle mission'}}
 
 	<div class="container">
 		<h2>Nouvelle mission</h2>
-		{{> quickForm collection="Missions" id="insertMissionForm" }}
+
+		{{#autoForm collection="Missions" id="insertMissionForm" }}
+
+
+		<section id="coord-search" class="row">
+
+			<div class="col-md-6">
+				<fieldset>
+					<legend>Mission</legend>
+					{{> afQuickField name='name' }}
+					{{> afQuickField name='shortDescription' }}
+					{{> afQuickField name="type" firstOption="-- Selectionnez un élément --"}}
+					{{> afQuickField name="level" firstOption="-- Selectionnez un élément --"}}
+
+				</fieldset>
+			</div>
+
+			<div class="col-md-6">
+				<fieldset>
+					<legend>Dates et durée</legend>
+					{{> afQuickField name='isEarliestStart' }}
+					{{> afQuickField name='start' }}
+					{{> afQuickField name='duration' }}
+				</fieldset>
+			</div>
+
+		</section>
+
+		<section id="coord-search" class="row">
+			<div class="col-md-6">
+				<fieldset>
+					<legend>Autres infos</legend>
+					{{> afQuickField name='location' }}
+					{{> afQuickField name='organization' }}
+					{{> afQuickField name='averageDailyRate' }}
+				</fieldset>
+			</div>
+			<div class="col-md-6">
+				<fieldset>
+					<legend>Catégorisation de la mission</legend>
+					{{> afQuickField name='technos' }}
+					{{> afQuickField name='categories' }}
+				</fieldset>
+			</div>
+		</section>
+		
+		{{> afQuickField name='description' }}
+
+		<button type="submit" class="btn btn-primary">Créer la nouvelle mission</button>
+
+		{{/autoForm}}
 	</div>
 </template>

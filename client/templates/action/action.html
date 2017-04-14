@@ -43,3 +43,16 @@
 <template name="action-user-log-off">
 	<strong>{{username}}</strong> s'est déconnecté d'indie-it.
 </template>
+
+<template name="action-mission-archive">
+	<strong>{{username}}</strong> a archivé la mission
+	<a href="{{pathFor 'mission' _id=missionid}}"><strong>{{mission}}</strong></a>.
+</template>
+<template name="action-mission-validate">
+	<strong>{{username}}</strong> a validé la mission
+	<a href="{{pathFor 'mission' _id=missionid}}"><strong>{{mission}}</strong></a>.
+</template>
+<template name="action-mission-accept">
+	<strong>{{username}}</strong> a accepté la mission
+	<a href="{{pathFor 'mission' _id=missionid}}"><strong>{{mission}}</strong></a>.
+</template>
