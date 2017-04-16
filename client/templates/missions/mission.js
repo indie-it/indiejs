@@ -88,30 +88,9 @@ Template.mission.helpers({
 		}
 		return obj.canValidate;
 	},
-	//"canAccept": function () {
-	//	var methodid = 'get-actions';
-	//	var actions = Call(methodid, 'mission.getActions', this.id).result();
-	//	if (!actions) {
-	//		return false;
-	//	}
-	//	return actions.canAccept;
-	//},
-	//"canArchive": function () {
-	//	var methodid = 'get-actions';
-	//	var actions = Call(methodid, 'mission.getActions', this.id).result();
-	//	if (!actions) {
-	//		return false;
-	//	}
-	//	return actions.canArchive;
-	//},
-	//"canValidate": function () {
-	//	var methodid = 'get-actions';
-	//	var actions = Call(methodid, 'mission.getActions', this.id).result();
-	//	if (!actions) {
-	//		return false;
-	//	}
-	//	return actions.canValidate;
-	//},
+	"canVote": function () {
+		return this.mission.currentState === 'validated';
+	},
 });
 
 Template.mission.created = function () {
@@ -170,11 +149,8 @@ Template.mission.events({
 				sAlert.error("error", error.message);
 				return;
 			}
-			if (result) {
-				console.log(result);
-				sAlert.success("Mission archivée", { onRouteClose: false });
-				Router.go(Utils.pathFor('missionsList'));
-			}
+			sAlert.success("Mission archivée", { onRouteClose: false });
+			Router.go(Utils.pathFor('missionsList'));
 		});
 	},
 	"click #action-validate": function (event, template) {
@@ -184,12 +160,8 @@ Template.mission.events({
 				sAlert.error("error", error.message);
 				return;
 			}
-
-			if (result) {
-				console.log(result);
-				sAlert.success("Mission validée", { onRouteClose: false });
-				Router.go(Utils.pathFor('missionsList'));
-			}
+			sAlert.success("Mission validée", { onRouteClose: false });
+			Router.go(Utils.pathFor('missionsList'));
 		});
 	},
 	"click #action-accept": function (event, template) {
@@ -199,11 +171,8 @@ Template.mission.events({
 				sAlert.error("error", error.message);
 				return;
 			}
-			if (result) {
-				console.log(result);
-				sAlert.success("Mission acceptée", { onRouteClose: false });
-				Router.go(Utils.pathFor('missionsList'));
-			}
+			sAlert.success("Mission acceptée", { onRouteClose: false });
+			Router.go(Utils.pathFor('missionsList'));
 		});
 	},
 });

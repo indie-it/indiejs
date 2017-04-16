@@ -10,8 +10,6 @@ module.exports = {
 	},
 
 	meteor: {
-		// TODO: change app name and path
-		// TOCHECK
 		name: 'indiejs',
 		path: "C:\\Documents\\code\\indiejs",
 		docker: {
@@ -31,7 +29,7 @@ module.exports = {
 		buildOptions: {
 			serverOnly: true, // skip building mobile apps, but still build the web.cordova architecture
 			//debug: true,
-			// cleanAfterBuild: true,	//default
+			cleanAfterBuild: true,	//default
 			buildLocation: "C:\\Documents\\code\\indiejs-builds"
 		},
 

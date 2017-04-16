@@ -1,5 +1,5 @@
 <template name="navigation">
-	<nav class="navbar navbar-default navbar-fixed-top">
+	<nav class="navbar {{#if isInRole 'admin'}}navbar-inverse{{else}}navbar-default{{/if}} navbar-fixed-top">
 		<div class="container-fluid">
 
 			<div class="navbar-header">
@@ -32,10 +32,14 @@
 
 				<ul class="nav navbar-nav navbar-right">
 					{{#if currentUser}}
-					<li class="{{getCurrentClass 'profile.update'}}"><a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='profile.update'}}">Profil ({{currentUser.username}})</a></li>
-					<li>
-						<a data-toggle="collapse" data-target=".navbar-collapse.in" href="#" class="logout">Déconnexion</a>
+					{{#if isInRole 'admin'}}
+					<p class="navbar-text"><i class="fa fa-star" aria-hidden="true"></i> AdminMode</p>
+					{{/if}}
+					<li class="{{getCurrentClass 'profile.update'}}">
+						<a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='profile.update'}}">Profil ({{currentUser.username}})</a>
 					</li>
+					
+					<li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="#" class="logout">Déconnexion</a></li>
 					{{/if}}
 				</ul>
 			</div>

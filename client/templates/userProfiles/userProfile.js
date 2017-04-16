@@ -2,32 +2,38 @@ if (Meteor.isServer)
 	return;
 
 Template.profile.helpers({
-	isSelfProfile: function() {
+	isSelfProfile: function () {
 		var isSelfProfile = this.profile.userid === Meteor.userId();
 		return isSelfProfile;
 	},
-	getCountEducation: function() {
-		return !this.profile.education ? 0 :this.profile.education.length;
+	getCountEducation: function () {
+		return !this.profile.education ? 0 : this.profile.education.length;
 	},
-	getCountExperiences: function() {
-		return !this.profile.experiences ? 0 :this.profile.experiences.length;
+	getCountExperiences: function () {
+		return !this.profile.experiences ? 0 : this.profile.experiences.length;
 	},
-	getCountSkills: function() {
+	getCountSkills: function () {
 		return !this.profile.skills ? 0 : this.profile.skills.length;
 	},
-	getCountRecommendations: function() {
+	getCountRecommendations: function () {
 		return !this.profile.recommendations ? 0 : this.profile.recommendations.length;
 	},
-	getCountFriends: function() {
+	getCountFriends: function () {
 		return !this.profile.friends ? 0 : this.profile.friends.length;
 	},
-	getSectionIdFromExperience: function(experience) {
+	getSectionIdFromExperience: function (experience) {
 		var title = this.title.replace(/[^\w]/g, '').toLowerCase();
 		var company = this.company.replace(/[^\w]/g, '').toLowerCase();
 		var start = moment(this.start).format('YYYYMMDD');
 		var id = title + "-" + company + "-" + start;
 
 		return "experience-" + id;
+	},
+	"getProfilePicSrc": function () {
+		if (!this.profile.profilePic) {
+			return "/img/profile-pic-placeholder.png";
+		}
+		return this.profile.profilePic.url;
 	},
 });
 
@@ -46,7 +52,7 @@ function drawChart() {
 	// pour pouvoir les afficher sous forme de radar.
 	var names = [];
 	var levels = [];
-	_.each(profile.skills, function(skill) {
+	_.each(profile.skills, function (skill) {
 		names.push(skill.name);
 		// on multiple par 2 car la note est sur 10.
 		levels.push(skill.level * 2);
@@ -67,7 +73,7 @@ function drawChart() {
 			pointHighlightFill: "#333",
 			pointHighlightStroke: "rgba(255,255,0,1)",
 			data: levels //[12, 15, 17, 16, 11, 13]
-        }]
+		}]
 	};
 	var ctx = $("#radar").get(0).getContext("2d");
 
@@ -82,7 +88,7 @@ function drawChart() {
 			scaleStartValue: 0
 		});
 }
-function configureAfix(){
+function configureAfix() {
 	$('#nav').affix({
 		offset: {
 			top: $('#nav').offset().top
@@ -91,8 +97,8 @@ function configureAfix(){
 	$('#nav').affix({
 		offset: {
 			bottom: ($('footer').outerHeight(true) +
-					$('.application').outerHeight(true)) +
-				40
+				$('.application').outerHeight(true)) +
+			40
 		}
 	});
 	$('body').scrollspy({
@@ -100,7 +106,7 @@ function configureAfix(){
 	});
 };
 
-Template.profile.rendered = function() {
+Template.profile.rendered = function () {
 	configureAfix();
 	//Tracker.autorun(drawChart);
 };

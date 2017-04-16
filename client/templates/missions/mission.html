@@ -7,11 +7,16 @@
 
 		{{#if isInRole 'admin'}}
 		<div class="row">
-			<h3>
-				{{#if canValidate}}<a id="action-validate" class="btn btn-primary" href="#" role="button">Valider</a>{{/if}}
-				{{#if canAccept}}<a id="action-accept" class="btn btn-primary" href="#" role="button">Accepter</a>{{/if}}
-				{{#if canArchive}}<a id="action-archive" class="btn btn-danger" href="#" role="button">Archiver</a>{{/if}}
-			</h3>
+			<div class="col-md-4">
+				<h3><span class="label label-primary"><i class="fa fa-cogs" aria-hidden="true"></i> {{mission.currentState}}</span></h3>
+			</div>
+			<div class="col-md-8">
+				<h3>
+					{{#if canValidate}}<a id="action-validate" class="btn btn-primary" href="#" role="button">Valider</a>{{/if}}
+					{{#if canAccept}}<a id="action-accept" class="btn btn-primary" href="#" role="button">Accepter</a>{{/if}}
+					{{#if canArchive}}<a id="action-archive" class="btn btn-danger" href="#" role="button">Archiver</a>{{/if}}
+				</h3>
+			</div>
 		</div>
 		{{/if}}
 
@@ -61,6 +66,7 @@
 			</div>
 		</div>
 
+		{{#if canVote}}
 		<div class="row">
 			<div class="col-md-12">
 				{{#if userHasAnswered }}
@@ -73,12 +79,14 @@
 				{{/if}}
 			</div>
 		</div>
-
 		<div class="row">
 			<div class="col-md-12">
 				<p><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp;{{ getInterestedUsersText }}</p>
 			</div>
 		</div>
+		{{else}}
+		<p><i class="fa fa-lock" aria-hidden="true"></i> Il n'est plus possible de postuler pour cette offre de mission.</p>
+		{{/if}}
 
 	</div>
 

@@ -1,7 +1,7 @@
 <template name="update">
 	{{setTitle 'Mon profil'}}
 
-	<div class="container">
+	<div class="container-fluid">
 
 		<div class="row">
 			<ul class="nav nav-pills">
@@ -17,7 +17,11 @@
 		{{#autoForm collection="UserProfiles" id="userprofile.createorupdate" doc=profile }}
 
 		<section id="coord-search" class="row">
-			<div class="col-md-6">
+			<div class="col-md-4">
+				<img id="profile-pic-image" class="profile-pic" src="{{getProfilePicSrc}}" />
+				<input id="profile-pic-file-input" type="file" name="userimage" />
+			</div>
+			<div class="col-md-4">
 				<fieldset>
 					<legend>Coordonnées</legend>
 					{{> afQuickField name='firstName'}}
@@ -25,7 +29,7 @@
 					{{> afQuickField name='birthday'}}
 				</fieldset>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<fieldset>
 					<legend>Recherche</legend>
 					{{> afQuickField name='isEnRecherche'}}
