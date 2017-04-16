@@ -20,6 +20,13 @@ Meteor.publish('missions.headers', function () {
 			}
 		});
 });
+
+Meteor.publish('missions.headersAdmin', function () {
+
+	return Missions.find({}, { fields: { description: 0, author: 0 }, sort: { updated: -1, createdAt: -1 } });
+
+});
+
 Meteor.publish("mission.getById", function (missionId) {
 	// We need to check the `listId` is the type we expect
 	new SimpleSchema({ missionId: { type: String } }).validate({ missionId });

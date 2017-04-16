@@ -24,6 +24,10 @@
 							<!-- <li><a href="#">Nouveau besoin identifié</a></li> -->
 							<li class="{{getCurrentClass 'missionCreate'}}"><a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='missionCreate'}}">Nouvelle mission</a></li>
 							<li class="{{getCurrentClass 'missionsList'}}"><a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='missionsList'}}">Liste des missions</a></li>
+							{{#if isInRole 'admin'}}
+							<li class="{{getCurrentClass 'missionsListAdmin'}}"><a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='missionsListAdmin'}}">Toutes les missions</a></li>
+
+							{{/if}}
 						</ul>
 					</li>
 					{{/if}}

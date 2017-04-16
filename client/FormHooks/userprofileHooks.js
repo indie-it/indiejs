@@ -70,6 +70,8 @@ AutoForm.hooks({
 				});
 			};
 
+			Modal.show("userprofile-loading-modal", null, { backdrop: 'static', keyboard: false });
+
 			// nouveau profil.
 			if (!currentdoc) {
 				if (!files) {
@@ -88,10 +90,12 @@ AutoForm.hooks({
 			return false;
 		},
 		onSuccess: function () {
+			Modal.hide();
 			sAlert.success("Modifications sauvegardées", { onRouteClose: false });
 			Router.go(Utils.pathFor('home'));
 		},
 		onError: function (formType, err) {
+			Modal.hide();
 			var error = err.reason ? err.reason : err;
 			sAlert.error('Erreur! ' + error);
 		}

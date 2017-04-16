@@ -1,0 +1,28 @@
+﻿<template name="missionsListAdmin">
+    {{setTitle 'Liste des missions'}}
+    <h3>Liste des missions Indie IT</h3>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Mission</th>
+                <th>Lieu</th>
+				<th>Niveau</th>
+                <th>Etat</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+        {{#each missions}}
+        <tr>
+            <th scope="row"><a href="{{pathFor route='mission'}}">{{name}}</a></th>
+            <td>{{location}}</td>
+            <td>{{level}}</td>
+			<td>{{currentState}}</td>
+            <td>{{formatDate createdAt}}</td>
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+
+</template>
