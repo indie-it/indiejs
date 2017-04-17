@@ -1,4 +1,11 @@
+//import dataTablesBootstrap from 'datatables.net-bs';
+//import 'datatables.net-bs/css/dataTables.bootstrap.css';
+
+//dataTablesBootstrap(window, $);
+
 Meteor.startup(function () {
+
+	//configuration sAlert
     sAlert.config({
         effect: '',
         position: 'top-left',
@@ -26,5 +33,6 @@ Meteor.startup(function () {
         // onClose: function() {
         //     /* Code here will be executed once the alert closes. */
         // }
-    });
+	});
+
 });

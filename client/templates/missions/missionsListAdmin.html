@@ -1,28 +1,17 @@
 ﻿<template name="missionsListAdmin">
-    {{setTitle 'Liste des missions'}}
-    <h3>Liste des missions Indie IT</h3>
 
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>Mission</th>
-                <th>Lieu</th>
-				<th>Niveau</th>
-                <th>Etat</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody>
-        {{#each missions}}
-        <tr>
-            <th scope="row"><a href="{{pathFor route='mission'}}">{{name}}</a></th>
-            <td>{{location}}</td>
-            <td>{{level}}</td>
-			<td>{{currentState}}</td>
-            <td>{{formatDate createdAt}}</td>
-        </tr>
-        {{/each}}
-        </tbody>
-    </table>
+	{{#if isInRole 'admin'}}
+		{{setTitle 'Liste des missions'}}
+		<h3>Liste des missions Indie IT</h3>
+		{{> tabular table=TabularTables.Missions id="poststableid" class="table table-hover table-striped table-bordered table-condensed"}}
 
+	{{else}}
+	{{setTitle 'Non autorisé'}}
+		Accès non autorisé
+	{{/if}}
+
+</template>
+
+<template name="missionName">
+	<a href="{{pathFor 'mission' _id=item._id }}">{{item.name}}</a>
 </template>

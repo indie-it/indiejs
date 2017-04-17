@@ -14,7 +14,7 @@
         <tbody>
         {{#each missions}}
         <tr>
-            <th scope="row"><a href="{{pathFor route='mission'}}">{{name}}</a></th>
+            <th scope="row"><a href="{{pathFor 'mission' _id=_id}}">{{name}}</a></th>
             <td>{{location}}</td>
             <td>{{level}}</td>
             <td>{{formatDate createdAt}}</td>
