@@ -9,12 +9,26 @@
 			{{#if currentUser}}
 			<h3>Bonjour <strong>{{ currentUser.username }}</strong>!</h3>
 			<br />
+
+			{{#if hasProfile}}
+			<p>Tout est en ordre.</p>
+			{{else}}
+			<div class="alert alert-warning alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<i class="fa fa-exclamation-circle" aria-hidden="true"></i> Vous n'avez pas encore créé votre profil.
+				Vous pouvez <a href="{{pathFor route='linkedin'}}"><strong>importer votre profil LinkedIn</strong></a> ou bien <a href="{{pathFor route='profile.update'}}"><strong>le renseigner ici</strong></a>.
+			</div>
+			{{/if}}
+
+			{{#if actions}}
 			<h4><i class="fa fa-briefcase fa-lg"></i> Les dernières missions</h4>
 			<ul id="actions">
 				{{#each actions}}
 				{{>action}}
 				{{/each}}
 			</ul>
+			{{/if}}
+
 			{{/if}}
 		</div>
 	</div>

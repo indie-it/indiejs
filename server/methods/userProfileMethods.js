@@ -14,7 +14,7 @@ Meteor.methods({
 		}
 
 		// validation de l'objet
-		Globals.schemas.UserProfileSchema.validate(insertdoc);
+		Globals.schemas.UserProfilesSchema.validate(insertdoc);
 
 		return UserProfiles.insert(insertdoc, function (err, objectid) {
 
@@ -54,15 +54,9 @@ Meteor.methods({
 		updatedoc.$set.createdAt = profile.createdAt;
 
 		// validation via le schéma défini
-		Globals.schemas.UserProfileSchema.validate(updatedoc.$set);
+		Globals.schemas.UserProfilesSchema.validate(updatedoc.$set);
 
-		//// force la mise à jour du champ availDate.
-		//if (updatedoc.$set.isAvailable === true) {
-		//	updatedoc.$set.availDate = new Date();
-		//	console.log("updatedoc.$set.availDate: " + updatedoc.$set.availDate);
-		//}
-
-
+		// mise à jour
 		UserProfiles.update(profile._id, updatedoc, function (err) {
 			if (err) {
 				throw new Meteor.Error(500, err.message);

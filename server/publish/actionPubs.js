@@ -10,10 +10,6 @@ Meteor.publish('actions.missions.sortedByDateDesc', function () {
 	console.log("[actions.missions.sortedByDateDesc]");
 
 	var isadmin = Roles.userIsInRole(this.userId, 'admin');
-
-	//console.log("isadmin: " + isadmin);
-
-
 	if (isadmin) {
 		return Actions.find({}, { sort: { createdAt: -1 }, limit: 15 });
 	}

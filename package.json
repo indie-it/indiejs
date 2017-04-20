@@ -10,6 +10,7 @@
     "datatables.net-bs": "^1.10.13",
     "jquery": "^1.11.2",
     "meteor-node-stubs": "~0.2.4",
+    "node-linkedin": "^0.5.4",
     "select2": "^4.0.3",
     "select2-bootstrap-theme": "0.1.0-beta.10",
     "simpl-schema": "^0.2.3"

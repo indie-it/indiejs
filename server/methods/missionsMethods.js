@@ -46,13 +46,7 @@ Meteor.methods({
 		console.log("mission.interested");
 
 		// validation du paramètre
-		new SimpleSchema({
-			missionid: {
-				type: String
-			}
-		}).validate({
-			missionid
-		});
+		new SimpleSchema({ missionid: { type: String } }).validate({ missionid });
 
 		// récupération de la mission
 		var mission = Missions.findOne({

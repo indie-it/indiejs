@@ -41,3 +41,15 @@ Meteor.publish("userprofile.getByUserId", function (userid) {
 	// mais jamais l'objet directement (findOne ne marchera pas).
 	return UserProfiles.find({ userid: userid });
 });
+Meteor.publish("userprofile.get", function () {
+	console.log("userprofile.get");
+
+	if (!this.userId) {
+		this.stop();
+		return;
+	}
+
+	// on renvoie un cursor ou un array via find ou find().fetch()
+	// mais jamais l'objet directement (findOne ne marchera pas).
+	return UserProfiles.find({ userid: this.userId });
+});

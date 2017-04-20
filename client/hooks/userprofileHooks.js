@@ -1,5 +1,7 @@
 var cloudinarycallback = function (doc, callback) {
 	console.log("cloudinarycallback called");
+	console.log(doc);
+	console.log("###");
 
 	// stockage de l'image de profil sur cloudinary
 	Cloudinary.upload(files, { width: 400, height: 400, gravity: "face", radius: "max", crop: "fill" }, function (err, result) {
@@ -25,11 +27,17 @@ var cloudinarycallback = function (doc, callback) {
 			};
 
 			if (doc.$set) {
+				// vérification: l'utilisateur avait-il déjà une image de profil?
+				// dans ce cas, il faut la supprimer!
+				//if (doc.$set.profilePic) {
+
+				//}
+
 				// cas de la mise à jour ; doc est un objet complexe contenant deux propriétés 
-				// $set et $unset; il faut ajouter la propriété = $set.
+				// $set et $unset; il faut ajouter la propriété à $set.
 				doc.$set.profilePic = obj;
 			} else {
-				// ds le cas de l'insertion, pas de souci; on met à jour directement l'object doc.
+				// dans le cas de l'insertion, pas de souci; on met à jour directement l'object doc.
 				doc.profilePic = obj;
 			}
 
@@ -47,7 +55,7 @@ AutoForm.hooks({
 		onSubmit: function (insertdoc, updatedoc, currentdoc) {
 			var self = this;
 
-			var saveCallback = function () {
+			var saveProfileCallback = function () {
 				// création de profil
 				Meteor.call("userprofile.insert", insertdoc, function (err, result) {
 					if (err) {
@@ -75,9 +83,9 @@ AutoForm.hooks({
 			// nouveau profil.
 			if (!currentdoc) {
 				if (!files) {
-					saveCallback();
+					saveProfileCallback();
 				} else {
-					cloudinarycallback(insertdoc, saveCallback);
+					cloudinarycallback(insertdoc, saveProfileCallback);
 				}
 			} else {
 				// mise à jour du profil

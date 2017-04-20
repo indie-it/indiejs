@@ -52,6 +52,7 @@ iron:router@1.1.2
 iron:url@1.1.0
 jquery@1.11.10
 juliancwirko:s-alert@3.2.0
+khamoud:linkedin-api@1.0.0
 launch-screen@1.1.1
 lepozepo:cloudinary@4.2.6
 livedata@1.0.18
