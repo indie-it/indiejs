@@ -16,6 +16,7 @@ Meteor.publish('user.linkedin.get', function () {
 			state: 1,
 			accessTokenCreationDate: 1,
 			accessTokenExpirationDate: 1,
+			linkedinInfo: 1,
 		}
 	});
 });

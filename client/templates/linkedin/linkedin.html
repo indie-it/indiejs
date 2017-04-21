@@ -1,12 +1,32 @@
 ﻿<template name="linkedin">
 	<h3>Import profil LinkedIn</h3>
-	{{#if accessToken}}
-	<p>Vous êtes déjà authentifié sur LinkedIn.</p>
-	<a id="btn-linkedin-profile-info" href="#" class="btn btn-primary"><i class="fa fa-linkedin" aria-hidden="true"></i> Récup infos profil</a>
+	
+	{{#if linkedinInfo}}
+	<p>Infos récupérées depuis LinkedIn:</p>
+	<ul>
 
+		<li>Nom: <strong>{{linkedinInfo.lastName}}</strong></li>
+		<li>Prénom: <strong>{{linkedinInfo.firstName}}</strong></li>
+		<li>Adresse e-mail: <strong>{{linkedinInfo.emailAddress}}</strong></li>
+		<li>Titre de profil: <strong>{{linkedinInfo.title}}</strong></li>
+		<li>Description de profil: <strong>{{linkedinInfo.description}}</strong></li>
+		<li>Secteur professionnel: <strong>{{linkedinInfo.industry}}</strong></li>
+		<li>Zone géographique: <strong>{{linkedinInfo.location}}</strong></li>
+		<!--{{#if linkedinInfo.pictureUrl}}<li>Url d'image de profil: <img src="{{linkedinInfo.pictureUrl}}"/></li>{{/if}}-->
+	</ul>
+
+	<a id="btn-import-linkedin-profile" href="#" class="btn btn-primary"><i class="fa fa-linkedin" aria-hidden="true"></i> Importer infos profil</a>
+	<hr/>
 	{{else}}
-	<p>Vous allez être redirigé vers la page d'authentification de LinkedIn</p>
-	<a id="btn-linkedin-authorize" href="{{getLinkedInUri}}" class="btn btn-primary"><i class="fa fa-linkedin" aria-hidden="true"></i> S'authentifier</a>
+	
+		{{#if accessToken}}
+			<p>Vous êtes déjà authentifié sur LinkedIn.</p>
+			<a id="btn-linkedin-profile-info" href="#" class="btn btn-primary"><i class="fa fa-linkedin" aria-hidden="true"></i> Récup infos profil</a>
+		{{else}}
+			<p>Vous allez être redirigé vers la page d'authentification de LinkedIn</p>
+			<a id="btn-linkedin-authorize" href="{{getLinkedInUri}}" class="btn btn-primary"><i class="fa fa-linkedin" aria-hidden="true"></i> S'authentifier</a>
+		{{/if}}
+
 	{{/if}}
 
 </template>

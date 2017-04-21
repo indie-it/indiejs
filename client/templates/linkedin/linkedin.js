@@ -20,19 +20,40 @@ Template.linkedin.events({
 
 	'click #btn-linkedin-profile-info': function (event) {
 		event.preventDefault();
-		//var res =
+
 		Meteor.call("user.linkedin.getProfileInfo", this.state, function (err, res) {
+
 			if (err) {
 				sAlert.error(err.Message);
 				return;
 			}
-			if (res && res === true) {
-				sAlert.success('Profil mis à jour depuis LinkedIn', { onRouteClose: false });
+
+			if (res) {
+				console.log(res);
+
+				sAlert.success('Informations du profil récupérées depuis LinkedIn', { onRouteClose: false });
+				Router.go(Utils.pathFor('linkedin'));
+			}
+		});
+
+	},
+
+	'click #btn-import-linkedin-profile': function (event) {
+		event.preventDefault();
+
+		Meteor.call("user.linkedin.setProfileInfo", this.state, function (err, res) {
+
+			if (err) {
+				sAlert.error(err.Message);
+				return;
+			}
+
+			if (res) {
+				console.log(res);
+				sAlert.success('Informations du profil récupérées depuis LinkedIn', { onRouteClose: false });
 				Router.go(Utils.pathFor('home'));
 			}
 		});
 
-
 	},
-
 });

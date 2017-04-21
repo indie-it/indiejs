@@ -4,11 +4,10 @@ import SimpleSchema from 'simpl-schema';
 import { HTTP } from 'meteor/http';
 
 Meteor.methods({
-
 	"user.linkedin.setState": function (state) {
 		if (!Meteor.userId()) { return false; }
 
-		console.log("user.linkedin.setState");
+		console.log(`user.linkedin.setState('${state}')`);
 
 		// validation param
 		new SimpleSchema({ state: { type: String } }).validate({ state });
@@ -21,7 +20,6 @@ Meteor.methods({
 			return true;
 		});
 	},
-
 	"user.linkedin.getAuthenticationToken": function (state, code) {
 		if (!Meteor.userId()) { return false; }
 
@@ -85,7 +83,6 @@ Meteor.methods({
 		}
 
 	},
-
 	"user.linkedin.getProfileInfo": function () {
 		if (!Meteor.userId()) { return false; }
 
@@ -106,37 +103,50 @@ Meteor.methods({
 			// car le code à l'intérieur des callback sur le serveur est interdit
 			var res = Meteor.wrapAsync(linkedin.people.me, linkedin.people)();
 
-			console.log(res);
-
-			//mise à jour du profil avec les infos récupérées
+			// on stocke les infos récupérées en base.
 			const set = {};
 
 			if (res.firstName) { set.firstName = res.firstName; }
 			if (res.lastName) { set.lastName = res.lastName; }
 			if (res.headline) { set.title = res.headline; }
 			if (res.summary) { set.description = res.summary; }
+			if (res.specialties) { set.specialties = res.specialties; }
 			if (res.location && res.location.name) { set.location = res.location.name; }
 			if (res.industry) { set.industry = res.industry; }
-			if (res.positions && res.positions.values && res.positions._total > 0) {
+			if (res.emailAddress) { set.emailAddress = res.emailAddress; }
+			if (res.pictureUrl) { set.pictureUrl = res.pictureUrl; }
+			if (res.numConnections) { set.numConnections = res.numConnections; }
+
+			if (res.positions && res.positions._total > 0 && res.positions.values) {
 				var pos = res.positions.values[0];
-				// TODO !
-				console.log(pos);
+				set.latestExperience = {};
+				if (pos.title) { set.latestExperience.title = pos.title; }
+				if (pos.summary) { set.latestExperience.description = pos.summary; }
+				if (pos.startDate) { set.latestExperience.start = new Date(pos.startDate.year, pos.startDate.Month, 1, 0, 0, 0, 0); }
+				if (pos.endDate) { set.latestExperience.end = new Date(pos.endDate.year, pos.endDate.Month, 1, 0, 0, 0, 0); }
+				if (pos.Company) { set.company = pos.Company.name; }
+				if (pos.isCurrent) { set.isCurrent = pos.isCurrent; }
 			}
 
-			if (!set.firstName && !set.lastName && !set.title) {
-				console.log("Nothing to set!");
-				return false;
-			}
+			LinkedInStuff.update(Meteor.userId(), { $set: { linkedinInfo: set } });
 
-			//màj ou insert si non trouvé
-			var res = UserProfiles.update({ userid: Meteor.userId() }, { $set: set }, { upsert: true });
+			return res;
 		}
 		catch (e) {
 			console.error(e);
 			return false;
 		}
-
-		return true;
 	},
+	"user.linkedin.setProfileInfo": function () {
+		if (!Meteor.userId()) { return false; }
 
+		var stuff = LinkedInStuff.findOne(Meteor.userId());
+		if (!stuff || !stuff.linkedinInfo) {
+			return false;
+		}
+
+		// màj ou insert si non trouvé
+		return UserProfiles.update({ userid: Meteor.userId() }, { $set: stuff.linkedinInfo }, { upsert: true });
+
+	},
 });

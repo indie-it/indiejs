@@ -13,7 +13,6 @@
 			</ul>
 		</div>
 
-
 		{{#autoForm collection="UserProfiles" id="userprofile.createorupdate" doc=profile }}
 
 		<section id="coord-search" class="row">
@@ -49,17 +48,20 @@
 			</fieldset>
 		</section>
 
-		<section id="skills">
-			{{> afQuickField name='skills' }}
-		</section>
+		<div class="row">
+			<section id="skills" class="col-lg-3">
+				{{> afQuickField name='skills' }}
+			</section>
 
-		<section id="education">
-			{{> afQuickField name='education'}}
-		</section>
+			<section id="education" class="col-lg-4">
+				{{> afQuickField name='education'}}
+			</section>
 
-		<section id="experiences">
-			{{> afQuickField name='experiences' }}
-		</section>
+			<section id="experiences" class="col-lg-5">
+				{{> afQuickField name='experiences' }}
+			</section>
+
+		</div>
 
 		<button type="submit" class="btn btn-primary">{{#if userHasProfile }}Mettre à jour{{else}}Créer le profil{{/if}}</button>
 

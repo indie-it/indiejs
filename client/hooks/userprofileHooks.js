@@ -82,14 +82,14 @@ AutoForm.hooks({
 
 			// nouveau profil.
 			if (!currentdoc) {
-				if (!files) {
+				if (typeof (files) === 'undefined') {
 					saveProfileCallback();
 				} else {
 					cloudinarycallback(insertdoc, saveProfileCallback);
 				}
 			} else {
 				// mise à jour du profil
-				if (!files) {
+				if (typeof(files) === 'undefined') {
 					updateProfileCallback();
 				} else {
 					cloudinarycallback(updatedoc, updateProfileCallback);
