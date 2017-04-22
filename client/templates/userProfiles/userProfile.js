@@ -2,10 +2,6 @@ if (Meteor.isServer)
 	return;
 
 Template.profile.helpers({
-	isSelfProfile: function () {
-		var isSelfProfile = this.profile.userid === Meteor.userId();
-		return isSelfProfile;
-	},
 	getCountEducation: function () {
 		return !this.profile.education ? 0 : this.profile.education.length;
 	},
@@ -110,3 +106,17 @@ Template.profile.rendered = function () {
 	configureAfix();
 	//Tracker.autorun(drawChart);
 };
+
+
+Template.profileHeader.helpers({
+	canEditProfile: function () {
+		//console.log(`userid: ${Meteor.userId()}`);
+		var isSelfProfile = this.profile.userid === Meteor.userId();
+		var isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin');
+		var canEdit = (isAdmin === true) || (isSelfProfile === true);
+
+		console.log(`isSelfProfile: ${isSelfProfile}, isAdmin: ${isAdmin}, canEdit: ${canEdit}`);
+
+		return canEdit;
+	},
+});

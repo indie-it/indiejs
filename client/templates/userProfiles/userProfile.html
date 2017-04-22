@@ -11,11 +11,7 @@
 
 				<!--affiché uniquement en xs--> 
 				<div class="hidden-sm hidden-md hidden-lg">
-					<h1 id="profile">
-						{{profile.firstName}} {{profile.lastName}}
-						{{#if isSelfProfile}} <a href="{{pathFor 'profile.update'}}" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modifier</a>{{/if}}
-					</h1>
-					<h3 class="profile-title">{{profile.title}}</h3>
+					{{> profileHeader}}
 				</div>
 
 				{{#if profile.isAvailable}}
@@ -74,11 +70,7 @@
 		<!--centre-->
 		<div class="col-sm-8 col-md-6 col-lg-6 profile-header">
 			<div class="hidden-xs">
-				<h1 id="profile">
-					{{profile.firstName}} {{profile.lastName}}
-					{{#if isSelfProfile}} <a href="{{pathFor 'profile.update'}}" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modifier</a>{{/if}}
-				</h1>
-				<h3 class="profile-title">{{profile.title}}</h3>
+				{{> profileHeader}}
 			</div>
 
 			{{#if profile.description}}
@@ -128,7 +120,17 @@
 		</div>
 		<!-- /Navigation profil -->
 
-
 	</section>
 
+</template>
+
+<template name="profileHeader">
+	<h1 id="profile">
+		{{profile.firstName}} {{profile.lastName}}
+
+		{{#if canEditProfile}}
+		&nbsp;<a href="{{pathFor 'profile.updateWithId' _id=profile._id}}" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modifier</a>
+		{{/if}}
+	</h1>
+	<h3 class="profile-title">{{profile.title}}</h3>
 </template>

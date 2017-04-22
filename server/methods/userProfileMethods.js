@@ -1,5 +1,6 @@
-﻿import { Meteor } from 'meteor/meteor'
+﻿import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
+import { check } from 'meteor/check';
 
 Meteor.methods({
 	"userprofile.insert": function (insertdoc) {
@@ -50,9 +51,6 @@ Meteor.methods({
 			userid: this.userId
 		});
 
-		updatedoc.$set.userid = this.userId;
-		updatedoc.$set.createdAt = profile.createdAt;
-
 		// validation via le schéma défini
 		Globals.schemas.UserProfilesSchema.validate(updatedoc.$set);
 
@@ -62,9 +60,9 @@ Meteor.methods({
 				throw new Meteor.Error(500, err.message);
 			}
 
-			var profileNameAndTitle = profile.firstName + " " + profile.lastName;
-			if (profile.title) {
-				profileNameAndTitle += " (" + profile.title + ")";
+			var profileNameAndTitle = updatedoc.$set.firstName + " " + updatedoc.$set.lastName;
+			if (updatedoc.$set.title) {
+				profileNameAndTitle += " (" + updatedoc.$set.title + ")";
 			}
 
 			Actions.insert({
@@ -86,4 +84,45 @@ Meteor.methods({
 		});
 		return true;
 	},
+	"userprofile.updateWithId": function (updatedoc, docId) {
+		check(docId, String);
+
+		console.log(`userProfile.updateWithId - docId: ${docId}`);
+
+		// validation via le schéma défini
+		Globals.schemas.UserProfilesSchema.validate(updatedoc.$set);
+
+		var profile = UserProfiles.findOne(docId);
+
+		// mise à jour
+		UserProfiles.update(docId, updatedoc, function (err) {
+			if (err) {
+				throw new Meteor.Error(500, err.message);
+			}
+
+			var profileNameAndTitle = updatedoc.$set.firstName + " " + updatedoc.$set.lastName;
+			if (updatedoc.$set.title) {
+				profileNameAndTitle += " (" + updatedoc.$set.title + ")";
+			}
+
+			Actions.insert({
+				actionType: 'profile-update',
+				userid: Meteor.userId(),
+				options: {
+					profile: profileNameAndTitle,
+					profileid: profile._id,
+					username: Meteor.user().username
+				}
+			}, function (err, objId) {
+				if (err) {
+					console.error(err);
+				}
+				console.log("Action enregistrée");
+			});
+
+			console.log("Update successful!");
+		});
+		return true;
+	},
+
 });

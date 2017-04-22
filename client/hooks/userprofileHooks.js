@@ -67,15 +67,26 @@ AutoForm.hooks({
 				});
 			};
 			var updateProfileCallback = function () {
-				// Mise à jour de profil
-				Meteor.call("userprofile.update", updatedoc, function (error) {
+
+				console.log(`self.currentDoc.userid: ${self.currentDoc.userid}, Meteor.userId(): ${Meteor.userId()}`);
+
+				var cb = function (error) {
 					if (error) {
 						console.log("error", error);
 						self.done(error); // Appelle onError
 						return;
 					}
 					self.done(); // Appelle onSuccess
-				});
+				};
+
+				// Mise à jour de profil
+				if (self.currentDoc.userid === Meteor.userId()) {
+					console.log("call method 'userprofile.update'")
+					Meteor.call('userprofile.update', updatedoc, cb);
+				} else {
+					console.log("call method 'userprofile.updateWithId' docId: " + self.docId)
+					Meteor.call('userprofile.updateWithId', updatedoc, self.docId, cb);
+				}
 			};
 
 			Modal.show("userprofile-loading-modal", null, { backdrop: 'static', keyboard: false });
@@ -89,7 +100,7 @@ AutoForm.hooks({
 				}
 			} else {
 				// mise à jour du profil
-				if (typeof(files) === 'undefined') {
+				if (typeof (files) === 'undefined') {
 					updateProfileCallback();
 				} else {
 					cloudinarycallback(updatedoc, updateProfileCallback);
