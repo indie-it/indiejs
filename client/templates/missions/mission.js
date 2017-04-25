@@ -2,7 +2,6 @@ import { Meteor } from 'meteor/meteor';
 
 Template.mission.helpers({
 	"getMissionStart": function () {
-		console.log("getMissionStart");
 		if (!!this.mission.isEarliestStart) {
 			return "au plus tôt";
 		}
@@ -44,15 +43,11 @@ Template.mission.helpers({
 		return aclass;
 	},
 	"getInterestedUsersText": function () {
-		console.log("this.mission.interestedUserIds.length: " + this.mission.interestedUserIds.length);
-
 		var isUserInterested = _.indexOf(this.mission.interestedUserIds, Meteor.userId()) != -1;
 		var isUserNotInterested = _.indexOf(this.mission.notinterestedUserIds, Meteor.userId()) != -1;
-
 		if (!this.mission.interestedUserIds || this.mission.interestedUserIds.length === 0) {
 			return "Cette mission n'intéresse encore personne."
 		}
-
 		if (isUserInterested) {
 			if (this.mission.interestedUserIds.length > 1) {
 				return `Cette mission intéresse aussi ${(this.mission.interestedUserIds.length - 1)} autre(s) personne(s).`;
@@ -64,6 +59,7 @@ Template.mission.helpers({
 		}
 		return `Cette mission intéresse ${this.mission.interestedUserIds.length} personne(s).`;
 	},
+
 	"canAccept": function () {
 		var tpl = Template.instance();
 		var obj = tpl.actions.get();
@@ -89,16 +85,21 @@ Template.mission.helpers({
 		return obj.canValidate;
 	},
 	"canVote": function () {
+		if (Roles.userIsInRole(Meteor.userId(), 'admin')) {
+			return false;
+		}
 		return this.mission.currentState === 'validated';
 	},
 });
 
 Template.mission.created = function () {
-	console.log("Template.mission.created");
 	this.actions = new ReactiveVar();
+	$('#select-freelancer').hide();
 };
 Template.mission.rendered = function () {
-	console.log("Template.mission.rendered");
+
+	$('#select-freelancer').hide();
+
 	var self = this;
 	Meteor.apply('mission.getActions', [this.data.id], { wait: true }, function (err, result) {
 		if (err) {
@@ -111,68 +112,83 @@ Template.mission.rendered = function () {
 
 Template.mission.events({
 	"click #interested": function (event, template) {
-		console.log("interested");
-		console.log(this.mission._id);
-
 		Meteor.call("mission.interested", this.mission._id, function (error, result) {
 			if (error) {
 				sAlert.error("error", error.message);
 				return;
 			}
 			if (result) {
-				console.log(result);
 				sAlert.success("Avis pris en compte.", { onRouteClose: false });
 				Router.go(Utils.pathFor('missionsList'));
 			}
 		});
-
 	},
 	"click #notinterested": function (event, template) {
-		console.log("notinterested");
-
 		Meteor.call("mission.notinterested", this.mission._id, function (error, result) {
 			if (error) {
 				sAlert.error("error", error.message);
 				return;
 			}
 			if (result) {
-				console.log(result);
 				sAlert.success("Avis pris en compte.", { onRouteClose: false });
 				Router.go(Utils.pathFor('missionsList'));
 			}
 		});
 	},
 	"click #action-archive": function (event, template) {
-		console.log("click #action-archive");
+		var self = this;
 		Meteor.call("mission.archive", this.mission._id, function (error, result) {
 			if (error) {
 				sAlert.error("error", error.message);
 				return;
 			}
 			sAlert.success("Mission archivée", { onRouteClose: false });
-			Router.go(Utils.pathFor('missionsList'));
+			Meteor.apply('mission.getActions', [self.mission._id], { wait: true }, function (err, result) {
+				if (err) {
+					sAlert.error(500, err.message);
+					return;
+				}
+				template.actions.set(result);
+			});
 		});
 	},
 	"click #action-validate": function (event, template) {
-		console.log("click #action-validate");
+		var self = this;
 		Meteor.call("mission.validate", this.mission._id, function (error, result) {
 			if (error) {
 				sAlert.error("error", error.message);
 				return;
 			}
 			sAlert.success("Mission validée", { onRouteClose: false });
-			Router.go(Utils.pathFor('missionsList'));
+			Meteor.apply('mission.getActions', [self.mission._id], { wait: true }, function (err, result) {
+				if (err) {
+					sAlert.error(500, err.message);
+					return;
+				}
+				template.actions.set(result);
+			});
 		});
 	},
 	"click #action-accept": function (event, template) {
-		console.log("click #action-accept");
-		Meteor.call("mission.accept", this.mission._id, function (error, result) {
-			if (error) {
-				sAlert.error("error", error.message);
-				return;
-			}
-			sAlert.success("Mission acceptée", { onRouteClose: false });
-			Router.go(Utils.pathFor('missionsList'));
-		});
+		event.preventDefault();
+
+		var self = this;
+
+		$('#select-freelancer').toggle();
+
+		//Meteor.call("mission.accept", self.mission._id, function (error, result) {
+		//	if (error) {
+		//		sAlert.error("error", error.message);
+		//		return;
+		//	}
+		//	sAlert.success("Mission acceptée", { onRouteClose: false });
+		//	Meteor.apply('mission.getActions', [self.mission._id], { wait: true }, function (err, result) {
+		//		if (err) {
+		//			sAlert.error(500, err.message);
+		//			return;
+		//		}
+		//		template.actions.set(result);
+		//	});
+		//});
 	},
 });

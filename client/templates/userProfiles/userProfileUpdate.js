@@ -7,7 +7,7 @@ $.cloudinary.config = {
 
 Template.update.helpers({
 	"getProfilePicSrc": function () {
-		if (!this.profile.profilePic) {
+		if (!this.profile || !this.profile.profilePic) {
 			return "/img/profile-pic-placeholder.png";
 		}
 		return this.profile.profilePic.url;

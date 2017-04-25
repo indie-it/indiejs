@@ -5,11 +5,11 @@ AutoForm.hooks({
 
 			console.log(doc);
 
-			if (!doc.username || !doc.password || !doc.emails) {
+			if (!doc.username || !doc.password || !doc.email) {
 				sAlert.error("Veuillez renseigner les champs obligatoires.");
 				return false;
 			}
-			var email = doc.emails[0].address;
+			var email = doc.email.address;
 
 			var self = this;
 
