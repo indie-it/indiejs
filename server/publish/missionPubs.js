@@ -1,11 +1,12 @@
 ﻿import SimpleSchema from 'simpl-schema';
+import { check } from 'meteor/check';
 
 Meteor.publish('missions.headers', function () {
-	console.log("Meteor.publish('missions.headers', ... )");
+	console.log("missions.headers");
 	return Missions.find({
 
 		// on ne récupère que les missions dont l'état = 'active'
-		currentState: WorkflowConst.STEP_VALIDATED,
+		"currentState.step": WorkflowConst.STEP_VALIDATED,
 
 		// on retire les missions qui n'intéressent pas l'utilisateur courant.
 		notinterestedUserIds: { $ne: this.userId }
@@ -27,8 +28,7 @@ Meteor.publish('missions.headersAdmin', function () {
 
 Meteor.publish("mission.getById", function (missionId) {
 	// We need to check the `listId` is the type we expect
-	new SimpleSchema({ missionId: { type: String } }).validate({ missionId });
+	check(missionId, String);
 
 	return Missions.find({ _id: missionId });
 });
-

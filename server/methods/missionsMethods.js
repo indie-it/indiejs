@@ -3,12 +3,16 @@ import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
 
 Meteor.methods({
+
 	"mission.insert": function (doc) {
 
 		// "nettoyage" du doc : affectation des valeurs auto
 		//Globals.schemas.MissionSchema.clean(doc);
 
-		doc.currentState = 'new';
+		doc.currentState = {
+			step: WorkflowConst.STEP_NEW,
+			date: new Date()
+		};
 		doc.createdAt = new Date();
 		doc.authorId = this.userId;
 		doc.authorName = Meteor.user().username;
@@ -157,7 +161,7 @@ Meteor.methods({
 			};
 		}
 
-		return MissionWorkflow.getActions(mission.currentState);
+		return MissionWorkflow.getActions(mission.currentState.step);
 	},
 
 	"mission.archive": function (missionid) {
@@ -166,18 +170,30 @@ Meteor.methods({
 		check(missionid, String);
 
 		// vérif mission
-		var mission = Missions.findOne({ _id: missionid });
+		var mission = Missions.findOne(missionid);
 		if (!mission) {
 			throw new Meteor.Error(400, "Mission non trouvée.");
 		}
 
 		// vérif action autorisée
-		var actions = MissionWorkflow.getActions(mission.currentState);
+		var actions = MissionWorkflow.getActions(mission.currentState.step);
 		if (!actions.canArchive) {
 			throw new Meteor.Error("Action non autorisée.");
 		}
 
-		Missions.update(missionid, { $set: { currentState: WorkflowConst.STEP_ARCHIVED } }, function (err) {
+		Missions.update(missionid, {
+			$set: {
+				"currentState.step": WorkflowConst.STEP_ARCHIVED,
+				"currentState.date": new Date()
+            },
+
+			// on vire le champ 'currentState.assignedUserId' s'il existe (ne fait rien sinon).
+            $unset: { "currentState.assignedUserId": "" },
+
+            $addToSet: {
+                workflowHistory: mission.currentState
+            }
+		}, function (err) {
 
 			if (err) {
 				throw new Meteor.Error(500, err.message);
@@ -203,23 +219,35 @@ Meteor.methods({
 			return true;
 		});
 	},
-	"mission.accept": function (missionid) {
-		console.log(`mission.accept: ${missionid}`);
+	"mission.accept": function (missionid, userid) {
+		console.log(`mission.accept: missionid: ${missionid}, userid: ${userid}`);
+
+		// vérif paramètres entrants !
 		check(missionid, String);
+		check(userid, String);
 
 		// vérif mission
-		var mission = Missions.findOne({ _id: missionid });
+		var mission = Missions.findOne(missionid);
 		if (!mission) {
 			throw new Meteor.Error(400, "Mission non trouvée.");
 		}
 
 		// vérif action autorisée
-		var actions = MissionWorkflow.getActions(mission.currentState);
+		var actions = MissionWorkflow.getActions(mission.currentState.step);
 		if (!actions.canAccept) {
 			throw new Meteor.Error("Action non autorisée.");
 		}
 
-		Missions.update(missionid, { $set: { currentState: WorkflowConst.STEP_IN_PROGRESS } }, function (err) {
+		Missions.update(missionid, {
+			$set: {
+				"currentState.step": WorkflowConst.STEP_IN_PROGRESS,
+				"currentState.date": new Date(),
+				"currentState.assignedUserId": userid
+			},
+            $addToSet: {
+                workflowHistory: mission.currentState
+            }
+		}, function (err) {
 
 			if (err) {
 				throw new Meteor.Error(500, err.message);
@@ -251,19 +279,29 @@ Meteor.methods({
 		check(missionid, String);
 
 		// vérif mission
-		var mission = Missions.findOne({ _id: missionid });
+		var mission = Missions.findOne(missionid);
 		if (!mission) {
 			throw new Meteor.Error(400, "Mission non trouvée.");
 		}
 
 		// vérif action autorisée
-		var actions = MissionWorkflow.getActions(mission.currentState);
+		var actions = MissionWorkflow.getActions(mission.currentState.step);
 		if (!actions.canValidate) {
 			throw new Meteor.Error("Action non autorisée.");
 		}
 
-		Missions.update(missionid, { $set: { currentState: WorkflowConst.STEP_VALIDATED } }, function (err) {
-
+		Missions.update(missionid, {
+			$set: {
+				"currentState.step": WorkflowConst.STEP_VALIDATED,
+				"currentState.date": new Date()
+			},
+            // on vire le champ 'currentState.assignedUserId' s'il existe (ne fait rien sinon).
+            $unset: { "currentState.assignedUserId": "" },
+			$addToSet: {
+                workflowHistory: mission.currentState
+            }
+		}, function (err) {
+			console.log(err);
 			if (err) {
 				throw new Meteor.Error(500, err.message);
 			}
@@ -289,4 +327,5 @@ Meteor.methods({
 		});
 
 	},
+
 });

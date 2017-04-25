@@ -1,6 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 
 Template.mission.helpers({
+	"getCurrentState": function () {
+		if (this.mission && this.mission.currentState) {
+			return this.mission.currentState.step;
+		}
+		return "Etape introuvable";
+	},
 	"getMissionStart": function () {
 		if (!!this.mission.isEarliestStart) {
 			return "au plus tôt";
@@ -12,21 +18,21 @@ Template.mission.helpers({
 	},
 	"userHasAnswered": function () {
 		var answered = false;
-		if (this.mission.interestedUserIds && _.indexOf(this.mission.interestedUserIds, Meteor.userId()) != -1) {
+		if (this.mission.interestedUserIds && _.indexOf(this.mission.interestedUserIds, Meteor.userId()) !== -1) {
 			answered = true;
 		}
-		if (this.mission.notinterestedUserIds && _.indexOf(this.mission.notinterestedUserIds, Meteor.userId()) != -1) {
+		if (this.mission.notinterestedUserIds && _.indexOf(this.mission.notinterestedUserIds, Meteor.userId()) !== -1) {
 			answered = true;
 		}
 		return answered;
 	},
 	"getAnswerText": function () {
 		var answerText = "";
-		if (this.mission.interestedUserIds && _.indexOf(this.mission.interestedUserIds, Meteor.userId()) != -1) {
+		if (this.mission.interestedUserIds && _.indexOf(this.mission.interestedUserIds, Meteor.userId()) !== -1) {
 			answerText = "Vous êtes intéressé(e) par cette mission.";
 		}
 
-		if (this.mission.notinterestedUserIds && _.indexOf(this.mission.notinterestedUserIds, Meteor.userId()) != -1) {
+		if (this.mission.notinterestedUserIds && _.indexOf(this.mission.notinterestedUserIds, Meteor.userId()) !== -1) {
 			answerText = "Vous n'êtes pas intéressé(e) par cette mission.";
 		}
 
@@ -34,17 +40,17 @@ Template.mission.helpers({
 	},
 	"getAnswerClass": function () {
 		var aclass = "";
-		if (this.mission.interestedUserIds && _.indexOf(this.mission.interestedUserIds, Meteor.userId()) != -1) {
+		if (this.mission.interestedUserIds && _.indexOf(this.mission.interestedUserIds, Meteor.userId()) !== -1) {
 			aclass = "up";
 		}
-		if (this.mission.notinterestedUserIds && _.indexOf(this.mission.notinterestedUserIds, Meteor.userId()) != -1) {
+		if (this.mission.notinterestedUserIds && _.indexOf(this.mission.notinterestedUserIds, Meteor.userId()) !== -1) {
 			aclass = "down";
 		}
 		return aclass;
 	},
 	"getInterestedUsersText": function () {
-		var isUserInterested = _.indexOf(this.mission.interestedUserIds, Meteor.userId()) != -1;
-		var isUserNotInterested = _.indexOf(this.mission.notinterestedUserIds, Meteor.userId()) != -1;
+		var isUserInterested = _.indexOf(this.mission.interestedUserIds, Meteor.userId()) !== -1;
+		var isUserNotInterested = _.indexOf(this.mission.notinterestedUserIds, Meteor.userId()) !== -1;
 		if (!this.mission.interestedUserIds || this.mission.interestedUserIds.length === 0) {
 			return "Cette mission n'intéresse encore personne."
 		}
@@ -61,24 +67,21 @@ Template.mission.helpers({
 	},
 
 	"canAccept": function () {
-		var tpl = Template.instance();
-		var obj = tpl.actions.get();
+		var obj = Session.get("actions");
 		if (!obj) {
 			return false;
 		}
 		return obj.canAccept;
 	},
 	"canArchive": function () {
-		var tpl = Template.instance();
-		var obj = tpl.actions.get();
+		var obj = Session.get("actions");
 		if (!obj) {
 			return false;
 		}
 		return obj.canArchive;
 	},
 	"canValidate": function () {
-		var tpl = Template.instance();
-		var obj = tpl.actions.get();
+		var obj = Session.get("actions");
 		if (!obj) {
 			return false;
 		}
@@ -88,12 +91,11 @@ Template.mission.helpers({
 		if (Roles.userIsInRole(Meteor.userId(), 'admin')) {
 			return false;
 		}
-		return this.mission.currentState === 'validated';
+		return this.mission.currentState.step === WorkflowConst.STEP_VALIDATED;
 	},
 });
 
 Template.mission.created = function () {
-	this.actions = new ReactiveVar();
 	$('#select-freelancer').hide();
 };
 Template.mission.rendered = function () {
@@ -106,7 +108,7 @@ Template.mission.rendered = function () {
 			sAlert.error(500, err.message);
 			return;
 		}
-		self.actions.set(result);
+		Session.set("actions", result);
 	});
 };
 
@@ -148,7 +150,7 @@ Template.mission.events({
 					sAlert.error(500, err.message);
 					return;
 				}
-				template.actions.set(result);
+				Session.set("actions", result);
 			});
 		});
 	},
@@ -165,7 +167,7 @@ Template.mission.events({
 					sAlert.error(500, err.message);
 					return;
 				}
-				template.actions.set(result);
+				Session.set("actions", result);
 			});
 		});
 	},
@@ -175,20 +177,39 @@ Template.mission.events({
 		var self = this;
 
 		$('#select-freelancer').toggle();
-
-		//Meteor.call("mission.accept", self.mission._id, function (error, result) {
-		//	if (error) {
-		//		sAlert.error("error", error.message);
-		//		return;
-		//	}
-		//	sAlert.success("Mission acceptée", { onRouteClose: false });
-		//	Meteor.apply('mission.getActions', [self.mission._id], { wait: true }, function (err, result) {
-		//		if (err) {
-		//			sAlert.error(500, err.message);
-		//			return;
-		//		}
-		//		template.actions.set(result);
-		//	});
-		//});
 	},
+});
+
+
+Template.assignUser.events({
+	"click a": function (event, template) {
+
+		// récupération de l'id d'utilisateur.
+		var userid = this.userid;
+		console.log(`userid: ${userid}`);
+		
+		// récupération de l'id de mission (param d'url')...
+		var missionid = Router.current().params._id;
+		console.log(`missionid: ${missionid}`);
+
+		// appel meteor serveur
+		Meteor.call("mission.accept", missionid, userid, function (err, res) {
+			if (err) {
+				console.error(err);
+				sAlert.error("error", err.message);
+				return;
+			}
+			sAlert.success("Mission acceptée", { onRouteClose: false });
+
+			Meteor.apply('mission.getActions', [missionid], { wait: true }, function (err, result) {
+				if (err) {
+					sAlert.error(500, err.message);
+					return;
+				}
+				Session.set("actions", result);
+			});
+		});
+
+	},
+
 });
