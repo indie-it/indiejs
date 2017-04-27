@@ -5,12 +5,34 @@ import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 
 Meteor.methods({
-	"user.insert": function (user) {
-		return Accounts.createUser(user);
-	},
-});
+	"freelancerAccount.insert": function (user) {
+		console.log("freelancerAccount.insert");
+		console.log(user);
 
-Meteor.methods({
+		// création du compte utilisateur
+		var account = Accounts.createUser({
+			email: user.email,
+			password: user.password,
+			username: user.username,
+		});
+
+		console.log(account);
+
+		// ajout du rôle recruteur (entreprise).
+		Roles.addUsersToRoles(account, Globals.roles.freelancer);
+
+		// Journalisation de l'action
+		Actions.insert({
+			actionType: Lists.actions.map.userCreate,
+			userid: account,
+			options: {
+				username: user.username,
+				role: Globals.roles.recruiter,
+			}
+		});
+
+		return true;
+	},
 	"companyAccount.insert": function (user) {
 
 		console.log("companyAccount.insert");
@@ -21,6 +43,7 @@ Meteor.methods({
 		// ajout du rôle recruteur (entreprise).
 		Roles.addUsersToRoles(account, Globals.roles.recruiter);
 
+		// Journalisation de l'action
 		Actions.insert({
 			actionType: Lists.actions.map.userCreate,
 			userid: account,
@@ -29,7 +52,9 @@ Meteor.methods({
 				role: Globals.roles.recruiter,
 			}
 		});
-		
+
+		return true;
+
 	},
 });
 

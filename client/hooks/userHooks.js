@@ -9,31 +9,31 @@ AutoForm.hooks({
 				sAlert.error("Veuillez renseigner les champs obligatoires.");
 				return false;
 			}
-			var email = doc.email.address;
-
+			
 			var self = this;
 
-			Accounts.createUser({
+			var options = {
 				username: doc.username,
-				email: email,
+				email: doc.email.address,
 				password: doc.password,
-				profile: doc.profile ? doc.profile : {},
-				roles: [Globals.roles.freelancer]
-			}, function (err) {
+			};
+
+			Meteor.call('freelancerAccount.insert', options, function (err) {
 				console.log(err);
 				if (!err) {
 					self.done(); // Appelle onSuccess
+					return;
 				}
-				else {
-					self.done(err); // Appelle onError
-				}
+
+				self.done(err); // Appelle onError
+
 			});
 
 			return false; // Dans tous les cas, arrête la soumission des donneés.
 		},
 
 		onSuccess: function () {
-			sAlert.success("Utilisateur créé!");
+			sAlert.success("Le nouvel utilisateur a bien été créé. Vous pouvez à présent vous connecter.", { onRouteClose: false });
 			Router.go(Utils.pathFor('home'));
 		},
 

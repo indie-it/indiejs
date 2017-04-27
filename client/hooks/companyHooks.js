@@ -34,7 +34,7 @@
 		},
 
 		onSuccess: function () {
-			sAlert.success("Utilisateur créé!", { onRouteClose: false });
+			sAlert.success("Votre compte a bien été créé. Vous pouvez vous connecter dès maintenant.", { onRouteClose: false });
 			Router.go(Utils.pathFor('home'));
 		},
 
