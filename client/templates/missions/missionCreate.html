@@ -11,9 +11,8 @@
 
 			<div class="col-md-6">
 				<fieldset>
-					<legend>Mission</legend>
+					<legend><i class="fa fa-search-plus" aria-hidden="true"></i> Mission</legend>
 					{{> afQuickField name='name' }}
-					{{> afQuickField name='shortDescription' }}
 					{{> afQuickField name="type" firstOption="-- Selectionnez un élément --"}}
 					{{> afQuickField name="level" firstOption="-- Selectionnez un élément --"}}
 
@@ -22,7 +21,7 @@
 
 			<div class="col-md-6">
 				<fieldset>
-					<legend>Dates et durée</legend>
+					<legend><i class="fa fa-calendar" aria-hidden="true"></i> Dates et durée</legend>
 					{{> afQuickField name='isEarliestStart' }}
 					{{> afQuickField name='start' }}
 					{{> afQuickField name='duration' }}
@@ -34,7 +33,7 @@
 		<section id="coord-search" class="row">
 			<div class="col-md-6">
 				<fieldset>
-					<legend>Autres infos</legend>
+					<legend><i class="fa fa-info" aria-hidden="true"></i> Autres infos</legend>
 					{{> afQuickField name='location' }}
 					{{> afQuickField name='organization' }}
 					{{> afQuickField name='averageDailyRate' }}
@@ -42,17 +41,20 @@
 			</div>
 			<div class="col-md-6">
 				<fieldset>
-					<legend>Catégorisation de la mission</legend>
+					<legend><i class="fa fa-tags" aria-hidden="true"></i> Catégorisation de la mission</legend>
 					{{> afQuickField name='technos' }}
 					{{> afQuickField name='categories' }}
 				</fieldset>
 			</div>
 		</section>
 		
+		{{> afQuickField name='shortDescription' }}
 		{{> afQuickField name='description' }}
 
 		<button type="submit" class="btn btn-primary">Créer la nouvelle mission</button>
 
 		{{/autoForm}}
+
 	</div>
+	<br/>
 </template>

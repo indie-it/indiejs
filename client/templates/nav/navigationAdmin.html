@@ -1,5 +1,6 @@
-<template name="navigation">
-	<nav class="navbar {{#if isInRole 'admin'}}navbar-inverse{{else}}navbar-default{{/if}} navbar-fixed-top">
+﻿<!--Administrateur-->
+<template name="navigationAdmin">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 
 			<div class="navbar-header">
@@ -17,14 +18,24 @@
 					<li class="{{getCurrentClass 'home'}}"><a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='home'}}">Accueil</a></li>
 
 					{{#if currentUser}}
-					<!--<li class="{{getCurrentClass 'linkedin'}}"><a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='linkedin'}}">LinkedIn</a></li>-->
-					<li class="{{getCurrentClass 'profile.list'}}"><a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='profile.list'}}">Liste des profils</a></li>
+
+					<li class="{{getCurrentClass 'profile.list'}}">
+						<a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='profile.list'}}">Indépendants</a>
+					</li>
+
+					<li class="{{getCurrentClass 'company'}}">
+						<a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='company'}}">Entreprises</a>
+					</li>
+
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mission <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<!-- <li><a href="#">Nouveau besoin identifié</a></li> -->
-							<li class="{{getCurrentClass 'missionCreate'}}"><a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='missionCreate'}}">Nouvelle mission</a></li>
-							<li class="{{getCurrentClass 'missionsList'}}"><a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='missionsList'}}">Liste des missions</a></li>
+							<li class="{{getCurrentClass 'missionCreate'}}">
+								<a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='missionCreate'}}">Nouvelle mission</a>
+							</li>
+							<li class="{{getCurrentClass 'missionsList'}}">
+								<a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='missionsList'}}">Liste des missions</a>
+							</li>
 							{{#if isInRole 'admin'}}
 							<li class="{{getCurrentClass 'missionsListAdmin'}}"><a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='missionsListAdmin'}}">Toutes les missions</a></li>
 							{{/if}}
@@ -36,17 +47,15 @@
 
 				<ul class="nav navbar-nav navbar-right">
 					{{#if currentUser}}
-					{{#if isInRole 'admin'}}
-					<p class="navbar-text"><i class="fa fa-star" aria-hidden="true"></i> AdminMode</p>
-					{{/if}}
 					<li class="{{getCurrentClass 'profile.update'}}">
-						<a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='profile.update'}}">Profil ({{currentUser.username}})</a>
+						<a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='profile.update'}}">{{#if isInRole 'admin'}}<i class="fa fa-star" aria-hidden="true"></i> {{/if}}Profil ({{currentUser.username}})</a>
 					</li>
-					
+
 					<li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="#" class="logout">Déconnexion</a></li>
 					{{/if}}
 				</ul>
 			</div>
+
 		</div>
 	</nav>
 </template>

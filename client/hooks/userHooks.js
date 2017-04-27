@@ -17,7 +17,8 @@ AutoForm.hooks({
 				username: doc.username,
 				email: email,
 				password: doc.password,
-				profile: doc.profile ? doc.profile : {}
+				profile: doc.profile ? doc.profile : {},
+				roles: [Globals.roles.freelancer]
 			}, function (err) {
 				console.log(err);
 				if (!err) {

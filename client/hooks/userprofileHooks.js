@@ -68,7 +68,7 @@ AutoForm.hooks({
 			};
 			var updateProfileCallback = function () {
 
-				console.log(`self.currentDoc.userid: ${self.currentDoc.userid}, Meteor.userId(): ${Meteor.userId()}`);
+				//console.log(`self.currentDoc.userid: ${self.currentDoc.userid}, Meteor.userId(): ${Meteor.userId()}`);
 
 				var cb = function (error) {
 					if (error) {
@@ -81,10 +81,10 @@ AutoForm.hooks({
 
 				// Mise à jour de profil
 				if (self.currentDoc.userid === Meteor.userId()) {
-					console.log("call method 'userprofile.update'")
+					//console.log("call method 'userprofile.update'")
 					Meteor.call('userprofile.update', updatedoc, cb);
 				} else {
-					console.log("call method 'userprofile.updateWithId' docId: " + self.docId)
+					//console.log("call method 'userprofile.updateWithId' docId: " + self.docId)
 					Meteor.call('userprofile.updateWithId', updatedoc, self.docId, cb);
 				}
 			};
@@ -99,7 +99,9 @@ AutoForm.hooks({
 					cloudinarycallback(insertdoc, saveProfileCallback);
 				}
 			} else {
-				// mise à jour du profil
+				// mise à jour du profil : clean !
+				Globals.schemas.UserProfilesSchema.clean(updatedoc.$set);
+
 				if (typeof (files) === 'undefined') {
 					updateProfileCallback();
 				} else {

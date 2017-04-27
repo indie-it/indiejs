@@ -1,0 +1,56 @@
+﻿<!--Utilisateur de type recruteur-->
+<template name="navigationRecruiter">
+	<nav class="navbar navbar-recruiter navbar-fixed-top">
+		<div class="container-fluid">
+
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">indie.it</a>
+			</div>
+
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+
+					<li class="{{getCurrentClass 'home'}}">
+						<a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='home'}}">Accueil</a>
+					</li>
+
+					<li class="{{getCurrentClass 'profile.list'}}">
+						<a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='profile.list'}}">Indépendants</a>
+					</li>
+
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mission <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li class="{{getCurrentClass 'missionCreate'}}">
+								<a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='missionCreate'}}">Nouvelle mission</a>
+							</li>
+							<li class="{{getCurrentClass 'missionsList'}}">
+								<a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='missionsList'}}">Liste des missions</a>
+							</li>
+						</ul>
+					</li>
+
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+					<li class="{{getCurrentClass 'profile.update'}}">
+						<a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='companyUpdate'}}">
+							<i class="fa fa-building fa-fw" aria-hidden="true"></i> Entreprise ({{currentUser.username}})
+						</a>
+					</li>
+
+					<li>
+						<a data-toggle="collapse" data-target=".navbar-collapse.in" href="#" class="logout">Déconnexion</a>
+					</li>
+				</ul>
+			</div>
+
+		</div>
+	</nav>
+</template>

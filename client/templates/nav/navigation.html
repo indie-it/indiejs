@@ -1,0 +1,18 @@
+<template name="navigation">
+
+	{{#if currentUser}}
+		{{#if isAdmin }}
+			{{> navigationAdmin}}
+		{{else}}
+			{{#if isFreelancer}}
+				{{> navigationFreelancer}}
+			{{else}}
+				{{> navigationRecruiter}}
+			{{/if}}
+		{{/if}}
+	{{else}}
+		{{> navigationNotConnected}}
+	{{/if}}
+
+</template>
+

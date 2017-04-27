@@ -1,7 +1,7 @@
 ﻿<template name="mission">
 	<div class="container">
 
-		{{#if isInRole 'admin'}}
+		{{#if isAdmin }}
 
 			<div class="row">
 				<div class="col-md-4">
@@ -95,7 +95,7 @@
 			</div>
 		</div>
 		{{else}}
-		{{#if isInRole 'admin'}}
+		{{#if isAdmin }}
 		<!--<p class="text-danger"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Impossible de posulter aux offres en tant qu'administrateur.</p>-->
 		<hr />
 		{{else}}
@@ -103,7 +103,7 @@
 		{{/if}}
 		{{/if}}
 
-		{{#if isInRole 'admin' }}
+		{{#if isAdmin }}
 		<h4>Journal des actions réalisées sur cette mission</h4>
 		<ul>
 			{{#each actions}}

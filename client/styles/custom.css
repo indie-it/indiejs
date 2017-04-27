@@ -4,76 +4,166 @@
 /* use our snippet below. Tip: By default, the navbar is 50px high.             */
 
 body {
-    padding-top: 30px;
-    position: relative;
+	padding-top: 25px;
+	position: relative;
+	font-family: 'Fira Sans', sans-serif;
 }
 
-.footer {
-    color: #919191;
+.navbar-default {
+}
+
+h1, h2, h3, h4, h5, h6 {
 }
 
 .toFade {
-    color: #919191;
-}
-
-.slogan {
-    display: inline-block;
-    margin-left: 100px;
-    color: #777777;
+	color: #919191;
 }
 
 .categoryList ul {
-    list-style-type: none;
+	list-style-type: none;
 }
 
 .important {
-    font-weight: bold;
-    color: #474747;
+	font-weight: bold;
+	color: #474747;
 }
 
 .horizontal-table tbody tr td:first-child {
-    font-weight: bold;
-    color: #474747;
+	font-weight: bold;
+	color: #474747;
 }
 
 .loadingScreen {
-    height: 300px;
+	height: 300px;
 }
 
 h1#profile {
 	margin-top: 10px;
 	font-weight: bold;
 }
+
 h3.profile-title {
 	margin-top: 12px;
 	color: #337ab7;
 }
-img.profile-pic{
+
+img.profile-pic {
 	width: 200px;
 	height: 200px;
 }
-section.profile-header{
-	align-content:center;
-	text-align:center;
+
+section.profile-header {
+	align-content: center;
+	text-align: center;
 }
+
 div.profile-description {
 	text-align: justify;
 }
+
 h2.profile {
 	color: #337ab7;
 	font-size: 18px;
 }
+
 .center {
 	align-content: center;
 	text-align: center;
 }
+
 .align-left {
 	text-align: left;
 }
+
 div.experience h3 {
 	font-size: 17px;
 	margin-top: 10px;
 }
+
 .well-info {
 	background: rgba(51, 122, 183, 0.1);
 }
+
+.company {
+}
+
+	.company h1 {
+		color: #337ab7;
+		font-weight: bold;
+	}
+
+	.company h2 {
+		color: #337ab7;
+	}
+
+
+/*************************  footer  ******************************/
+
+.footer {
+	background-color: #202024;
+	color: #8e8e8e;
+	border-top: 1px solid #515151;
+}
+
+	.footer p {
+		font-size: 12px;
+	}
+
+
+
+/********************* Intro (page d'accueil) *********************/
+
+.intro-header {
+	padding-top: 50px;
+	padding-bottom: 50px;
+	text-align: center;
+	color: #f8f8f8;
+	background: url(img/intro-bg.jpg) no-repeat center;
+	background-size: cover;
+}
+
+.intro-message {
+	position: relative;
+	padding-top: 20%;
+	padding-bottom: 20%;
+}
+
+	.intro-message h1 {
+		margin: 0;
+		text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+		font-size: 5em;
+		font-weight: 500;
+	}
+
+	.intro-message h3 {
+		text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+	}
+
+.intro-divider {
+	width: 500px;
+	border-top: 1px solid #f8f8f8;
+	border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+
+
+/**** alerts overrides */
+.alert-warning {
+	background-color: rgba(252, 248, 227, 0.85) !important;
+}
+
+/** navbar : enterprise **/
+.navbar-recruiter {
+	background-color: #ffffff;
+	border-color: rgb(251, 253, 255);
+}
+	.navbar-recruiter .navbar-toggle {
+		border-color: #337ab7;
+	}
+	.navbar-recruiter .active {
+		background-color: #e3f2ff;
+	}
+
+	.navbar-recruiter .icon-bar {
+		background-color: #337ab7;
+	}

@@ -60,13 +60,13 @@ Meteor.methods({
 				throw new Meteor.Error(500, err.message);
 			}
 
-			var profileNameAndTitle = updatedoc.$set.firstName + " " + updatedoc.$set.lastName;
+			var profileNameAndTitle = `${updatedoc.$set.firstName} ${updatedoc.$set.lastName}`;
 			if (updatedoc.$set.title) {
-				profileNameAndTitle += " (" + updatedoc.$set.title + ")";
+				profileNameAndTitle += ` (${updatedoc.$set.title})`;
 			}
 
 			Actions.insert({
-				actionType: 'profile-update',
+				actionType: Lists.actions.map.profileUpdate,
 				userid: Meteor.userId(),
 				options: {
 					profile: profileNameAndTitle,

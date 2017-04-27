@@ -1,0 +1,39 @@
+﻿<template name="companyUpdate">
+	<div class="container">
+		<h1>Entreprise</h1>
+		{{#autoForm collection="Companies" id="company.createorupdate" doc=company }}
+		<div class="row">
+			<div class="col-md-6">
+				<fieldset>
+					<legend>Informations</legend>
+					{{> afQuickField name='name'}}
+					{{> afQuickField name='type'}}
+					{{> afQuickField name='size'}}
+				</fieldset>
+			</div>
+			<div class="col-md-6">
+				<fieldset>
+					<legend>Secteur et localisation</legend>
+					{{> afQuickField name='field'}}
+					{{> afQuickField name='location'}}
+				</fieldset>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<fieldset>
+					<legend>Descriptif</legend>
+					{{> afQuickField name='shortDescription'}}
+					{{> afQuickField name='description'}}
+				</fieldset>
+			</div>
+		</div>
+
+		<button type="submit" class="btn btn-primary">Enregistrer</button>
+
+		{{/autoForm}}
+	</div>
+
+	<br />
+
+</template>
