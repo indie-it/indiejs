@@ -122,12 +122,15 @@ Meteor.methods({
 				set.latestExperience = {};
 				if (pos.title) { set.latestExperience.title = pos.title; }
 				if (pos.summary) { set.latestExperience.description = pos.summary; }
-				if (pos.startDate) { set.latestExperience.start = new Date(pos.startDate.year, pos.startDate.Month, 1, 0, 0, 0, 0); }
-				if (pos.endDate) { set.latestExperience.end = new Date(pos.endDate.year, pos.endDate.Month, 1, 0, 0, 0, 0); }
+				if (pos.startDate) {
+					set.latestExperience.start = new Date(pos.startDate.year, pos.startDate.month, 1, 0, 0, 0, 0);
+				}
+				if (pos.endDate) { set.latestExperience.end = new Date(pos.endDate.year, pos.endDate.month, 1, 0, 0, 0, 0); }
 				if (pos.Company) { set.company = pos.Company.name; }
 				if (pos.isCurrent) { set.isCurrent = pos.isCurrent; }
 			}
 
+			console.log(set);
 			LinkedInStuff.update(Meteor.userId(), { $set: { linkedinInfo: set } });
 
 			return res;
