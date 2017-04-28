@@ -75,14 +75,21 @@
 			</section>
 		</div>
 
-		<div class="fixed-footer">
-			<button type="submit" class="btn btn-primary">{{#if userHasProfile }}Mettre à jour{{else}}Créer le profil{{/if}}</button>
-		</div>
 
 		{{/autoForm}}
+
 		<br />
+		<br />
+
 	</div>
 
+	<div class="container-fluid">
+		<div class="row fixed-footer text-center">
+			<div class="col-sm-12">
+				<button type="submit" class="btn btn-primary">{{#if userHasProfile }}Mettre à jour{{else}}Créer le profil{{/if}}</button>
+			</div>
+		</div>
+	</div>
 
 </template>
 

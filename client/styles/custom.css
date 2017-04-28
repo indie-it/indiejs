@@ -81,7 +81,9 @@ div.experience h3 {
 }
 
 .well-info {
-	background: rgba(51, 122, 183, 0.1);
+	background: rgba(51, 122, 183, 0.4);
+	/*padding: 10px;*/
+	/*margin: 15px;*/
 }
 
 .company {
@@ -145,6 +147,27 @@ div.experience h3 {
 	border-bottom: 1px solid rgba(0,0,0,0.2);
 }
 
+
+/********************* Connexion *********************/
+
+.connect-header {
+	/*padding-top: 20px;*/
+	/*padding-bottom: 20px;*/
+	/*text-align: center;*/
+	/*color: #f8f8f8;*/
+	background: url(img/connect-bg.jpg) no-repeat center;
+	background-size: cover;
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
+.connect-message {
+	background-color: rgba(255, 255, 255, 0.9);
+	position: relative;
+	padding-top: 5%;
+	padding-bottom: 15%;
+}
+
 /*************** Loading  ****************/
 .loadingDiv {
 	padding-top: 20%;
@@ -184,8 +207,12 @@ div.experience h3 {
 }*/
 
 .fixed-footer {
+	border-top: solid 1px rgb(204, 204, 204);
+	background-color: #fff;
 	position: fixed;
-	height: 100px;
+	height: 45px;
+	line-height: 45px;
 	bottom: 0;
 	width: 100%;
+	z-index: 100;
 }
