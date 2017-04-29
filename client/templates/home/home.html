@@ -8,32 +8,51 @@
 
 						<!-- <img src="/img/logo-indie-it.jpg"/> -->
 						<h1>{{getGlobal 'appName'}}</h1>
+						<hr class="hidden-xs intro-divider" />
+						<hr class="hidden-sm hidden-md hidden-lg intro-divider-sm" />
 						<h3>{{getGlobal 'appDesc'}}</h3>
 
 						{{#if currentUser}}
-						<hr class="intro-divider"/>
-						<h3>Bonjour <strong>{{ currentUser.username }}</strong>!</h3>
+							<h3>Bonjour <strong>{{ currentUser.username }}</strong>!</h3>
 
-						{{#if hasProfile}}
+							{{#if hasProfile}}
+							{{else}}
+							<br />
+							<div class="alert alert-warning alert-dismissible" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<i class="fa fa-exclamation-circle" aria-hidden="true"></i> Vous n'avez pas encore créé votre profil.
+								Vous pouvez <a href="{{pathFor route='linkedin'}}"><strong>importer votre profil LinkedIn</strong></a> ou bien <a href="{{pathFor route='profile.update'}}"><strong>le renseigner ici</strong></a>.
+							</div>
+							{{/if}}
+						
+							<!--{{#if isAdmin}}
+							<div class="encadre">
+								<h4><i class="fa fa-briefcase fa-lg"></i> Les dernières actions</h4>
+								<ul id="actions">
+									{{#each actions}}
+									{{>action}}
+									{{/each}}
+								</ul>
+							</div>
+							{{/if}}-->
+
 						{{else}}
 						<br/>
-						<div class="alert alert-warning alert-dismissible" role="alert">
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<i class="fa fa-exclamation-circle" aria-hidden="true"></i> Vous n'avez pas encore créé votre profil.
-							Vous pouvez <a href="{{pathFor route='linkedin'}}"><strong>importer votre profil LinkedIn</strong></a> ou bien <a href="{{pathFor route='profile.update'}}"><strong>le renseigner ici</strong></a>.
-						</div>
-						{{/if}}
 
-						<!--{{#if isAdmin}}
-						<div class="encadre">
-							<h4><i class="fa fa-briefcase fa-lg"></i> Les dernières actions</h4>
-							<ul id="actions">
-								{{#each actions}}
-								{{>action}}
-								{{/each}}
-							</ul>
+						<div class="col-lg-3"></div>
+						<div class="col-lg-6">
+							<div class="well well-info">
+								<h4>
+									La plateforme communautaire d'indépendants IT pour la <strong>recherche de missions</strong>, l'<strong>entraide</strong> et le <strong>partage</strong>.
+								</h4>
+								<h4>
+									<strong><a href="#" class="btn btn-default"><i class="fa fa-black-tie fa-fw" aria-hidden="true"></i> Indépendant</a></strong>
+									&nbsp;
+									<strong><a href="#" class="btn btn-default"><i class="fa fa-building fa-fw" aria-hidden="true"></i> Entreprise</a></strong>
+								</h4>
+							</div>
 						</div>
-						{{/if}}-->
+						<div class="col-lg-3"></div>
 
 						{{/if}}
 					</div>

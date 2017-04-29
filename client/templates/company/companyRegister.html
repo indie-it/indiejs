@@ -1,20 +1,32 @@
 ﻿<template name="companyRegister">
 	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>Enregistrement de société</h1>
+			</div>
+		</div>
+		{{#autoForm collection="Meteor.users" id="insertCompanyAccount"}}
 		<div class="col-md-6">
-			<h1>Enregistrement de société</h1>
-			{{#autoForm collection="Meteor.users" id="insertCompanyAccount"}}
 			<fieldset>
-				<legend>Informations obligatoires</legend>
+				<legend><i class="fa fa-building fa-fw" aria-hidden="true"></i> Informations obligatoires</legend>
 				{{> afQuickField name="username"}}
 				{{> afQuickField name="password"}}
 				{{> afQuickField name="confirmation"}}
-				{{> afQuickField name="companyName"}}
 				{{> afQuickField name="email" }}
+			</fieldset>
+		</div>
+		<div class="col-md-6">
+			<fieldset>
+				<legend><i class="fa fa-black-tie fa-fw" aria-hidden="true"></i> Informations de contact</legend>
 				{{> afQuickField name="profile" }}
 			</fieldset>
-			<button type="submit" class="btn btn-primary">Je crée mon compte Entreprise</button>
-			{{/autoForm}}
 		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<button type="submit" class="btn btn-primary">Je crée mon compte Entreprise</button>
+			</div>
+		</div>
+		{{/autoForm}}
 	</div>
 	<br />
 </template>

@@ -2,6 +2,7 @@
 <template name="navigationNotConnected">
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
+			
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 					<span class="sr-only">Toggle navigation</span>
@@ -11,11 +12,22 @@
 				</button>
 				<a class="navbar-brand" href="#">indie.it</a>
 			</div>
+
 			<div id="navbar" class="navbar-collapse collapse">
+				
 				<ul class="nav navbar-nav">
 					<li class="{{getCurrentClass 'home'}}"><a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='home'}}">Accueil</a></li>
 				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='login'}}">Se connecter</a>
+					</li>
+				</ul>
+
 			</div>
+
+
 		</div>
 	</nav>
 </template>

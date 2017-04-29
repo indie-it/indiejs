@@ -81,9 +81,7 @@ div.experience h3 {
 }
 
 .well-info {
-	background: rgba(51, 122, 183, 0.4);
-	/*padding: 10px;*/
-	/*margin: 15px;*/
+	background: linear-gradient(45deg, rgba(51, 122, 183, 0.6), rgba(51, 122, 183, 0.4));
 }
 
 .company {
@@ -141,8 +139,17 @@ div.experience h3 {
 		text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
 	}
 
+	.intro-message .well-info {
+		background: rgba(51, 122, 183, 0.85);
+	}
+
 .intro-divider {
 	width: 500px;
+	border-top: 1px solid #f8f8f8;
+	border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+.intro-divider-sm {
+	width: 200px;
 	border-top: 1px solid #f8f8f8;
 	border-bottom: 1px solid rgba(0,0,0,0.2);
 }
@@ -151,10 +158,6 @@ div.experience h3 {
 /********************* Connexion *********************/
 
 .connect-header {
-	/*padding-top: 20px;*/
-	/*padding-bottom: 20px;*/
-	/*text-align: center;*/
-	/*color: #f8f8f8;*/
 	background: url(img/connect-bg.jpg) no-repeat center;
 	background-size: cover;
 	padding-right: 0px;
@@ -194,17 +197,6 @@ div.experience h3 {
 	.navbar-recruiter .icon-bar {
 		background-color: #337ab7;
 	}
-
-/*.encadre {
-	text-align: left;
-	min-height: 20px;
-	padding: 19px;
-	margin-bottom: 20px;
-	background-color: rgba(245, 245, 245, 0.80);
-	border: 1px solid #e3e3e3;
-	border-radius: 4px;
-	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
-}*/
 
 .fixed-footer {
 	border-top: solid 1px rgb(204, 204, 204);

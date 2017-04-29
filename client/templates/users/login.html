@@ -1,4 +1,5 @@
 ﻿<template name="login">
+
 	<div class="container-fluid connect-header">
 		<div class="connect-message">
 			<div class="container">
@@ -8,6 +9,14 @@
 						<h1>Se connecter</h1>
 					</div>
 				</div>
+
+				{{#if currentUser}}
+
+				<p>Vous êtes déjà connecté.</p>
+				<br/>
+				<p> <a href="{{pathFor route='home'}}" class="btn btn-default"><i class="fa fa-home fa-fw" aria-hidden="true"></i> Retour à l'accueil</a></p>
+
+				{{else}}
 
 				<div class="row">
 
@@ -42,8 +51,8 @@
 
 					</div>
 
-
 				</div>
+
 				<br />
 
 				<div class="row">
@@ -55,8 +64,10 @@
 					</div>
 				</div>
 				<br />
+				{{/if}}
 			</div>
 
 		</div>
 	</div>
+
 </template>
