@@ -43,6 +43,8 @@ Meteor.startup(function () {
 			families: [
 				'Fira+Sans:200',
 				'Lobster',
+				'Pacifico',
+				'Baloo',
 				//'Fira+Sans:500',
 				//'Roboto Slab:700,400:latin',
 				//'Oswald:400',

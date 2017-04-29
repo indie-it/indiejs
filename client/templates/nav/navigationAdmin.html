@@ -19,6 +19,10 @@
 
 					{{#if currentUser}}
 
+					<li class="{{getCurrentClass 'admin'}}">
+						<a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='admin'}}">Admin.</a>
+					</li>
+
 					<li class="{{getCurrentClass 'profile.list'}}">
 						<a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='profile.list'}}">Indépendants</a>
 					</li>
