@@ -1,33 +1,42 @@
 ﻿<template name="mission">
+	{{setTitle mission.name}}
 	<div class="container">
+		<ol class="breadcrumb">
+			<li><a href="{{pathFor route='home'}}">Accueil</a></li>
+			<li><a href="{{pathFor route='missionsList'}}">Liste des missions</a></li>
+			<li class="active">{{mission.name}}</li>
+		</ol>
+
 
 		{{#if isAdmin }}
 
-			<div class="row">
-				<div class="col-md-4">
-					<h3><span class="label label-primary"><i class="fa fa-cogs" aria-hidden="true"></i> {{getCurrentState}}</span></h3>
-				</div>
-				<div class="col-md-8">
-					<h3 class="pull-right">
-						{{#if canValidate}}<a id="action-validate" class="btn btn-success" href="#" role="button"><i class="fa fa-check" aria-hidden="true"></i> Valider</a>{{/if}}
-						{{#if canAccept}}<a id="action-accept" class="btn btn-primary" href="#" role="button"><i class="fa fa-user-circle" aria-hidden="true"></i> Affecter un indépendant</a>{{/if}}
-						{{#if canArchive}}<a id="action-archive" class="btn btn-danger" href="#" role="button"><i class="fa fa-archive" aria-hidden="true"></i> Archiver</a>{{/if}}
-					</h3>
-				</div>
+		<div class="row">
+			<div class="col-md-4">
+				<h3><span class="label label-primary"><i class="fa fa-cogs" aria-hidden="true"></i> {{getCurrentState}}</span></h3>
 			</div>
+			<div class="col-md-8">
+				<h3 class="pull-right">
+					{{#if canValidate}}<a id="action-validate" class="btn btn-success" href="#" role="button"><i class="fa fa-check" aria-hidden="true"></i> Valider</a>{{/if}}
+					{{#if canAccept}}<a id="action-accept" class="btn btn-primary" href="#" role="button"><i class="fa fa-user-circle" aria-hidden="true"></i> Affecter un indépendant</a>{{/if}}
+					{{#if canArchive}}<a id="action-archive" class="btn btn-danger" href="#" role="button"><i class="fa fa-archive" aria-hidden="true"></i> Archiver</a>{{/if}}
+				</h3>
+			</div>
+		</div>
 
-			{{#if canAccept}}
-			<div id="select-freelancer" class="row" style="display: none;">
-				<div class="container">
-					{{> tabular table=TabularTables.UserProfiles class="table table-striped table-bordered"}}
-				</div>
+		{{#if canAccept}}
+		<div id="select-freelancer" class="row" style="display: none;">
+			<div class="container">
+				{{> tabular table=TabularTables.UserProfiles class="table table-striped table-bordered"}}
 			</div>
-			{{/if}}
-		<hr/>
+		</div>
+		{{/if}}
+		<hr />
 		{{/if}}
 
 		<div class="row">
-			<h3>{{mission.name}}</h3>
+			<div class="col-md-12">
+				<h3>{{mission.name}}</h3>
+			</div>
 		</div>
 
 		<div class="row">
@@ -50,6 +59,7 @@
 					{{#if mission.level}}<span class="label label-primary">{{mission.level}}</span>{{/if}}
 					{{#if mission.type}}<span class="label label-primary">{{mission.type}}</span>{{/if}}
 				</p>
+				<br />
 				{{#if mission.shortDescription}}<h4><small>{{mission.shortDescription}}</small></h4>{{/if}}
 
 				<div>{{#markdown}}{{mission.description}}{{/markdown}}</div>
@@ -77,14 +87,18 @@
 		</div>
 
 		{{#if canVote}}
+
 		<div class="row">
 			<div class="col-md-12">
+				<h3><i class="fa fa-star-o fa-fw" aria-hidden="true"></i>Cette mission vous intéresse ?</h3>
+				<p>Cliquez sur le bouton "Intéressé" pour postuler. Sinon, cliquez sur "Pas intéressé" pour faire disparaître la mission de la liste.</p>
+
 				{{#if userHasAnswered }}
 				<p><strong><span class="glyphicon glyphicon-thumbs-{{ getAnswerClass }}" aria-hidden="true"></span>&nbsp;{{ getAnswerText }}</strong></p>
 				{{else}}
 				<h3>
-					<a id="interested" class="btn btn-primary" href="#" role="button">Intéressé</a>
-					<a id="notinterested" class="btn btn-default" href="#" role="button">Pas intéressé</a>
+					<a id="interested" class="btn btn-primary" href="#" role="button"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Intéressé</a>
+					<a id="notinterested" class="btn btn-default" href="#" role="button"><i class="fa fa-thumbs-down" aria-hidden="true"></i> Pas intéressé</a>
 				</h3>
 				{{/if}}
 			</div>

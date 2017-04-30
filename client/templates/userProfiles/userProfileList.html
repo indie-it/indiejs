@@ -1,7 +1,11 @@
 <template name="list">
+	{{setTitle 'Liste des profils'}}
 	<div class="container">
+		<ol class="breadcrumb">
+			<li><a href="{{pathFor route='home'}}">Accueil</a></li>
+			<li class="active">Liste des indépendants</li>
+		</ol>
 
-		{{setTitle 'Liste des profils'}}
 		<h2>Liste des indépendants IndieIT</h2>
 		<!-- <ul>
 		{{#each profiles}}
@@ -24,7 +28,7 @@
 						{{#if isAvailable }}
 						Oui
 						{{else}}
-							{{formatDate availDate}}
+						{{formatDate availDate}}
 						{{/if}}
 					</td>
 					<td>{{ formatDate updated }}</td>

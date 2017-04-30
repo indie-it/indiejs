@@ -1,5 +1,12 @@
 <template name="profile">
 	<div class="container-fluid">
+		<div class="container">
+			<ol class="breadcrumb">
+				<li><a href="{{pathFor route='home'}}">Accueil</a></li>
+				<li><a href="{{pathFor route='profile.list'}}">Liste des indépendants</a></li>
+				<li class="active">{{profile.firstName}} {{profile.lastName}}</li>
+			</ol>
+		</div>
 		<!-- Profil -->
 		<section id="top" class="row ">
 
@@ -114,8 +121,6 @@
 						</ul>
 					</li>
 					<li><a href="#skills">Compétences <span class="badge">{{getCountSkills}}</span></a></li>
-					<li><!--<a href="#recommendations">Recommandations <span class="badge">{{getCountRecommendations}}</span></a>--></li>
-					<li><!--<a href="#friends">Amis <span class="badge">{{getCountFriends}}</span></a>--></li>
 				</ul>
 			</div>
 			<!-- /Navigation profil -->

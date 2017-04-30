@@ -1,8 +1,15 @@
 <template name="update">
-	{{setTitle 'Mon profil'}}
+	{{setTitle 'Mise à jour de profil'}}
 
 	<div class="container-fluid">
-
+		<div class="container">
+			<ol class="breadcrumb">
+				<li><a href="{{pathFor route='home'}}">Accueil</a></li>
+				<li><a href="{{pathFor route='profile.list'}}">Liste des indépendants</a></li>
+				<li><a href="{{pathFor 'profile.view'}}">{{profile.firstName}} {{profile.lastName}}</a></li>
+				<li class="active">Mise à jour de profil</li>
+			</ol>
+		</div>
 		<div class="row">
 			<ul class="nav nav-pills">
 				<li role="presentation"><a href="{{pathFor 'profile.view'}}">Afficher</a></li>

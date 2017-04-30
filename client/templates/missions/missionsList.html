@@ -1,7 +1,10 @@
 ﻿<template name="missionsList">
 	{{setTitle 'Liste des missions'}}
 	<div class="container">
-
+		<ol class="breadcrumb">
+			<li><a href="{{pathFor route='home'}}">Accueil</a></li>
+			<li class="active">Liste des missions</li>
+		</ol>
 		<h3>Liste des missions Indie IT</h3>
 
 		{{#if hasMissions}}
