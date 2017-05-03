@@ -1,15 +1,26 @@
 ﻿<template name="company">
-	<div class="container company">
+	<div class="container-fluid companies-background-image">
 
-		{{> companyHeader }}
+		<div class="container-fluid hidden-xs breadcrumb-background">
+			<ol class="breadcrumb">
+				<li><a href="{{pathFor route='home'}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+				<li><a href="{{pathFor route='companyList'}}">Liste des entreprises</a></li>
+				<li class="active">{{name}}</li>
+			</ol>
+		</div>
 
-		{{> companySummary }}
+		<div class="container company background-layer">
 
-		{{> companyComments }}
+			{{> companyHeader }}
 
-		{{> companyMissions }}
+			{{> companySummary }}
 
-	</div>
+			<!--{{> companyComments }}
+
+			{{> companyMissions }}-->
+
+		</div>
+		</div>
 </template>
 
 <template name="companyHeader">
@@ -42,22 +53,16 @@
 </template>
 
 <template name="companySummary">
-	<div class="row">
 		<h2>Présentation de la société</h2>
 		{{#markdown}}{{description}}{{/markdown}}
-	</div>
 </template>
 
 <template name="companyMissions">
-	<div class="row">
 		<h2>Missions proposées</h2>
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mauris nisi, viverra id mauris a, laoreet interdum arcu. Nullam non lorem volutpat mi sollicitudin accumsan. Curabitur pulvinar maximus nibh id pretium. Etiam viverra eros sagittis mi pellentesque ullamcorper. Morbi rutrum semper lectus eget congue. Sed vitae ipsum ullamcorper, tincidunt ipsum posuere, bibendum ipsum. Vivamus finibus dolor vitae libero ullamcorper facilisis. Duis mauris quam, sodales a faucibus nec, pretium et velit. Aliquam ac pulvinar est.</p>
-	</div>
 </template>
 
 <template name="companyComments">
-	<div class="row">
 		<h2>Commentaires</h2>
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mauris nisi, viverra id mauris a, laoreet interdum arcu. Nullam non lorem volutpat mi sollicitudin accumsan. Curabitur pulvinar maximus nibh id pretium. Etiam viverra eros sagittis mi pellentesque ullamcorper. Morbi rutrum semper lectus eget congue. Sed vitae ipsum ullamcorper, tincidunt ipsum posuere, bibendum ipsum. Vivamus finibus dolor vitae libero ullamcorper facilisis. Duis mauris quam, sodales a faucibus nec, pretium et velit. Aliquam ac pulvinar est.</p>
-	</div>
 </template>

@@ -1,60 +1,70 @@
 ﻿<template name="missionCreate">
 	{{setTitle 'Nouvelle mission'}}
+	<div class="container-fluid missions-background-image">
 
-	<div class="container">
-		<h2>Nouvelle mission</h2>
+		<div class="container-fluid hidden-xs breadcrumb-background">
+			<ol class="breadcrumb">
+				<li><a href="{{pathFor route='home'}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+				<li class="active">Proposer une mission</li>
+			</ol>
+		</div>
 
-		{{#autoForm collection="Missions" id="insertMissionForm" }}
+
+		<div class="container background-layer">
+			<h2>Nouvelle mission</h2>
+
+			{{#autoForm collection="Missions" id="insertMissionForm" }}
 
 
-		<section id="coord-search" class="row">
+			<section id="coord-search" class="row">
 
-			<div class="col-md-6">
-				<fieldset>
-					<legend><i class="fa fa-search-plus" aria-hidden="true"></i> Mission</legend>
-					{{> afQuickField name='name' }}
-					{{> afQuickField name="type" firstOption="-- Selectionnez un élément --"}}
-					{{> afQuickField name="level" firstOption="-- Selectionnez un élément --"}}
+				<div class="col-md-6">
+					<fieldset>
+						<legend><i class="fa fa-search-plus" aria-hidden="true"></i> Mission</legend>
+						{{> afQuickField name='name' }}
+						{{> afQuickField name="type" firstOption="-- Selectionnez un élément --"}}
+						{{> afQuickField name="level" firstOption="-- Selectionnez un élément --"}}
 
-				</fieldset>
-			</div>
+					</fieldset>
+				</div>
 
-			<div class="col-md-6">
-				<fieldset>
-					<legend><i class="fa fa-calendar" aria-hidden="true"></i> Dates et durée</legend>
-					{{> afQuickField name='isEarliestStart' }}
-					{{> afQuickField name='start' }}
-					{{> afQuickField name='duration' }}
-				</fieldset>
-			</div>
+				<div class="col-md-6">
+					<fieldset>
+						<legend><i class="fa fa-calendar" aria-hidden="true"></i> Dates et durée</legend>
+						{{> afQuickField name='isEarliestStart' }}
+						{{> afQuickField name='start' }}
+						{{> afQuickField name='duration' }}
+					</fieldset>
+				</div>
 
-		</section>
+			</section>
 
-		<section id="coord-search" class="row">
-			<div class="col-md-6">
-				<fieldset>
-					<legend><i class="fa fa-info" aria-hidden="true"></i> Autres infos</legend>
-					{{> afQuickField name='location' }}
-					{{> afQuickField name='organization' }}
-					{{> afQuickField name='averageDailyRate' }}
-				</fieldset>
-			</div>
-			<div class="col-md-6">
-				<fieldset>
-					<legend><i class="fa fa-tags" aria-hidden="true"></i> Catégorisation de la mission</legend>
-					{{> afQuickField name='technos' }}
-					{{> afQuickField name='categories' }}
-				</fieldset>
-			</div>
-		</section>
-		
-		{{> afQuickField name='shortDescription' }}
-		{{> afQuickField name='description' }}
+			<section id="coord-search" class="row">
+				<div class="col-md-6">
+					<fieldset>
+						<legend><i class="fa fa-info" aria-hidden="true"></i> Autres infos</legend>
+						{{> afQuickField name='location' }}
+						{{> afQuickField name='organization' }}
+						{{> afQuickField name='averageDailyRate' }}
+					</fieldset>
+				</div>
+				<div class="col-md-6">
+					<fieldset>
+						<legend><i class="fa fa-tags" aria-hidden="true"></i> Catégorisation de la mission</legend>
+						{{> afQuickField name='technos' }}
+						{{> afQuickField name='categories' }}
+					</fieldset>
+				</div>
+			</section>
 
-		<button type="submit" class="btn btn-primary">Créer la nouvelle mission</button>
+			{{> afQuickField name='shortDescription' }}
+			{{> afQuickField name='description' }}
 
-		{{/autoForm}}
+			<button type="submit" class="btn btn-primary">Créer la nouvelle mission</button>
+
+			{{/autoForm}}
+
+		</div>
 
 	</div>
-	<br/>
 </template>

@@ -1,17 +1,29 @@
 ﻿<template name="companyList">
-	<div class="container">
-		<h2>Liste des entreprises enregistrées sur IndieIT</h2>
 
-		{{#if hasCompanies}}
-		<ul>
-			{{#each companies}}
-			<li>
-				<a href="{{pathFor route='company' _id=this._id}}"> {{this.name}}</a> {{#if this.field}}({{this.field}}){{/if}}
-			</li>
-			{{/each}}
-		</ul>
-		{{else}}
-		<p>Il n'y a aucune société actuellement.</p>
-		{{/if}}
+	<div class="container-fluid companies-background-image">
+
+		<div class="container-fluid hidden-xs breadcrumb-background">
+			<ol class="breadcrumb">
+				<li><a href="{{pathFor route='home'}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+				<li class="active">Liste des entreprises</li>
+			</ol>
+		</div>
+
+		<div class="container background-layer">
+			<h2>Liste des entreprises enregistrées sur IndieIT</h2>
+
+			{{#if hasCompanies}}
+			<ul>
+				{{#each companies}}
+				<li>
+					<a href="{{pathFor route='company' _id=this._id}}"> {{this.name}}</a> {{#if this.field}}({{this.field}}){{/if}}
+				</li>
+				{{/each}}
+			</ul>
+			{{else}}
+			<p>Il n'y a aucune société actuellement.</p>
+			{{/if}}
+		</div>
+
 	</div>
 </template>

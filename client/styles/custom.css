@@ -85,18 +85,6 @@ div.experience h3 {
 	background: linear-gradient(45deg, rgba(51, 122, 183, 0.6), rgba(51, 122, 183, 0.4));
 }
 
-.company {
-}
-
-	.company h1 {
-		color: #337ab7;
-		font-weight: bold;
-	}
-
-	.company h2 {
-		color: #337ab7;
-	}
-
 
 /*************************  footer  ******************************/
 
@@ -149,6 +137,7 @@ div.experience h3 {
 	border-top: 1px solid #f8f8f8;
 	border-bottom: 1px solid rgba(0,0,0,0.2);
 }
+
 .intro-divider-sm {
 	width: 200px;
 	border-top: 1px solid #f8f8f8;
@@ -188,9 +177,11 @@ div.experience h3 {
 	background-color: #ffffff;
 	border-color: rgb(251, 253, 255);
 }
+
 	.navbar-recruiter .navbar-toggle {
 		border-color: #337ab7;
 	}
+
 	.navbar-recruiter .active {
 		background-color: #e3f2ff;
 	}
@@ -208,4 +199,103 @@ div.experience h3 {
 	bottom: 0;
 	width: 100%;
 	z-index: 100;
+}
+
+
+
+/*********************************** en commun ********************************************/
+
+.background-layer {
+	background-color: rgba(255, 255, 255, 0.9);
+	position: relative;
+	/*padding-top: 0px;*/
+	padding-bottom: 20px;
+	min-height: 700px;
+}
+
+/*****************Admin *****************/
+.admin-background-image {
+	background: url(img/admin-bg.jpg) no-repeat center;
+	background-size: cover;
+	padding-right: 0;
+	padding-left: 0;
+}
+
+/***********************************Freelancers**************************************/
+.freelancers-background-image {
+	background: url(img/programming-bg.jpg) no-repeat center;
+	background-size: cover;
+	padding-right: 0;
+	padding-left: 0;
+}
+
+
+/*********************************** Missions **************************************/
+.missions-background-image {
+	background: url(img/missions-bg2.jpg) no-repeat center;
+	background-size: cover;
+	padding-right: 0;
+	padding-left: 0;
+}
+
+/************************************* Entreprises *************************************/
+.company {
+}
+
+	.company h1 {
+		color: #337ab7;
+		font-weight: bold;
+	}
+
+	.company h2 {
+		color: #337ab7;
+	}
+
+.companies-background-image {
+	background: url(img/companies-bg.jpg) no-repeat center;
+	background-size: cover;
+	padding-right: 0;
+	padding-left: 0;
+}
+
+
+/**** Breadcrumb *****/
+
+.breadcrumb {
+	background-color: rgba(255, 255, 255, 0);
+	margin-bottom: 0px;
+	color: #fff;
+}
+
+.breadcrumb-background {
+	background-color: rgba(16, 16, 16, 0.7);
+}
+
+.breadcrumb > .active {
+	color: #fff;
+}
+
+.breadcrumb li > a {
+	color: #f6f5ff;
+}
+
+	.breadcrumb li > a:hover {
+		color: #fff;
+	}
+
+
+/**** table overrides ****/
+
+.table-hover > tbody > tr:hover {
+	background-color: rgba(255,255,255,0.5);
+}
+
+.ul-comma-separated li:after {
+	content: ",";
+}
+.ul-comma-separated li:before {
+	content: "";
+}
+.ul-comma-separated li:last-child:after {
+	content: "";
 }

@@ -1,13 +1,23 @@
 ﻿<template name="missionsListAdmin">
-	<div class="container-fluid">
-		{{#if isInRole 'admin'}}
-		{{setTitle 'Liste des missions'}}
-		<h3>Liste des missions Indie IT</h3>
-		{{> tabular table=TabularTables.Missions id="adminMissions" class="table table-hover table-striped table-bordered table-condensed"}}
-		{{else}}
-		{{setTitle 'Non autorisé'}}
-		<h3>Accès non autorisé</h3>
-		{{/if}}
+	<div class="container-fluid missions-background-image">
+
+		<div class="container-fluid hidden-xs breadcrumb-background">
+			<ol class="breadcrumb">
+				<li><a href="{{pathFor route='home'}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+				<li class="active">Liste des missions (admin)</li>
+			</ol>
+		</div>
+
+		<div class="container-fluid background-layer">
+			{{#if isInRole 'admin'}}
+			{{setTitle 'Liste des missions'}}
+			<h3>Liste des missions Indie IT</h3>
+			{{> tabular table=TabularTables.Missions id="adminMissions" class="table table-hover table-striped table-bordered table-condensed"}}
+			{{else}}
+			{{setTitle 'Non autorisé'}}
+			<h3>Accès non autorisé</h3>
+			{{/if}}
+		</div>
 	</div>
 </template>
 

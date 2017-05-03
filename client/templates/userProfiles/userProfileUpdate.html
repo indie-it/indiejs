@@ -1,26 +1,18 @@
 <template name="update">
 	{{setTitle 'Mise à jour de profil'}}
 
-	<div class="container-fluid">
-		<div class="container">
-			<ol class="breadcrumb">
-				<li><a href="{{pathFor route='home'}}">Accueil</a></li>
-				<li><a href="{{pathFor route='profile.list'}}">Liste des indépendants</a></li>
-				<li><a href="{{pathFor 'profile.view'}}">{{profile.firstName}} {{profile.lastName}}</a></li>
-				<li class="active">Mise à jour de profil</li>
-			</ol>
-		</div>
-		<div class="row">
-			<ul class="nav nav-pills">
-				<li role="presentation"><a href="{{pathFor 'profile.view'}}">Afficher</a></li>
-				<li role="presentation"><a href="#coord-search">Coordonnées/Recherche</a></li>
-				<li role="presentation"><a href="#skills">Compétences</a></li>
-				<li role="presentation"><a href="#education">Education</a></li>
-				<li role="presentation"><a href="#experiences">Expériences</a></li>
-			</ul>
-		</div>
+	<div class="container-fluid hidden-xs breadcrumb-background">
+		<ol class="breadcrumb">
+			<li><a href="{{pathFor route='home'}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+			<li><a href="{{pathFor route='profile.list'}}">Liste des indépendants</a></li>
+			<li><a href="{{pathFor 'profile.view'}}">{{profile.firstName}} {{profile.lastName}}</a></li>
+			<li class="active">Mise à jour de profil</li>
+		</ol>
+	</div>
 
-		{{#autoForm collection="UserProfiles" id="userprofile.createorupdate" doc=profile }}
+	{{#autoForm collection="UserProfiles" id="userprofile.createorupdate" doc=profile }}
+	<div class="container-fluid">
+
 
 		<section id="coord-search" class="row">
 			<div class="col-md-4">
@@ -56,18 +48,6 @@
 		</section>
 
 
-		<!--{{> userProfileSkills}}-->
-		<!--<div class="row">
-
-			<section id="education" class="col-lg-4">
-				{{> afQuickField name='education'}}
-			</section>
-
-			<section id="experiences" class="col-lg-8">
-				{{> afQuickField name='experiences' }}
-			</section>
-		</div>-->
-
 		<div class="row">
 			<section id="skills" class="col-lg-3">
 				{{> afQuickField name='skills' }}
@@ -83,9 +63,7 @@
 		</div>
 
 
-		{{/autoForm}}
 
-		<br />
 		<br />
 
 	</div>
@@ -93,10 +71,12 @@
 	<div class="container-fluid">
 		<div class="row fixed-footer text-center">
 			<div class="col-sm-12">
+				<a href="{{pathFor 'profile.view'}}" class="btn btn-default">Afficher</a>
 				<button type="submit" class="btn btn-primary">{{#if userHasProfile }}Mettre à jour{{else}}Créer le profil{{/if}}</button>
 			</div>
 		</div>
 	</div>
+	{{/autoForm}}
 
 </template>
 

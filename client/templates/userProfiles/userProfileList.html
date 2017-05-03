@@ -1,40 +1,42 @@
 <template name="list">
 	{{setTitle 'Liste des profils'}}
-	<div class="container">
-		<ol class="breadcrumb">
-			<li><a href="{{pathFor route='home'}}">Accueil</a></li>
-			<li class="active">Liste des indépendants</li>
-		</ol>
 
-		<h2>Liste des indépendants IndieIT</h2>
-		<!-- <ul>
-		{{#each profiles}}
-			<li>{{title}}</li>
-		{{/each}}
-		</ul> -->
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>Titre</th>
-					<th>Disponibilité</th>
-					<th>Mise à jour</th>
-				</tr>
-			</thead>
-			<tbody>
-				{{#each profiles}}
-				<tr>
-					<th scope="row"><a href="{{pathFor route='profile'}}">{{ title }}</a></th>
-					<td>
-						{{#if isAvailable }}
-						Oui
-						{{else}}
-						{{formatDate availDate}}
-						{{/if}}
-					</td>
-					<td>{{ formatDate updated }}</td>
-				</tr>
-				{{/each}}
-			</tbody>
-		</table>
+	<div class="container-fluid freelancers-background-image">
+
+		<div class="container-fluid hidden-xs breadcrumb-background">
+			<ol class="breadcrumb">
+				<li><a href="{{pathFor route='home'}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+				<li class="active">Tous les indépendants</li>
+			</ol>
+		</div>
+
+		<div class="container background-layer">
+			<h2>Liste des indépendants IndieIT</h2>
+
+			{{> tabular table=TabularTables.Freelancers id="tableFreelancers" class="table table-striped table-hover" }}
+
+		</div>
 	</div>
+</template>
+
+
+
+<template name="freelancerDisplay">
+	<strong>
+		<a href="{{pathFor route='profile' _id=_id }}">{{firstName}} {{lastName}} - {{title}}</a>
+	</strong>
+
+	<!--<p class="freelancer-short-description">{{description}}</p>-->
+
+	{{#if hasSkills}}
+	<p>
+		<ul class="list-inline ul-comma-separated">
+			{{#each skills}}
+			<li>{{this.name}}</li>
+			{{/each}}
+		</ul>
+	</p>
+	{{/if}}
+
+
 </template>
