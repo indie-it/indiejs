@@ -6,4 +6,11 @@ Template.missionsList.helpers({
 		}
 		return this.missions.count() > 0;
 	},
+
+	"getCategories": function () {
+		if (!this.categories) {
+			return "";
+		}
+		return this.categories.join(", ");
+	},
 });
