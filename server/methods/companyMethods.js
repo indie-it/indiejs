@@ -50,8 +50,8 @@ Meteor.methods({
 			}
 
 			var companyNameAndField = updatedoc.$set.name;
-			if (insertdoc.$set.field) {
-				companyNameAndField += ` (${insertdoc.$set.field})`;
+			if (updatedoc.$set.field) {
+				companyNameAndField += ` (${updatedoc.$set.field})`;
 			}
 
 			Actions.insert({
