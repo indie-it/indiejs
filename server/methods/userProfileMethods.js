@@ -29,7 +29,7 @@ Meteor.methods({
 			}
 
 			Actions.insert({
-				actionType: 'profile-create',
+				actionType: Lists.actions.map.profileFreelancerCreate,
 				userid: Meteor.userId(),
 				options: {
 					profile: profileNameAndTitle,
@@ -66,7 +66,7 @@ Meteor.methods({
 			}
 
 			Actions.insert({
-				actionType: Lists.actions.map.profileUpdate,
+				actionType: Lists.actions.map.profileFreelancerUpdate,
 				userid: Meteor.userId(),
 				options: {
 					profile: profileNameAndTitle,
@@ -106,7 +106,7 @@ Meteor.methods({
 			}
 
 			Actions.insert({
-				actionType: 'profile-update',
+				actionType: Lists.actions.map.profileFreelancerUpdate,
 				userid: Meteor.userId(),
 				options: {
 					profile: profileNameAndTitle,

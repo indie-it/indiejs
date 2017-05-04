@@ -31,7 +31,7 @@ Meteor.methods({
 			}
 
 			Actions.insert({
-				actionType: 'mission-create',
+				actionType: Lists.actions.map.missionCreate,
 				userid: Meteor.userId(),
 				options: {
 					mission: missionName,
@@ -75,7 +75,7 @@ Meteor.methods({
 
 			// enregistrement de l'action.
 			Actions.insert({
-				actionType: 'user-interested',
+				actionType: Lists.actions.map.userInterested,
 				userid: Meteor.userId(),
 				options: {
 					mission: mission.name,
@@ -124,7 +124,7 @@ Meteor.methods({
 			}
 			console.log("Update successful!");
 			Actions.insert({
-				actionType: 'user-not-interested',
+				actionType: Lists.actions.map.userNotInterested,
 				userid: Meteor.userId(),
 				options: {
 					mission: mission.name,
@@ -200,7 +200,7 @@ Meteor.methods({
 			}
 
 			Actions.insert({
-				actionType: 'mission-archive',
+				actionType: Lists.actions.map.missionArchive,
 				userid: Meteor.userId(),
 				options: {
 					mission: mission.name,
@@ -254,7 +254,7 @@ Meteor.methods({
 			}
 
 			Actions.insert({
-				actionType: 'mission-accept',
+				actionType: Lists.actions.map.missionAccept,
 				userid: Meteor.userId(),
 				options: {
 					mission: mission.name,
@@ -307,7 +307,7 @@ Meteor.methods({
 			}
 
 			Actions.insert({
-				actionType: 'mission-validate',
+				actionType: Lists.actions.map.missionValidate,
 				userid: Meteor.userId(),
 				options: {
 					mission: mission.name,

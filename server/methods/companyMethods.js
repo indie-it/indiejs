@@ -24,7 +24,7 @@ Meteor.methods({
 			}
 
 			Actions.insert({
-				actionType: Lists.actions.map.companyCreate,
+				actionType: Lists.actions.map.profileRecruiterCreate,
 				userid: Meteor.userId(),
 				options: {
 					company: companyNameAndField,
