@@ -15,7 +15,13 @@
 						{{#if currentUser}}
 							<h3>Bonjour <strong>{{ currentUser.username }}</strong>!</h3>
 
+							{{#if isAdmin}}
+							<a id="sendMail" href="#" class="btn btn-default">Tester l'envoi de mail !</a>
+							{{/if}}
+
+
 							{{#if hasProfile}}
+
 							{{else}}
 							<br />
 							<div class="alert alert-warning alert-dismissible" role="alert">
@@ -25,16 +31,7 @@
 							</div>
 							{{/if}}
 						
-							<!--{{#if isAdmin}}
-							<div class="encadre">
-								<h4><i class="fa fa-briefcase fa-lg"></i> Les dernières actions</h4>
-								<ul id="actions">
-									{{#each actions}}
-									{{>action}}
-									{{/each}}
-								</ul>
-							</div>
-							{{/if}}-->
+
 
 						{{else}}
 						<br/>

@@ -55,3 +55,7 @@ Template.registerHelper("isFreelancer", function (route) {
 Template.registerHelper("isRecruiter", function (route) {
 	return Roles.userIsInRole(Meteor.userId(), Globals.roles.recruiter);
 });
+
+Template.registerHelper("getEmailLink", function () {
+	return `mailto:${Globals.contact}`;
+});

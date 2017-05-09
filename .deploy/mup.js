@@ -1,4 +1,5 @@
 module.exports = {
+
 	servers: {
 		one: {
 			host: 'ec2-52-33-204-40.us-west-2.compute.amazonaws.com',
@@ -12,6 +13,7 @@ module.exports = {
 	meteor: {
 		name: 'indiejs',
 		path: "C:\\Documents\\code\\indiejs",
+
 		docker: {
 			// change to 'kadirahq/meteord' if your app is not using Meteor 1.4
 			image: 'abernix/meteord:base',
@@ -36,10 +38,10 @@ module.exports = {
 		env: {
 			// TODO: Change to your app's url
 			// If you are using ssl, it needs to start with https://
-			//   ROOT_URL: 'http://app.com',
 			// TODO: CHECK
 			ROOT_URL: 'http://ec2-52-33-204-40.us-west-2.compute.amazonaws.com',
 			MONGO_URL: 'mongodb://localhost/meteor',
+			//MAIL_URL: 'smtp://indieitblog:Katakana82@smtp.gmail.com:465',
 		},
 
 		ssl: {
