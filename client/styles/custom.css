@@ -16,6 +16,27 @@ h1, h2, h3, h4, h5, h6 {
 	/*font-family: 'Baloo', cursive;*/
 }
 
+.jumbotron {
+	background-color: rgba(36, 36, 36, 0.3);
+	padding-top: 50px;
+	padding-bottom: 50px;
+	margin-bottom: 0px;
+	text-shadow: 1px 1px 2px #a9a9a9;
+}
+
+.jumbotron-sub {
+	background-color: rgba(255, 255, 255, 0.75);
+	padding-top: 30px;
+	padding-bottom: 30px;
+	color: rgb(0, 0, 0);
+	text-shadow: 1px 1px 1px #fff;
+}
+
+	.jumbotron-sub h2 {
+		/*font-weight: bold;*/
+	}
+
+
 .toFade {
 	color: #919191;
 }
@@ -103,13 +124,16 @@ div.experience h3 {
 /********************* Intro (page d'accueil) *********************/
 
 .intro-header {
-	padding-top: 50px;
-	padding-bottom: 50px;
-	text-align: center;
+	/*text-align: center;*/
+	/*padding-top: 50px;*/
+	/*padding-bottom: 50px;*/
 	color: #f8f8f8;
 	background: url(img/intro-bg.jpg) no-repeat center;
 	background-size: cover;
+	min-height: 800px;
 }
+
+
 
 .intro-message {
 	position: relative;
@@ -129,7 +153,8 @@ div.experience h3 {
 	}
 
 	.intro-message .well-info {
-		background: rgba(51, 122, 183, 0.85);
+		/*background: rgba(51, 122, 183, 0.85);*/
+		background: rgba(32, 32, 36, 0.75);
 	}
 
 .intro-divider {
@@ -213,7 +238,15 @@ div.experience h3 {
 	min-height: 700px;
 }
 
-/*****************Admin *****************/
+/***************** Home *****************/
+.home-background-image {
+	background: url(img/intro-bg.jpg) no-repeat center;
+	background-size: cover;
+	padding-right: 0;
+	padding-left: 0;
+}
+
+/***************** Admin *****************/
 .admin-background-image {
 	background: url(img/admin-bg.jpg) no-repeat center;
 	background-size: cover;
@@ -221,14 +254,13 @@ div.experience h3 {
 	padding-left: 0;
 }
 
-/***********************************Freelancers**************************************/
+/*********************************** Freelancers **************************************/
 .freelancers-background-image {
 	background: url(img/programming-bg.jpg) no-repeat center;
 	background-size: cover;
 	padding-right: 0;
 	padding-left: 0;
 }
-
 
 /*********************************** Missions **************************************/
 .missions-background-image {
@@ -293,9 +325,11 @@ div.experience h3 {
 .ul-comma-separated li:after {
 	content: ",";
 }
+
 .ul-comma-separated li:before {
 	content: "";
 }
+
 .ul-comma-separated li:last-child:after {
 	content: "";
 }

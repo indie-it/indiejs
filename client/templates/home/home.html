@@ -1,59 +1,63 @@
 <template name="home">
 	{{setTitle 'Accueil'}}
 	<div class="intro-header">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="intro-message">
 
-						<!-- <img src="/img/logo-indie-it.jpg"/> -->
-						<h1><strong>{{getGlobal 'appName'}}</strong></h1>
-						<hr class="hidden-xs intro-divider" />
-						<hr class="hidden-sm hidden-md hidden-lg intro-divider-sm" />
-						<h3>{{getGlobal 'appDesc'}}</h3>
+		<div class="jumbotron">
+			<div class="container">
+				<h1>Indie IT</h1>
+				<h3>Le réseau montpelliérain des indépendants IT</h3>
+				
+				<br />
 
-						{{#if currentUser}}
-							<h3>Bonjour <strong>{{ currentUser.username }}</strong>!</h3>
+				<p>
+					Indie IT, c'est une aide à la recherche de missions, de l'entraide et du partage.
+					C'est aussi la plateforme de mise en relation des indépendants et des entreprises.
+				</p>
+				
+				<!--<p><a href="{{pathFor route='fonctionnement'}}" class="btn btn-primary btn-lg">En savoir plus »</a></p>-->
+				<br/>
+				
+				<p>
+					<strong><a href="{{pathFor route='fonctionnement'}}" class="btn btn-primary btn-lg"><i class="fa fa-black-tie fa-fw" aria-hidden="true"></i> Indépendant</a></strong>
+					&nbsp;
+					<strong><a href="{{pathFor route='fonctionnementEntreprise'}}" class="btn btn-primary btn-lg"><i class="fa fa-building fa-fw" aria-hidden="true"></i> Entreprise</a></strong>
+				</p>
+				
 
-							{{#if isAdmin}}
-							<a id="sendMail" href="#" class="btn btn-default">Tester l'envoi de mail !</a>
-							{{/if}}
+			</div>
+		</div>
 
+		<div class="jumbotron-sub">
+			<div class="container">
 
-							{{#if hasProfile}}
+				<div class="row">
 
-							{{else}}
-							<br />
-							<div class="alert alert-warning alert-dismissible" role="alert">
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								<i class="fa fa-exclamation-circle" aria-hidden="true"></i> Vous n'avez pas encore créé votre profil.
-								Vous pouvez <a href="{{pathFor route='linkedin'}}"><strong>importer votre profil LinkedIn</strong></a> ou bien <a href="{{pathFor route='profile.update'}}"><strong>le renseigner ici</strong></a>.
-							</div>
-							{{/if}}
-						
-
-
-						{{else}}
-						<br/>
-
-						<div class="col-lg-3"></div>
-						<div class="col-lg-6">
-							<div class="well well-info">
-								<h4>Indie IT, c'est la plateforme communautaire des indépendants IT pour la <strong>recherche de missions</strong>, l'<strong>entraide</strong> et le <strong>partage</strong>.</h4>
-								<h4>C'est aussi la plateforme de mise en relation des indépendants et des entreprises.</h4>
-								<br/>
-								<h4>
-									<strong><a href="{{pathFor route='fonctionnement'}}" class="btn btn-default btn-lg"><i class="fa fa-black-tie fa-fw" aria-hidden="true"></i> Indépendant</a></strong>
-									&nbsp;
-									<strong><a href="{{pathFor route='fonctionnementEntreprise'}}" class="btn btn-default btn-lg"><i class="fa fa-building fa-fw" aria-hidden="true"></i> Entreprise</a></strong>
-								</h4>
-							</div>
-						</div>
-						<div class="col-lg-3"></div>
-
-						{{/if}}
+					<div class="col-md-3">
+						<h2>Une augmentation de vos revenus</h2>
+						<p class="lead">Contrairement aux autres sociétés intermédiaires, Indie IT proposera toujours un commissionnement faible pour vous permettre d'augmenter votre rémunération.</p>
+						<!--<p><a class="btn btn-default" href="#" role="button">Détails »</a></p>-->
 					</div>
+
+					<div class="col-md-3">
+						<h2>Une aide pour la recherche de missions</h2>
+						<p>Les missions peuvent être proposées directement par les entreprises ou par le réseau d'indépendants qui sont déjà en mission chez un client.</p>
+						<!--<p><a class="btn btn-default" href="#" role="button">Voir les missions »</a></p>-->
+					</div>
+
+					<div class="col-md-3">
+						<h2>Une communauté d'entraide et de partage</h2>
+						<p>L'esprit d'entraide et de partage est au coeur de la communauté. Des outils sont mis à disposition du réseau pour faciliter les échanges.</p>
+						<!--<p><a class="btn btn-default" href="#" role="button">Voir les forums »</a></p>-->
+					</div>
+
+					<div class="col-md-3">
+						<h2>Un site gratuit et sans publicité</h2>
+						<p>Le site est entièrement gratuit. Nous n'afficherons jamais de publicité. Il n'y a pas d'abonnement et donc pas de surprise. Nous croyons en une transparence totale.</p>
+						<!--<p><a class="btn btn-default" href="#" role="button">Détails »</a></p>-->
+					</div>
+
 				</div>
+
 			</div>
 		</div>
 	</div>

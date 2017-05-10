@@ -2,7 +2,7 @@ module.exports = {
 
 	servers: {
 		one: {
-			host: 'ec2-52-33-204-40.us-west-2.compute.amazonaws.com',
+			host: 'www.indieit.fr',
 			username: 'ubuntu',
 			pem: "C:\\Documents\\IndieIT\\AWS\\paire-de-cles-ubuntu-server-ami-a58d0dc5.pem"
 			// password: 'server-password'
@@ -39,16 +39,16 @@ module.exports = {
 			// TODO: Change to your app's url
 			// If you are using ssl, it needs to start with https://
 			// TODO: CHECK
-			ROOT_URL: 'http://ec2-52-33-204-40.us-west-2.compute.amazonaws.com',
+			//ROOT_URL: 'http://ec2-52-33-204-40.us-west-2.compute.amazonaws.com',
+			ROOT_URL: 'http://www.indieit.fr',
 			MONGO_URL: 'mongodb://localhost/meteor',
-			//MAIL_URL: 'smtp://indieitblog:Katakana82@smtp.gmail.com:465',
 		},
 
 		ssl: {
 			// Enables let's encrypt (optional)
 			autogenerate: {
-				email: 'indieitblog@gmail.com',
-				domains: 'ec2-52-33-204-40.us-west-2.compute.amazonaws.com' //'website.com,www.website.com' // comma seperated list of domains
+				email: 'contact@indieit.fr',
+				domains: 'indieit.fr,www.indieit.fr' //'website.com,www.website.com' // comma seperated list of domains
 			}
 		},
 

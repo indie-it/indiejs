@@ -1,18 +1,30 @@
 ﻿<template name="register">
-	<div class="container">
-		<div class="col-md-6">
-			<h1>Enregistrement</h1>
-			{{#autoForm collection="Meteor.users" id="insertUser"}}
-			<fieldset>
-				<legend>Informations obligatoires</legend>
-				{{> afQuickField name="username"}}
-				{{> afQuickField name="password"}}
-				{{> afQuickField name="confirmation"}}
-				{{> afQuickField name="email" }}
-			</fieldset>
-			<button type="submit" class="btn btn-primary">Valider</button>
-			{{/autoForm}}
+
+	{{setTitle 'Inscription au site'}}
+
+	<div class="container-fluid home-background-image">
+
+		<div class="container-fluid hidden-xs breadcrumb-background">
+			<ol class="breadcrumb">
+				<li><a href="{{pathFor route='home'}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+				<li class="active">Inscription au site</li>
+			</ol>
+		</div>
+
+		<div class="container background-layer">
+			<div class="col-md-6">
+				<h1>Enregistrement</h1>
+				{{#autoForm collection="Meteor.users" id="insertUser"}}
+				<fieldset>
+					<legend>Informations obligatoires</legend>
+					{{> afQuickField name="username"}}
+					{{> afQuickField name="password"}}
+					{{> afQuickField name="confirmation"}}
+					{{> afQuickField name="email" }}
+				</fieldset>
+				<button type="submit" class="btn btn-primary">Valider</button>
+				{{/autoForm}}
+			</div>
 		</div>
 	</div>
-	<br/>
 </template>

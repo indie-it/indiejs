@@ -1,32 +1,41 @@
 ﻿<template name="companyRegister">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<h1>Enregistrement de société</h1>
+	<div class="container-fluid home-background-image">
+
+		<div class="container-fluid hidden-xs breadcrumb-background">
+			<ol class="breadcrumb">
+				<li><a href="{{pathFor route='home'}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+				<li class="active">Fonctionnement pour les Entreprises</li>
+			</ol>
+		</div>
+
+		<div class="container background-layer">
+			<div class="row">
+				<div class="col-md-12">
+					<h1>Enregistrement de société</h1>
+				</div>
 			</div>
-		</div>
-		{{#autoForm collection="Meteor.users" id="insertCompanyAccount"}}
-		<div class="col-md-6">
-			<fieldset>
-				<legend><i class="fa fa-building fa-fw" aria-hidden="true"></i> Informations obligatoires</legend>
-				{{> afQuickField name="username"}}
-				{{> afQuickField name="password"}}
-				{{> afQuickField name="confirmation"}}
-				{{> afQuickField name="email" }}
-			</fieldset>
-		</div>
-		<div class="col-md-6">
-			<fieldset>
-				<legend><i class="fa fa-black-tie fa-fw" aria-hidden="true"></i> Informations de contact</legend>
-				{{> afQuickField name="profile" }}
-			</fieldset>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<button type="submit" class="btn btn-primary">Je crée mon compte Entreprise</button>
+			{{#autoForm collection="Meteor.users" id="insertCompanyAccount"}}
+			<div class="col-md-6">
+				<fieldset>
+					<legend><i class="fa fa-building fa-fw" aria-hidden="true"></i> Informations obligatoires</legend>
+					{{> afQuickField name="username"}}
+					{{> afQuickField name="password"}}
+					{{> afQuickField name="confirmation"}}
+					{{> afQuickField name="email" }}
+				</fieldset>
 			</div>
+			<div class="col-md-6">
+				<fieldset>
+					<legend><i class="fa fa-black-tie fa-fw" aria-hidden="true"></i> Informations de contact</legend>
+					{{> afQuickField name="profile" }}
+				</fieldset>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<button type="submit" class="btn btn-primary">Je crée mon compte Entreprise</button>
+				</div>
+			</div>
+			{{/autoForm}}
 		</div>
-		{{/autoForm}}
 	</div>
-	<br />
 </template>

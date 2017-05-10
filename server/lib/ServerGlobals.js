@@ -13,12 +13,6 @@ ServerGlobals.linkedin = {
 	authTokenUri: 'https://www.linkedin.com/oauth/v2/accessToken',
 };
 
-//ServerGlobals.smtp = {
-//	username: 'b2118e9d0ad1ee2893f08c98683b7f4c',
-//	password: '0d85678267d284d088f08b4690f36d84',
-//	server: 'in-v3.mailjet.com',
-//	port: 25
-//};
 ServerGlobals.smtp = {
 	username: 'noreply@indieit.fr',
 	password: 'bt2M5TjWKLpU',

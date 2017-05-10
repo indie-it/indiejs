@@ -1,49 +1,56 @@
 ﻿<template name="fonctionnement">
-	<div class="container">
-		<div class="row">
 
-			<!--<div class="col-md-3"></div>-->
+	<div class="container-fluid home-background-image">
 
-			<div class="col-md-12">
-				<h2>Indépendant - Fonctionnement de la plateforme Indie IT</h2>
-				<p>Je suis indépendant et j'aimerais faire partie du réseau. Comment ça marche?</p>
+		<div class="container-fluid hidden-xs breadcrumb-background">
+			<ol class="breadcrumb">
+				<li><a href="{{pathFor route='home'}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+				<li class="active">Fonctionnement pour les indépendants</li>
+			</ol>
+		</div>
 
-				<br />
-				<h3><span class="badge">1</span> Je renseigne gratuitement mon profil sur le site…</h3>
-				<p>…et j’indique mes expériences et mes compétences. Je peux utiliser l'import de mon profil LinkedIn pour gagner du temps.</p>
+		<div class="container background-layer">
+			<div class="row">
 
-				<h3><span class="badge">2</span> La plateforme me propose une mission…</h3>
-				<p>…en rapport avec mon profil. Je suis libre d’accepter ou de refuser n’importe quelle mission.</p>
+				<div class="col-md-12">
+					<h2>
+						Je suis indépendant et j'aimerais faire partie du réseau. Comment ça marche?
+					</h2>
 
-				<h3><span class="badge">3</span> Je passe un entretien chez le client</h3>
-				<p>…je mets mon expérience et mes compétences en avant. Je mets en avant la démarche et les avantages du regroupement d’indépendant.</p>
+					<br />
+					<h3><span class="badge">1</span> Je renseigne gratuitement mon profil sur le site…</h3>
+					<p>…et j’indique mes expériences et mes compétences. Je peux utiliser l'import de mon profil LinkedIn pour gagner du temps.</p>
 
-				<h3><span class="badge">4</span> Le client accepte…</h3>
-				<p>…et les contrats sont établis entre le client, Indie IT et moi. Indie IT prélève une commission de 5% sur mon TJM.</p>
+					<h3><span class="badge">2</span> La plateforme me propose une mission…</h3>
+					<p>…en rapport avec mon profil. Je suis libre d’accepter ou de refuser n’importe quelle mission.</p>
 
-				<h3><span class="badge">5</span> Je réalise la prestation…</h3>
-				<p>…et j’entretiens le réseau lorsque je prends connaissance d’un nouveau besoin du client. Une prime est attribuée aux indépendants proposant de nouvelles missions*.</p>
+					<h3><span class="badge">3</span> Je passe un entretien chez le client</h3>
+					<p>…je mets mon expérience et mes compétences en avant. Je mets en avant la démarche et les avantages du regroupement d’indépendant.</p>
 
-				<h3><span class="badge">6</span> Je suis disponible pour le réseau…</h3>
-				<p>…et je garde un peu de temps pour faire vivre le réseau en aidant ou en conseillant les autres membres.</p>
+					<h3><span class="badge">4</span> Le client accepte…</h3>
+					<p>…et les contrats sont établis entre le client, Indie IT et moi. Indie IT prélève une commission de 5% sur mon TJM.</p>
 
-				<br />
-				<br />
-				<a href="{{pathFor route='user.register' }}" class="btn btn-primary btn-lg">
-					<i class="fa fa-arrow-right fa-fw" aria-hidden="true"></i> Je m'inscris, c'est gratuit.
-				</a>
-				<br />
+					<h3><span class="badge">5</span> Je réalise la prestation…</h3>
+					<p>…et j’entretiens le réseau lorsque je prends connaissance d’un nouveau besoin du client. Une prime est attribuée aux indépendants proposant de nouvelles missions*.</p>
 
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<p>* Une prime ne sera accordée que si le nouveau besoin aboutit au recrutement d'un indépendant.</p>
+					<h3><span class="badge">6</span> Je suis disponible pour le réseau…</h3>
+					<p>…et je garde un peu de temps pour faire vivre le réseau en aidant ou en conseillant les autres membres.</p>
+
+					<br />
+					<br />
+					<a href="{{pathFor route='user.register' }}" class="btn btn-primary btn-lg">
+						<i class="fa fa-arrow-right fa-fw" aria-hidden="true"></i> Je m'inscris, c'est gratuit.
+					</a>
+					<br />
+
+					<br />
+					<br />
+					<br />
+					<br />
+					<p>* Une prime ne sera accordée que si le nouveau besoin aboutit au recrutement d'un indépendant.</p>
+				</div>
+
 			</div>
-
-			<!--<div class="col-md-3"></div>-->
-
 		</div>
 	</div>
 </template>
