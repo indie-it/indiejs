@@ -6,7 +6,7 @@ Meteor.publish('missions.headers', function () {
 	return Missions.find({
 
 		// on ne récupère que les missions dont l'état = 'active'
-		"currentState.step": WorkflowConst.STEP_VALIDATED,
+		"currentState.step": Lists.missionWorkflow.map.STEP_VALIDATED,
 
 		// on retire les missions qui n'intéressent pas l'utilisateur courant.
 		notinterestedUserIds: { $ne: this.userId }

@@ -2,10 +2,43 @@ import { Meteor } from 'meteor/meteor';
 
 Template.mission.helpers({
 	"getCurrentState": function () {
-		if (this.mission && this.mission.currentState) {
-			return this.mission.currentState.step;
+
+		if (!this.mission) {
+			return "Etape introuvable";
 		}
-		return "Etape introuvable";
+
+		var step = Lists.missionWorkflow.get(this.mission.currentState.step);
+		if (!step) {
+			return "Etape introuvable";
+		}
+
+		return step.text;
+	},
+	"getCurrentStateIcon": function() {
+		if (!this.mission) {
+			return "fa-cogs";
+		}
+
+		var step = Lists.missionWorkflow.get(this.mission.currentState.step);
+		if (!step) {
+			return "fa-cogs";
+		}
+
+		return step.icon;
+	},
+	"getCurrentStateClass": function() {
+		var classname = "label-primary";
+		if (!this.mission) {
+			return classname;
+		}
+
+		var step = Lists.missionWorkflow.get(this.mission.currentState.step);
+		if (!step) {
+			return classname;
+		}
+
+		return step.classname;
+
 	},
 	"getMissionStart": function () {
 		if (!!this.mission.isEarliestStart) {
@@ -91,7 +124,10 @@ Template.mission.helpers({
 		if (Roles.userIsInRole(Meteor.userId(), 'admin')) {
 			return false;
 		}
-		return this.mission.currentState.step === WorkflowConst.STEP_VALIDATED;
+		return this.mission.currentState.step === Lists.missionWorkflow.map.STEP_VALIDATED;
+	},
+	"canModify": function () {
+		return Roles.userIsInRole(Meteor.userId(), 'admin');
 	},
 });
 
@@ -182,12 +218,13 @@ Template.mission.events({
 
 
 Template.assignUser.events({
+
 	"click a": function (event, template) {
 
 		// récupération de l'id d'utilisateur.
 		var userid = this.userid;
 		console.log(`userid: ${userid}`);
-		
+
 		// récupération de l'id de mission (param d'url')...
 		var missionid = Router.current().params._id;
 		console.log(`missionid: ${missionid}`);

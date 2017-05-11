@@ -1,20 +1,20 @@
-﻿<template name="missionCreate">
-	{{setTitle 'Nouvelle mission'}}
+﻿<template name="missionUpdate">
+
 	<div class="container-fluid missions-background-image">
 
 		<div class="container-fluid hidden-xs breadcrumb-background">
 			<ol class="breadcrumb">
 				<li><a href="{{pathFor route='home'}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
-				<li class="active">Proposer une mission</li>
+				<li><a href="{{pathFor route='missionsList'}}">Liste des missions</a></li>
+				<li class="active"><a href="{{pathFor route='mission' _id=mission._id}}">{{mission.name}}</a></li>
+				<li class="active">Modification</li>
 			</ol>
 		</div>
 
-
 		<div class="container background-layer">
-			<h2>Nouvelle mission</h2>
+			<h2>Modification de mission</h2>
 
-			{{#autoForm collection="Missions" id="insertOrUpdateMission" doc=null }}
-
+			{{#autoForm collection="Missions" id="insertOrUpdateMission"  doc=mission  }}
 
 			<section id="coord-search" class="row">
 
@@ -60,7 +60,7 @@
 			{{> afQuickField name='shortDescription' }}
 			{{> afQuickField name='description' }}
 
-			<button type="submit" class="btn btn-primary">Créer la nouvelle mission</button>
+			<button type="submit" class="btn btn-primary">Mettre à jour la mission</button>
 
 			{{/autoForm}}
 

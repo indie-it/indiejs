@@ -10,7 +10,7 @@ Meteor.methods({
 		//Globals.schemas.MissionSchema.clean(doc);
 
 		doc.currentState = {
-			step: WorkflowConst.STEP_NEW,
+			step: Lists.missionWorkflow.map.STEP_NEW,
 			date: new Date()
 		};
 		doc.createdAt = new Date();
@@ -46,6 +46,36 @@ Meteor.methods({
 			});
 		});
 	},
+	"mission.update": function (docid, updateDoc) {
+
+		//Globals.schemas.MissionSchema.validate(updateDoc.$set);
+
+		//console.log(updateDoc);
+
+		return Missions.update(docid, { $set: updateDoc.$set, $unset: updateDoc.$unset }, function (err) {
+
+			if (err) {
+				throw new Meteor.Error(500, err);
+			}
+
+			Actions.insert({
+				actionType: Lists.actions.map.missionUpdate,
+				userid: Meteor.userId(),
+				options: {
+					mission: updateDoc.$set.name,
+					missionid: docid,
+					username: Meteor.user().username
+				}
+			}, function (err, objId) {
+				if (err) {
+					console.error(err);
+				}
+				console.log("Action enregistrée");
+			});
+		});
+
+	},
+
 	"mission.interested": function (missionid) {
 		console.log("mission.interested");
 
@@ -183,16 +213,16 @@ Meteor.methods({
 
 		Missions.update(missionid, {
 			$set: {
-				"currentState.step": WorkflowConst.STEP_ARCHIVED,
+				"currentState.step": Lists.missionWorkflow.map.STEP_ARCHIVED,
 				"currentState.date": new Date()
-            },
+			},
 
 			// on vire le champ 'currentState.assignedUserId' s'il existe (ne fait rien sinon).
-            $unset: { "currentState.assignedUserId": "" },
+			$unset: { "currentState.assignedUserId": "" },
 
-            $addToSet: {
-                workflowHistory: mission.currentState
-            }
+			$addToSet: {
+				workflowHistory: mission.currentState
+			}
 		}, function (err) {
 
 			if (err) {
@@ -240,13 +270,13 @@ Meteor.methods({
 
 		Missions.update(missionid, {
 			$set: {
-				"currentState.step": WorkflowConst.STEP_IN_PROGRESS,
+				"currentState.step": Lists.missionWorkflow.map.STEP_IN_PROGRESS,
 				"currentState.date": new Date(),
 				"currentState.assignedUserId": userid
 			},
-            $addToSet: {
-                workflowHistory: mission.currentState
-            }
+			$addToSet: {
+				workflowHistory: mission.currentState
+			}
 		}, function (err) {
 
 			if (err) {
@@ -292,14 +322,14 @@ Meteor.methods({
 
 		Missions.update(missionid, {
 			$set: {
-				"currentState.step": WorkflowConst.STEP_VALIDATED,
+				"currentState.step": Lists.missionWorkflow.map.STEP_VALIDATED,
 				"currentState.date": new Date()
 			},
-            // on vire le champ 'currentState.assignedUserId' s'il existe (ne fait rien sinon).
-            $unset: { "currentState.assignedUserId": "" },
+			// on vire le champ 'currentState.assignedUserId' s'il existe (ne fait rien sinon).
+			$unset: { "currentState.assignedUserId": "" },
 			$addToSet: {
-                workflowHistory: mission.currentState
-            }
+				workflowHistory: mission.currentState
+			}
 		}, function (err) {
 			console.log(err);
 			if (err) {

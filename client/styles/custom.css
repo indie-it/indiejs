@@ -337,3 +337,29 @@ div.experience h3 {
 .ul-comma-separated li:last-child:after {
 	content: "";
 }
+
+.admin-buttons {
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.mission-description {
+}
+
+	.mission-description p {
+	}
+
+	.mission-description h1 {
+		font-size: 23px;
+	}
+
+	.mission-description h2 {
+		font-size: 21px;
+	}
+
+	.mission-description h3 {
+		font-size: 19px;
+	}
+
+	.mission-description h4 {
+		font-size: 16px;
+	}
