@@ -48,23 +48,12 @@
 			<div class="row">
 
 				<!-- A GAUCHE -->
-				<div class="col-sm-8 col-md-9">
+				<div class="col-sm-8 col-md-8">
 
-					{{#if mission.categories}}
-					<p class="h4">
-						<i class="fa fa-tags" aria-hidden="true"></i> {{#each mission.categories}}<span class="label label-default">{{this}}</span> {{/each}}
-					</p>
-					{{/if}}
+					<div class="hidden-lg">
+						{{> missionLabels }}
+					</div>
 
-					<p class="h5">
-						<i class="fa fa-tags" aria-hidden="true"></i>
-						{{#each mission.technos}}<span class="label label-info">{{this}}</span> {{/each}}
-					</p>
-					<p class="h5">
-						<i class="fa fa-tags" aria-hidden="true"></i>
-						{{#if mission.level}}<span class="label label-primary">{{mission.level}}</span>{{/if}}
-						{{#if mission.type}}<span class="label label-primary">{{mission.type}}</span>{{/if}}
-					</p>
 					<br />
 					{{#if mission.shortDescription}}<h4><small>{{mission.shortDescription}}</small></h4>{{/if}}
 
@@ -73,15 +62,11 @@
 				</div>
 
 				<!-- A DROITE -->
-				<div class="col-sm-4 col-md-3">
-					<div class="alert alert-info" role="alert">
-						<p class="hidden-xs">
-							{{#each mission.categories}}<span class="label label-default">{{this}}</span> {{/each}}
-							{{#if mission.type}}<span class="label label-primary">{{mission.type}}</span>{{/if}}
-							{{#if mission.level}}<span class="label label-primary">{{mission.level}}</span>{{/if}}
-							{{#each mission.technos}}<span class="label label-info">{{this}}</span> {{/each}}
-						</p>
-
+				<div class="col-sm-4 col-md-4">
+					<div class="">
+						<div class="hidden-xs">
+							{{> missionLabels }}
+						</div>
 
 						{{#if mission.organization}}<p><i class="fa fa-building-o fa-fw"></i> {{mission.organization}}</p>{{/if}}
 						{{#if mission.location}}<p><i class="fa fa-map-marker fa-fw"></i> {{mission.location}}</p>{{/if}}
@@ -103,7 +88,7 @@
 					<p><strong><span class="glyphicon glyphicon-thumbs-{{ getAnswerClass }}" aria-hidden="true"></span>&nbsp;{{ getAnswerText }}</strong></p>
 					{{else}}
 					<h3>
-						<a id="interested" class="btn btn-primary" href="#" role="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> Je postule</a>
+						<a id="interested" class="btn btn-primary" href="#" role="button"> Je postule</a>
 						<a id="notinterested" class="btn btn-default" href="#" role="button">Je ne suis pas intéressé</a>
 					</h3>
 					{{/if}}
@@ -136,9 +121,27 @@
 
 	</div>
 
-
 </template>
 
 <template name="assignUser">
 	<a href="#" class="btn assign-user"><i class="fa fa-briefcase" aria-hidden="true"></i> Affecter</a>
+</template>
+
+<template name="missionLabels">
+	{{#if mission.categories}}
+	<p class="h4">
+		<i class="fa fa-tags" aria-hidden="true"></i> {{#each mission.categories}}<span class="label label-default">{{this}}</span> {{/each}}
+	</p>
+	{{/if}}
+
+	<p class="h5">
+		<i class="fa fa-tags" aria-hidden="true"></i>
+		{{#each mission.technos}}<span class="label label-info">{{this}}</span> {{/each}}
+	</p>
+	<p class="h5">
+		<i class="fa fa-tags" aria-hidden="true"></i>
+		{{#if mission.level}}<span class="label label-primary">{{mission.level}}</span>{{/if}}
+		{{#if mission.type}}<span class="label label-primary">{{mission.type}}</span>{{/if}}
+	</p>
+
 </template>

@@ -4,7 +4,6 @@
 			<div class="row">
 				<div class="col-md-8">
 					<h5><strong>{{getGlobal 'appName'}}</strong>&nbsp;{{getGlobal 'appDesc'}}</h5>
-					<!--<hr/>-->
 					<p>
 						Indie IT s'adresse aux personnes qui travaillent dans le domaine des nouvelles technologies : particulièrement aux indépendants mais également aux personnes souhaitant le devenir.<br />
 						L'objectif d'Indie IT est de rassembler au sein d'un même groupement les indépendants en informatique pour leur permettre de se constituer un réseau, de faciliter la recherche de missions et de bénéficier de son esprit d'entraide.<br />
@@ -13,11 +12,12 @@
 					</p>
 				</div>
 				<div class="col-md-4">
-					<h5><strong>Contact</strong></h5>
-					<p>Indie IT</p>
-
-					<p><i class="fa fa-envelope fa-fw" aria-hidden="true"></i> <a href="{{getEmailLink}}">{{getGlobal 'contact'}}</a></p>
-
+					<h5><strong>Contact Indie IT</strong></h5>
+					<p class="lead">
+						<a href="{{getEmailLink}}" class="btn-lg"><i class="fa fa-envelope fa-fw" aria-hidden="true"></i></a>
+						&nbsp;
+						<a href="{{getLinkedinProfile}}" class="btn-lg" target="_blank"><i class="fa fa-linkedin-square fa-fw" aria-hidden="true"></i></a>
+					</p>
 				</div>
 			</div>
 		</div>

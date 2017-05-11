@@ -1,0 +1,37 @@
+﻿<template name="invite">
+	{{setTitle 'Inviter un collègue'}}
+
+	<div class="container-fluid home-background-image">
+
+		<div class="container-fluid hidden-xs breadcrumb-background">
+			<ol class="breadcrumb">
+				<li><a href="{{pathFor route='home'}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+				<li class="active">Inviter un collègue</li>
+			</ol>
+		</div>
+
+		<div class="container background-layer">
+
+			<h2>Invitez vos collègues</h2>
+
+			<p>Si vous connaissez des indépendants compétents dans la région montpelliéraine, n'hésitez pas à remplir ce formulaire pour les inviter à rejoindre le réseau Indie IT.</p>
+
+			<div class="col-md-6">
+
+				{{#autoForm collection="Invitation" id="createInvite"}}
+				<fieldset>
+					<legend>Informations obligatoires</legend>
+					{{> afQuickField name="firstName"}}
+					{{> afQuickField name="lastName"}}
+					{{> afQuickField name="email" }}
+					{{> afQuickField name="message" }}
+				</fieldset>
+				<button type="submit" class="btn btn-primary">Envoyer l'invitation</button>
+				{{/autoForm}}
+			</div>
+
+			<div class="col-md-6"></div>
+
+		</div>
+	</div>
+</template>

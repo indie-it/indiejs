@@ -7,7 +7,7 @@ ServerGlobals.cloudinary = {
 };
 
 ServerGlobals.linkedin = {
-	redirectUri: `${Meteor.absoluteUrl()}linkedin/callback`,
+	redirectUri: Meteor.absoluteUrl('linkedin/callback'),
 	clientId: '77o3kr1iy6djb5',
 	clientSecret: 'KR6qpAuF54wY0wWf',
 	authTokenUri: 'https://www.linkedin.com/oauth/v2/accessToken',
@@ -21,7 +21,6 @@ ServerGlobals.smtp = {
 };
 
 ServerGlobals.MAIL_URL = function () {
-	var smtp = `smtp://${encodeURIComponent(ServerGlobals.smtp.username)}:${encodeURIComponent(ServerGlobals.smtp.password)}@${encodeURIComponent(ServerGlobals.smtp.server)}:${ServerGlobals.smtp.port}`;
-	console.log(smtp);
-	return smtp;
+	return `smtp://${encodeURIComponent(ServerGlobals.smtp.username)}:${encodeURIComponent(ServerGlobals.smtp.password)}@${encodeURIComponent(ServerGlobals.smtp.server)}:${ServerGlobals.smtp.port}`;
 };
+

@@ -17,5 +17,5 @@
 			}
 			sAlert.success("Vous êtes connecté");
 		});
-	}
+	},
 });

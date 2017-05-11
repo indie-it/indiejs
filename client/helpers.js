@@ -59,3 +59,6 @@ Template.registerHelper("isRecruiter", function (route) {
 Template.registerHelper("getEmailLink", function () {
 	return `mailto:${Globals.contact}`;
 });
+Template.registerHelper("getLinkedinProfile", function () {
+	return `${Globals.linkedinCompanyProfileUrl}`;
+});

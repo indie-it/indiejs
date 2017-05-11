@@ -14,7 +14,7 @@
 
 				<p>Vous êtes déjà connecté.</p>
 				<br/>
-				<p> <a href="{{pathFor route='home'}}" class="btn btn-default"><i class="fa fa-home fa-fw" aria-hidden="true"></i> Retour à l'accueil</a></p>
+				<p><a href="{{pathFor route='home'}}" class="btn btn-default"><i class="fa fa-home fa-fw" aria-hidden="true"></i> Retour à l'accueil</a></p>
 
 				{{else}}
 
@@ -30,7 +30,9 @@
 								<label for="password">Mot de passe</label>
 								<input id="password" class="form-control" type="password" />
 							</div>
-							<br />
+
+							<p><a href="{{pathFor route='passwordReset'}}"> Mot de passe oublié ?</a></p>
+
 							<button class="btn btn-primary">Connexion</button>
 						</form>
 						<br />
