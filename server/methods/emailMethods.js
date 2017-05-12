@@ -6,8 +6,7 @@ Meteor.methods({
 
 		// petite vérif 1: il faut être connecté
 		if (!Meteor.userId()) {
-			this.unblock();
-			return false;
+			throw new Meteor.Error(401, "Vous devez être connecté pour effectuer cette action");
 		}
 
 		const from = ServerGlobals.smtp.username;
@@ -21,6 +20,18 @@ Meteor.methods({
 
 		Email.send({ to, from, subject, text });
 
+	},
+
+	"email.verify": function () {
+		console.log("email.verify called!");
+
+		// petite vérif 1: il faut être connecté
+		if (!Meteor.userId()) {
+			throw new Meteor.Error(401, "Vous devez être connecté pour effectuer cette action");
+		}
+
+		// envoi du mail de vérification !
+		Accounts.sendVerificationEmail(Meteor.userId());
 	},
 
 });

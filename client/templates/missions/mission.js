@@ -1,6 +1,19 @@
 import { Meteor } from 'meteor/meteor';
 
 Template.mission.helpers({
+	"getTJM": function () {
+		if (!this.mission.averageDailyRate || (!this.mission.averageDailyRate.min && !this.mission.averageDailyRate.max)) {
+			return "Non renseigné";
+		}
+
+		if (this.mission.averageDailyRate.min && !this.mission.averageDailyRate.max) {
+			return `A partir de ${this.mission.averageDailyRate.min} €/j`;
+		}
+		if (!this.mission.averageDailyRate.min && this.mission.averageDailyRate.max) {
+			return `${this.mission.averageDailyRate.max} €/j maximum`;
+		}
+		return `Entre ${this.mission.averageDailyRate.min} et ${this.mission.averageDailyRate.max} €/j`;
+	},
 	"getCurrentState": function () {
 
 		if (!this.mission) {

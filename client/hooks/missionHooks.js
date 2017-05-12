@@ -30,11 +30,13 @@ AutoForm.hooks({
 					}
 					self.done(); // Appelle onSuccess
 				});
-			}; 
+			};
 
 			if (!currentdoc) {
+				Session.set("mission", { isInsert: true });
 				insert();
 			} else {
+				Session.set("mission", { isUpdate: true });
 				update();
 			}
 
@@ -43,8 +45,17 @@ AutoForm.hooks({
 
 		// Called when any submit operation succeeds
 		onSuccess: function () {
-			sAlert.success('La mission a bien été créée!', { onRouteClose: false });
-			Router.go(Utils.pathFor('home'));
+			var obj = Session.get("mission");
+
+			if (!obj || obj.isInsert === true) {
+				sAlert.success('La mission a bien été créée!', { onRouteClose: false });
+				Router.go(Utils.pathFor('home'));
+				return;
+			}
+
+			if (obj.isUpdate === true) {
+				sAlert.success('La mission a bien été mise à jour!');
+			}
 		},
 
 		// Called when any submit operation fails

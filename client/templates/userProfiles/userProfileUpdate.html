@@ -5,7 +5,7 @@
 		<ol class="breadcrumb">
 			<li><a href="{{pathFor route='home'}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
 			<li><a href="{{pathFor route='profile.list'}}">Liste des indépendants</a></li>
-			<li><a href="{{pathFor 'profile.view'}}">{{profile.firstName}} {{profile.lastName}}</a></li>
+			<li><a href="{{pathFor 'profile' _id=profile._id}}">{{profile.firstName}} {{profile.lastName}}</a></li>
 			<li class="active">Mise à jour de profil</li>
 		</ol>
 	</div>
@@ -75,7 +75,7 @@
 	<div class="container-fluid">
 		<div class="row fixed-footer text-center">
 			<div class="col-sm-12">
-				<a href="{{pathFor 'profile.view'}}" class="btn btn-default">Afficher</a>
+				{{#if userHasProfile }}<a href="{{pathFor 'profile' _id=profile._id}}" class="btn btn-default">Afficher</a>{{/if}}
 				<button type="submit" class="btn btn-primary">{{#if userHasProfile }}Mettre à jour{{else}}Créer le profil{{/if}}</button>
 			</div>
 		</div>

@@ -62,3 +62,11 @@ Template.registerHelper("getEmailLink", function () {
 Template.registerHelper("getLinkedinProfile", function () {
 	return `${Globals.linkedinCompanyProfileUrl}`;
 });
+Template.registerHelper("isEmailVerified", function () {
+	if (!Meteor.user() || !Meteor.user().emails || Meteor.user().emails.length == 0) { return false; }
+	var email = Meteor.user().emails[0];
+	if (email.verified === false) {
+		return true;
+	}
+	return false;
+});

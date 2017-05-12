@@ -2,22 +2,22 @@ if (Meteor.isServer)
 	return;
 
 Template.profile.helpers({
-	getCountEducation: function () {
+	'getCountEducation': function () {
 		return !this.profile.education ? 0 : this.profile.education.length;
 	},
-	getCountExperiences: function () {
+	'getCountExperiences': function () {
 		return !this.profile.experiences ? 0 : this.profile.experiences.length;
 	},
-	getCountSkills: function () {
+	'getCountSkills': function () {
 		return !this.profile.skills ? 0 : this.profile.skills.length;
 	},
-	getCountRecommendations: function () {
+	'getCountRecommendations': function () {
 		return !this.profile.recommendations ? 0 : this.profile.recommendations.length;
 	},
-	getCountFriends: function () {
+	'getCountFriends': function () {
 		return !this.profile.friends ? 0 : this.profile.friends.length;
 	},
-	getSectionIdFromExperience: function (experience) {
+	'getSectionIdFromExperience': function (experience) {
 		var title = this.title.replace(/[^\w]/g, '').toLowerCase();
 		var company = this.company.replace(/[^\w]/g, '').toLowerCase();
 		var start = moment(this.start).format('YYYYMMDD');
@@ -25,11 +25,20 @@ Template.profile.helpers({
 
 		return "experience-" + id;
 	},
-	"getProfilePicSrc": function () {
+	'getProfilePicSrc': function () {
 		if (!this.profile.profilePic) {
 			return "/img/profile-pic-placeholder.png";
 		}
 		return this.profile.profilePic.url;
+	},
+
+	"getIsEmailVerified": function () {
+		console.log(this.account);
+		if (!this.account || !this.account.emails || this.account.emails.length == 0) {
+			return false;
+		}
+
+		return this.account.emails[0].verified;
 	},
 });
 

@@ -17,7 +17,7 @@
 
 				<!--photo-->
 				<div class="col-sm-4 col-md-3 col-lg-3">
-					<div class="center">
+					<div class="text-center">
 						<img src="{{getProfilePicSrc}}" class="profile-pic profile-header img-circle" />
 						<br />
 
@@ -26,27 +26,36 @@
 							{{> profileHeader}}
 						</div>
 
+						<p class="h4">
+							{{#if getIsEmailVerified}}
+							<span class="label label-primary" title="L'adresse e-mail du profil est vérifiée"><i class="fa fa-check-circle" aria-hidden="true"></i> Email vérifié</span>
+							{{/if}}
+							{{#if profile.isCertified}}
+							<span class="label label-success" title="Le profil a été certifié par Indie IT"><i class="fa fa-certificate" aria-hidden="true"></i> Profil certifié</span>
+							{{/if}}
+						</p>
+
 						{{#if profile.isAvailable}}
-						<p><i class="fa fa-check-circle text-success" aria-hidden="true"></i> Disponible</p>
+						<p class="h4"><i class="fa fa-check-circle text-success" aria-hidden="true"></i> Disponible</p>
 						{{else}}
 						{{#if profile.availDate}}
-						<p><i class="fa fa-calendar-o" aria-hidden="true"></i> Disponible au {{formatDate profile.availDate}}</p>
+						<p class="h4"><i class="fa fa-calendar-o" aria-hidden="true"></i> Disponible au {{formatDate profile.availDate}}</p>
 						{{else}}
-						<p><i class="fa fa-calendar-o" aria-hidden="true"></i> Pas de date de disponibilité</p>
+						<p class="h4"><i class="fa fa-calendar-o" aria-hidden="true"></i> Pas de date de disponibilité</p>
 						{{/if}}
 						{{/if}}
 
 						{{#if profile.isEnRecherche}}
-						<p><i class="fa fa-search text-success" aria-hidden="true"></i> En recherche de mission</p>
+						<p class="h4"><i class="fa fa-search text-success" aria-hidden="true"></i> En recherche de mission</p>
 						{{/if}}
 
-						<p>
+						<p class="h4">
 							{{#each profile.categories}}
 							<span class="label label-default">{{this}}</span>
 							{{/each}}
 						</p>
 
-						<p><i class="fa fa-user text-success" aria-hidden="true"></i> Membre depuis le {{formatDate profile.createdAt}}</p>
+						<p class="h4"><i class="fa fa-user text-success" aria-hidden="true"></i> Membre depuis le {{formatDate profile.createdAt}}</p>
 					</div>
 
 					<!--compétences-->
@@ -70,7 +79,7 @@
 
 					<!--formation-->
 					<section id="education" class="hidden-xs">
-						<h2 class="profile"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Education/Formation</h2>
+						<h2 class="profile"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Education</h2>
 						{{#each profile.education}}
 						{{> education}}
 						{{/each}}
