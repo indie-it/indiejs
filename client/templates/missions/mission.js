@@ -27,6 +27,19 @@ Template.mission.helpers({
 
 		return step.text;
 	},
+	"getCurrentStateTooltip": function () {
+
+		if (!this.mission) {
+			return "";
+		}
+
+		var step = Lists.missionWorkflow.get(this.mission.currentState.step);
+		if (!step) {
+			return "";
+		}
+
+		return step.tooltip;
+	},
 	"getCurrentStateIcon": function() {
 		if (!this.mission) {
 			return "fa-cogs";
@@ -60,7 +73,15 @@ Template.mission.helpers({
 		return Utils.formatDate(this.mission.start);
 	},
 	"getMissionDuration": function () {
-		return !this.mission.duration ? "" : moment.duration(this.mission.duration, 'days').humanize();
+		if (!this.mission.duration) {
+			return "";
+		}
+		var days = this.mission.duration;
+		if (days >= 20) {
+			var months = days / 20;
+			return `${moment.duration(months, 'months').humanize()} (${days}j)`;
+		}
+		return moment.duration(this.mission.duration, 'days').humanize();
 	},
 	"userHasAnswered": function () {
 		var answered = false;
