@@ -47,15 +47,13 @@ Meteor.methods({
 	"userprofile.update": function (updatedoc) {
 		console.log("userProfile.update");
 
-		var profile = UserProfiles.findOne({
-			userid: this.userId
-		});
+
 
 		// validation via le schéma défini
 		Globals.schemas.UserProfilesSchema.validate(updatedoc.$set);
 
 		// mise à jour
-		UserProfiles.update(profile._id, updatedoc, function (err) {
+		UserProfiles.update(updatedoc._id, updatedoc, function (err) {
 			if (err) {
 				throw new Meteor.Error(500, err.message);
 			}
@@ -70,7 +68,7 @@ Meteor.methods({
 				userid: Meteor.userId(),
 				options: {
 					profile: profileNameAndTitle,
-					profileid: profile._id,
+					profileid: updatedoc._id,
 					username: Meteor.user().username
 				}
 			}, function (err, objId) {
@@ -92,7 +90,7 @@ Meteor.methods({
 		// validation via le schéma défini
 		Globals.schemas.UserProfilesSchema.validate(updatedoc.$set);
 
-		var profile = UserProfiles.findOne(docId);
+		//var profile = UserProfiles.findOne(docId);
 
 		// mise à jour
 		UserProfiles.update(docId, updatedoc, function (err) {
@@ -110,7 +108,7 @@ Meteor.methods({
 				userid: Meteor.userId(),
 				options: {
 					profile: profileNameAndTitle,
-					profileid: profile._id,
+					profileid: updatedoc._id,
 					username: Meteor.user().username
 				}
 			}, function (err, objId) {

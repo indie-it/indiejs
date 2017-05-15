@@ -85,7 +85,7 @@
 					<section id="education" class="hidden-xs">
 						<h2 class="profile"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Education <span class="badge">{{getCountEducation}}</span></h2>
 						{{#if hasEducation}}
-						{{#each profile.education}}
+						{{#each getSortedEducation}}
 						{{> education}}
 						{{/each}}
 						{{else}}
@@ -113,7 +113,7 @@
 					<section class="hidden-sm hidden-md hidden-lg">
 						<h2 class="profile"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Education <span class="badge">{{getCountEducation}}</span></h2>
 						{{#if hasEducation}}
-						{{#each profile.education}}
+						{{#each getSortedEducation}}
 						{{> education}}
 						{{/each}}
 						{{else}}

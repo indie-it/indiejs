@@ -45,16 +45,16 @@ Template.profile.helpers({
 		return (this.profile.skills && this.profile.skills.length > 0) ? true : false;
 	},
 	"hasEducation": function () {
-		var haseducation = (this.profile.education && this.profile.education.length > 0) ? true : false;
-		console.log(haseducation);
-		return haseducation;
+		return (this.profile.education && this.profile.education.length > 0) ? true : false;
 	},
 	"hasExperiences": function () {
 		return (this.profile.experiences && this.profile.experiences.length > 0) ? true : false;
 	},
 	"getSortedExperiences": function () {
-
 		return _.sortBy(this.profile.experiences, 'start').reverse();
+	},
+	"getSortedEducation": function () {
+		return _.sortBy(this.profile.education, 'date').reverse();
 	},
 });
 
