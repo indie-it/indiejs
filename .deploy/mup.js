@@ -5,8 +5,6 @@ module.exports = {
 			host: 'www.indieit.fr',
 			username: 'ubuntu',
 			pem: "C:\\Documents\\IndieIT\\AWS\\paire-de-cles-ubuntu-server-ami-a58d0dc5.pem"
-			// password: 'server-password'
-			// or neither for authenticate from ssh-agent
 		}
 	},
 
@@ -30,7 +28,6 @@ module.exports = {
 
 		buildOptions: {
 			serverOnly: true, // skip building mobile apps, but still build the web.cordova architecture
-			//debug: true,
 			cleanAfterBuild: true,	//default
 			buildLocation: "C:\\Documents\\code\\indiejs-builds"
 		},
@@ -38,18 +35,14 @@ module.exports = {
 		env: {
 			// TODO: Change to your app's url
 			// If you are using ssl, it needs to start with https://
-			// TODO: CHECK
-			//ROOT_URL: 'http://ec2-52-33-204-40.us-west-2.compute.amazonaws.com',
-			ROOT_URL: 'http://www.indieit.fr',
+			ROOT_URL: 'https://www.indieit.fr',
 			MONGO_URL: 'mongodb://localhost/meteor',
 		},
 
 		ssl: {
-			// Enables let's encrypt (optional)
-			autogenerate: {
-				email: 'contact@indieit.fr',
-				domains: 'indieit.fr,www.indieit.fr' //'website.com,www.website.com' // comma seperated list of domains
-			}
+			crt: "C:\\Documents\\IndieIT\\nom de domaine\\Certificat-www.indieit.fr\\public\\certificate-453582.crt", // this is a bundle of certificates
+			key: "C:\\Documents\\IndieIT\\nom de domaine\\Certificat-www.indieit.fr\\private\\www.indieit.fr.key", // this is the private key of the certificate
+			port: 443 // 443 is the default value and it's the standard HTTPS port
 		},
 
 

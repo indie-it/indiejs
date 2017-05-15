@@ -40,6 +40,22 @@ Template.profile.helpers({
 
 		return this.account.emails[0].verified;
 	},
+
+	"hasSkills": function () {
+		return (this.profile.skills && this.profile.skills.length > 0) ? true : false;
+	},
+	"hasEducation": function () {
+		var haseducation = (this.profile.education && this.profile.education.length > 0) ? true : false;
+		console.log(haseducation);
+		return haseducation;
+	},
+	"hasExperiences": function () {
+		return (this.profile.experiences && this.profile.experiences.length > 0) ? true : false;
+	},
+	"getSortedExperiences": function () {
+
+		return _.sortBy(this.profile.experiences, 'start').reverse();
+	},
 });
 
 function drawChart() {

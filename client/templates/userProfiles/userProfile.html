@@ -60,7 +60,8 @@
 
 					<!--compétences-->
 					<section id="skills">
-						<h2 class="profile"><i class="fa fa-code-fork" aria-hidden="true"></i> Compétences</h2>
+						<h2 class="profile"><i class="fa fa-code-fork" aria-hidden="true"></i> Compétences <span class="badge">{{getCountSkills}}</span></h2>
+						{{#if hasSkills}}
 						{{#each profile.skills}}
 						<div class="row">
 							<div class="col-lg-3">
@@ -75,14 +76,21 @@
 							</div>
 						</div>
 						{{/each}}
+						{{else}}
+						<p>Aucune compétence renseignée.</p>
+						{{/if}}
 					</section>
 
 					<!--formation-->
 					<section id="education" class="hidden-xs">
-						<h2 class="profile"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Education</h2>
+						<h2 class="profile"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Education <span class="badge">{{getCountEducation}}</span></h2>
+						{{#if hasEducation}}
 						{{#each profile.education}}
 						{{> education}}
 						{{/each}}
+						{{else}}
+						<p>Aucune éducation/formation renseignée.</p>
+						{{/if}}
 					</section>
 
 
@@ -101,20 +109,30 @@
 					</div>
 					{{/if}}
 
+					<!--formation (mobile)-->
 					<section class="hidden-sm hidden-md hidden-lg">
-						<h2 class="profile"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Education/Formation</h2>
+						<h2 class="profile"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Education <span class="badge">{{getCountEducation}}</span></h2>
+						{{#if hasEducation}}
 						{{#each profile.education}}
 						{{> education}}
 						{{/each}}
+						{{else}}
+						<p>Aucune éducation/formation renseignée.</p>
+						{{/if}}
 					</section>
 
 					<hr />
-					<h2 id="experiences" class="profile"><i class="fa fa-briefcase" aria-hidden="true"></i> Expériences</h2>
-					{{#each profile.experiences}}
+					<h2 id="experiences" class="profile"><i class="fa fa-briefcase" aria-hidden="true"></i> Expériences <span class="badge">{{getCountExperiences}}</span></h2>
+
+					{{#if hasExperiences}}
+					{{#each getSortedExperiences}}
 					<section id={{getSectionIdFromExperience this}}>
 						{{> experience}}
 					</section>
 					{{/each}}
+					{{else}}
+					<p>Aucune expérience renseignée.</p>
+					{{/if}}
 
 					<p class="pull-right"><i class="fa fa-pencil-square" aria-hidden="true"></i> Profil mis à jour le {{formatDate profile.updated}}</p>
 
@@ -141,7 +159,7 @@
 
 			</section>
 		</div>
-	
+
 	</div>
 
 </template>

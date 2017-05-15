@@ -395,6 +395,10 @@ div.experience h3 {
 		font-size: 14px;
 	}
 
+.freelance-label {
+	line-height: 1.26em;
+}
+
 .freelance-experience-separator {
 	border: 0;
 	height: 1px;
