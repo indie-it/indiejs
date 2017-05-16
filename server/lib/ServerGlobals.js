@@ -20,7 +20,18 @@ ServerGlobals.smtp = {
 	port: 25
 };
 
-ServerGlobals.MAIL_URL = function () {
+ServerGlobals.MAIL_URL = () => {
 	return `smtp://${encodeURIComponent(ServerGlobals.smtp.username)}:${encodeURIComponent(ServerGlobals.smtp.password)}@${encodeURIComponent(ServerGlobals.smtp.server)}:${ServerGlobals.smtp.port}`;
 };
+
+ServerGlobals.invite = {};
+ServerGlobals.invite.subject = () => { return "Indie IT - Invitation par email"; };
+ServerGlobals.invite.text = (user, guestFirstName, guestLastName, url) => {
+	return ` Bonjour ${guestFirstName} ${guestLastName},\n\n`
+		+ `Vous venez de recevoir une invitation à rejoindre Indie IT, le réseau des indépendants IT de Montpellier. Veuillez cliquer sur le lien suivant pour finaliser votre inscription:\n`
+		+ `${url} \n\n`
+		+ `Cordialement, \n`
+		+ `L'équipe Indie IT`;
+};
+
 

@@ -30,6 +30,10 @@ Meteor.methods({
 			throw new Meteor.Error(401, "Vous devez être connecté pour effectuer cette action");
 		}
 
+		// Let other method calls from the same client start running, without
+		// waiting for the email sending to complete.
+		this.unblock();
+
 		// envoi du mail de vérification !
 		Accounts.sendVerificationEmail(Meteor.userId());
 	},

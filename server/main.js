@@ -3,7 +3,7 @@ import { Accounts } from 'meteor/accounts-base';
 
 Meteor.startup(() => {
 	console.log('\n\n#########################################################################');
-	console.log('#### ' + new Date + ' ####');
+	console.log(`#### ${new Date } ####`);
 	console.log('#########################################################################');
 
 	// POUR INFO :
