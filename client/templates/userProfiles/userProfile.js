@@ -1,5 +1,6 @@
-if (Meteor.isServer)
-	return;
+if (Meteor.isServer) { return; }
+
+import changeCase from 'change-case';
 
 Template.profile.helpers({
 	'getCountEducation': function () {
@@ -33,7 +34,7 @@ Template.profile.helpers({
 	},
 
 	"getIsEmailVerified": function () {
-		console.log(this.account);
+		//console.log(this.account);
 		if (!this.account || !this.account.emails || this.account.emails.length == 0) {
 			return false;
 		}
@@ -55,6 +56,10 @@ Template.profile.helpers({
 	},
 	"getSortedEducation": function () {
 		return _.sortBy(this.profile.education, 'date').reverse();
+	},
+	"getSortedSkills": function () {
+		if (!this.profile.skills) return;
+		return _.sortBy(this.profile.skills, 'name');
 	},
 });
 
@@ -134,8 +139,7 @@ Template.profile.rendered = function () {
 
 
 Template.profileHeader.helpers({
-	canEditProfile: function () {
-		//console.log(`userid: ${Meteor.userId()}`);
+	"canEditProfile": function () {
 		var isSelfProfile = this.profile.userid === Meteor.userId();
 		var isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin');
 		var canEdit = (isAdmin === true) || (isSelfProfile === true);
@@ -143,5 +147,11 @@ Template.profileHeader.helpers({
 		console.log(`isSelfProfile: ${isSelfProfile}, isAdmin: ${isAdmin}, canEdit: ${canEdit}`);
 
 		return canEdit;
+	},
+	"getProfileEmail": function () {
+		if (!this.account || !this.account.emails || this.account.emails.length == 0) {
+			return false;
+		}
+		return this.account.emails[0].address;
 	},
 });

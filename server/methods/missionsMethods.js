@@ -1,13 +1,9 @@
-import { Meteor } from 'meteor/meteor'
 import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
 
 Meteor.methods({
 
 	"mission.insert": function (doc) {
-
-		// "nettoyage" du doc : affectation des valeurs auto
-		//Globals.schemas.MissionSchema.clean(doc);
 
 		doc.currentState = {
 			step: Lists.missionWorkflow.map.STEP_NEW,
@@ -29,28 +25,11 @@ Meteor.methods({
 			if (err) {
 				throw new Meteor.Error('Erreur', err);
 			}
-
-			Actions.insert({
-				actionType: Lists.actions.map.missionCreate,
-				userid: Meteor.userId(),
-				options: {
-					mission: missionName,
-					missionid: objectId,
-					username: Meteor.user().username
-				}
-			}, function (err, objId) {
-				if (err) {
-					console.error(err);
-				}
-				console.log("Action enregistrée");
-			});
 		});
 	},
 	"mission.update": function (docid, updateDoc) {
 
 		//Globals.schemas.MissionSchema.validate(updateDoc.$set);
-
-		//console.log(updateDoc);
 
 		return Missions.update(docid, { $set: updateDoc.$set, $unset: updateDoc.$unset }, function (err) {
 
@@ -58,20 +37,6 @@ Meteor.methods({
 				throw new Meteor.Error(500, err);
 			}
 
-			Actions.insert({
-				actionType: Lists.actions.map.missionUpdate,
-				userid: Meteor.userId(),
-				options: {
-					mission: updateDoc.$set.name,
-					missionid: docid,
-					username: Meteor.user().username
-				}
-			}, function (err, objId) {
-				if (err) {
-					console.error(err);
-				}
-				console.log("Action enregistrée");
-			});
 		});
 
 	},
@@ -103,21 +68,6 @@ Meteor.methods({
 			}
 			console.log("Update successful!");
 
-			// enregistrement de l'action.
-			Actions.insert({
-				actionType: Lists.actions.map.userInterested,
-				userid: Meteor.userId(),
-				options: {
-					mission: mission.name,
-					missionid: mission._id,
-					username: Meteor.user().username
-				}
-			}, function (err, objId) {
-				if (err) {
-					console.error(err);
-				}
-				console.log("Action enregistrée");
-			});
 		});
 		return true;
 	},
@@ -153,21 +103,6 @@ Meteor.methods({
 				throw new Meteor.Error(500, error.message);
 			}
 			console.log("Update successful!");
-			Actions.insert({
-				actionType: Lists.actions.map.userNotInterested,
-				userid: Meteor.userId(),
-				options: {
-					mission: mission.name,
-					missionid: mission._id,
-					username: Meteor.user().username
-				}
-			}, function (err, objId) {
-				if (err) {
-					console.error(err);
-				}
-				console.log("Action enregistrée");
-			});
-
 		});
 		return true;
 	},
@@ -202,7 +137,7 @@ Meteor.methods({
 		// vérif mission
 		var mission = Missions.findOne(missionid);
 		if (!mission) {
-			throw new Meteor.Error(400, "Mission non trouvée.");
+			throw new Meteor.Error(500, "Mission non trouvée.");
 		}
 
 		// vérif action autorisée
@@ -228,21 +163,6 @@ Meteor.methods({
 			if (err) {
 				throw new Meteor.Error(500, err.message);
 			}
-
-			Actions.insert({
-				actionType: Lists.actions.map.missionArchive,
-				userid: Meteor.userId(),
-				options: {
-					mission: mission.name,
-					missionid: missionid,
-					username: Meteor.user().username,
-				}
-			}, function (err, objId) {
-				if (err) {
-					console.error(err);
-				}
-				console.log("Action enregistrée");
-			});
 
 			console.log("Mission archivée");
 
@@ -283,21 +203,6 @@ Meteor.methods({
 				throw new Meteor.Error(500, err.message);
 			}
 
-			Actions.insert({
-				actionType: Lists.actions.map.missionAccept,
-				userid: Meteor.userId(),
-				options: {
-					mission: mission.name,
-					missionid: missionid,
-					username: Meteor.user().username,
-				}
-			}, function (err, objId) {
-				if (err) {
-					console.error(err);
-				}
-				console.log("Action enregistrée");
-			});
-
 			console.log("Mission acceptée!");
 
 			return true;
@@ -335,21 +240,6 @@ Meteor.methods({
 			if (err) {
 				throw new Meteor.Error(500, err.message);
 			}
-
-			Actions.insert({
-				actionType: Lists.actions.map.missionValidate,
-				userid: Meteor.userId(),
-				options: {
-					mission: mission.name,
-					missionid: missionid,
-					username: Meteor.user().username,
-				}
-			}, function (err, objId) {
-				if (err) {
-					console.error(err);
-				}
-				console.log("Action enregistrée");
-			});
 
 			console.log("Mission validée avec succès");
 

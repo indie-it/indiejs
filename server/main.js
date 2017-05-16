@@ -2,6 +2,9 @@
 import { Accounts } from 'meteor/accounts-base';
 
 Meteor.startup(() => {
+	console.log('\n\n#########################################################################');
+	console.log('#### ' + new Date + ' ####');
+	console.log('#########################################################################');
 
 	// POUR INFO :
 	// Les objets/propriétés utilisés ici sont définis dans server/ lib / ServerGlobals.js)

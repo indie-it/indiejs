@@ -47,8 +47,6 @@ Meteor.methods({
 	"userprofile.update": function (updatedoc) {
 		console.log("userProfile.update");
 
-
-
 		// validation via le schéma défini
 		Globals.schemas.UserProfilesSchema.validate(updatedoc.$set);
 
@@ -89,8 +87,6 @@ Meteor.methods({
 
 		// validation via le schéma défini
 		Globals.schemas.UserProfilesSchema.validate(updatedoc.$set);
-
-		//var profile = UserProfiles.findOne(docId);
 
 		// mise à jour
 		UserProfiles.update(docId, updatedoc, function (err) {

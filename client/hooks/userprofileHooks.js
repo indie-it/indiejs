@@ -81,10 +81,8 @@ AutoForm.hooks({
 
 				// Mise à jour de profil
 				if (self.currentDoc.userid === Meteor.userId()) {
-					//console.log("call method 'userprofile.update'")
 					Meteor.call('userprofile.update', updatedoc, cb);
 				} else {
-					//console.log("call method 'userprofile.updateWithId' docId: " + self.docId)
 					Meteor.call('userprofile.updateWithId', updatedoc, self.docId, cb);
 				}
 			};

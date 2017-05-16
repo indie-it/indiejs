@@ -1,27 +1,14 @@
 import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
 
-
 // Schéma des étapes de WF
 Globals.schemas.WorkflowStepSchema = new SimpleSchema({
 
-	id: {
-		type: String,
-	},
-	name: {
-		type: String,
-	},
-	description: {
-		type: String,
-		optional: true
-	},
-	next: {
-		type: Array,
-		optional: true
-	},
-	"next.$": {
-		type: String,
-	},
+	id: String,
+	name: String,
+	description: { type: String, optional: true },
+	next: { type: Array, optional: true },
+	"next.$": String,
 
 });
 
@@ -30,11 +17,7 @@ class WorkflowStep {
 
 	constructor(id, name, nextSteps) {
 
-		Globals.schemas.WorkflowStepSchema.validate({
-			id: id,
-			name: name,
-			next: nextSteps
-		});
+		Globals.schemas.WorkflowStepSchema.validate({ 'id': id, 'name': name, 'next': nextSteps });
 
 		this.id = id;
 		this.name = name;
@@ -55,7 +38,7 @@ class WorkflowStep {
 
 	canTransition(stepid) {
 
-		new SimpleSchema({ stepid: { type: String } }).validate({ stepid });
+		check(stepid, String);
 
 		if (!this.next) { // || this.isEnd()) {
 			return false;
@@ -76,6 +59,46 @@ MissionWorkflow.steps.push(new WorkflowStep(Lists.missionWorkflow.map.STEP_NEW, 
 MissionWorkflow.steps.push(new WorkflowStep(Lists.missionWorkflow.map.STEP_VALIDATED, "Mission validée", [Lists.missionWorkflow.map.STEP_IN_PROGRESS, Lists.missionWorkflow.map.STEP_ARCHIVED]));
 MissionWorkflow.steps.push(new WorkflowStep(Lists.missionWorkflow.map.STEP_IN_PROGRESS, "Mission en cours", [Lists.missionWorkflow.map.STEP_ARCHIVED]));
 MissionWorkflow.steps.push(new WorkflowStep(Lists.missionWorkflow.map.STEP_ARCHIVED, "Mission archivée", [Lists.missionWorkflow.map.STEP_VALIDATED]));
+
+MissionWorkflow.transitions = {};
+MissionWorkflow.transitions.values = [
+	{
+		name: Lists.actions.map.missionValidate,
+		from: Lists.missionWorkflow.map.STEP_NEW,
+		to: Lists.missionWorkflow.map.STEP_VALIDATED,
+	},
+	{
+		name: Lists.actions.map.missionArchive,
+		from: Lists.missionWorkflow.map.STEP_NEW,
+		to: Lists.missionWorkflow.map.STEP_ARCHIVED,
+	},
+	{
+		name: Lists.actions.map.missionAccept,
+		from: Lists.missionWorkflow.map.STEP_VALIDATED,
+		to: Lists.missionWorkflow.map.STEP_IN_PROGRESS,
+	},
+	{
+		name: Lists.actions.map.missionArchive,
+		from: Lists.missionWorkflow.map.STEP_VALIDATED,
+		to: Lists.missionWorkflow.map.STEP_ARCHIVED,
+	},
+	{
+		name: Lists.actions.map.missionArchive,
+		from: Lists.missionWorkflow.map.STEP_IN_PROGRESS,
+		to: Lists.missionWorkflow.map.STEP_ARCHIVED,
+	},
+	{
+		name: Lists.actions.map.missionUnarchive,
+		from: Lists.missionWorkflow.map.STEP_ARCHIVED,
+		to: Lists.missionWorkflow.map.STEP_VALIDATED,
+	},
+];
+MissionWorkflow.transitions.get = function (from, to) {
+	check([from, to], [String]);
+	console.log(`MissionWorkflow.transitions.get('${from}', '${to}')`);
+	return _.findWhere(MissionWorkflow.transitions.values, { from: from, to: to });
+};
+
 
 var getMission = function (stepid) {
 	check(stepid, String);
@@ -98,3 +121,5 @@ MissionWorkflow.getActions = function (stepid) {
 		canValidate: mission.canTransition(Lists.missionWorkflow.map.STEP_VALIDATED)
 	};
 };
+
+

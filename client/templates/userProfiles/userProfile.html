@@ -62,7 +62,7 @@
 					<section id="skills">
 						<h2 class="profile"><i class="fa fa-code-fork" aria-hidden="true"></i> Compétences <span class="badge">{{getCountSkills}}</span></h2>
 						{{#if hasSkills}}
-						{{#each profile.skills}}
+						{{#each getSortedSkills}}
 						<div class="row">
 							<div class="col-lg-3">
 								{{this.name}}
@@ -173,4 +173,12 @@
 		{{/if}}
 	</h1>
 	<h3 class="profile-title">{{profile.title}}</h3>
+
+	<h4>
+	<i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:{{getProfileEmail}}">{{getProfileEmail}}</a> 
+	{{#if profile.website}} <i class="fa fa-globe" aria-hidden="true"></i> <a href="{{profile.website}}" target="_blank">{{profile.website}}</a>{{/if}}
+	{{#if profile.telephone}} <i class="fa fa-phone-square" aria-hidden="true"></i> <a href="tel:{{profile.telephone}}">{{profile.telephone}}</a>{{/if}}
+	{{#if profile.skype}} <i class="fa fa-skype" aria-hidden="true"></i> <a href="skype:{{profile.skype}}">{{profile.skype}}</a>{{/if}}
+	</h4>
+
 </template>
