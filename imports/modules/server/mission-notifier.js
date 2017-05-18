@@ -34,23 +34,22 @@ const getMissionUri = (missionId) => {
  * @param {any} action
  */
 function notifyMatchingProfiles(missionDoc, actionType) {
-
 	check(actionType, String);
 	console.log(`missionNotifier.notifyMatchingProfiles - action.actionType: ${actionType}`);
 
 	var profiles = getUserProfiles(missionDoc.technos);
-
 	if (!profiles || profiles.length == 0) {
 		console.log("aucun profil ne correspond...");
 		return;
 	}
 
 	_.each(profiles, (obj) => {
-		var user = {
-			'email': obj.userObj.emails[0].address,
+		var email = obj.userObj.emails[0].address;
+		var tpldata = {
 			'firstName': obj.firstName,
+			'missionName': missionName,
 		};
-		emailNotification.sendEmailForAction(user, actionType, getMissionUri(missionDoc._id));
+		emailNotification.sendEmailForAction(email, actionType, getMissionUri(missionDoc._id), tpldata);
 	});
 
 }
@@ -61,9 +60,7 @@ function notifyMatchingProfiles(missionDoc, actionType) {
  * @param {any} action
  */
 function notifyAdmins(missionDoc, actionType) {
-
 	check(actionType, String);
-
 	console.log(`missionNotifier.notifyAdmin - action.actionType: ${actionType}`);
 
 	var admins = getAdmins();
@@ -72,15 +69,14 @@ function notifyAdmins(missionDoc, actionType) {
 		return;
 	}
 
-	console.log("\tFound " + admins.length + " admins");
-
 	// on parcourt le tableau des admins
 	_.each(admins, (obj) => {
-		var user = {
-			'email': obj.emails[0].address,
-			'firstName': obj.username
+		var email = obj.emails[0].address;
+		var tpldata = {
+			'firstName': obj.username,
+			'missionName': missionDoc.name,
 		};
-		emailNotification.sendEmailForAction(user, actionType, getMissionUri(missionDoc._id));
+		emailNotification.sendEmailForAction(email, actionType, getMissionUri(missionDoc._id), tpldata);
 	});
 }
 
