@@ -1,19 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 
 Template.mission.helpers({
-	"getTJM": function () {
-		if (!this.mission.averageDailyRate || (!this.mission.averageDailyRate.min && !this.mission.averageDailyRate.max)) {
-			return "Non renseigné";
-		}
-
-		if (this.mission.averageDailyRate.min && !this.mission.averageDailyRate.max) {
-			return `A partir de ${this.mission.averageDailyRate.min} €/j`;
-		}
-		if (!this.mission.averageDailyRate.min && this.mission.averageDailyRate.max) {
-			return `${this.mission.averageDailyRate.max} €/j maximum`;
-		}
-		return `Entre ${this.mission.averageDailyRate.min} et ${this.mission.averageDailyRate.max} €/j`;
-	},
 	"getCurrentState": function () {
 
 		if (!this.mission) {
@@ -65,23 +52,6 @@ Template.mission.helpers({
 
 		return step.classname;
 
-	},
-	"getMissionStart": function () {
-		if (!!this.mission.isEarliestStart) {
-			return "au plus tôt";
-		}
-		return Utils.formatDate(this.mission.start);
-	},
-	"getMissionDuration": function () {
-		if (!this.mission.duration) {
-			return "";
-		}
-		var days = this.mission.duration;
-		if (days >= 20) {
-			var months = days / 20;
-			return `${moment.duration(months, 'months').humanize()} (${days}j)`;
-		}
-		return moment.duration(this.mission.duration, 'days').humanize();
 	},
 	"userHasAnswered": function () {
 		var answered = false;
@@ -181,7 +151,6 @@ Template.mission.rendered = function () {
 		Session.set("actions", result);
 	});
 };
-
 Template.mission.events({
 	"click #interested": function (event, template) {
 		Meteor.call("mission.interested", this.mission._id, function (error, result) {
@@ -250,7 +219,6 @@ Template.mission.events({
 	},
 });
 
-
 Template.assignUser.events({
 
 	"click a": function (event, template) {
@@ -283,4 +251,37 @@ Template.assignUser.events({
 
 	},
 
+});
+
+Template.missionLabels.helpers({
+	"getTJM": function () {
+		if (!this.mission.averageDailyRate || (!this.mission.averageDailyRate.min && !this.mission.averageDailyRate.max)) {
+			return "Non renseigné";
+		}
+
+		if (this.mission.averageDailyRate.min && !this.mission.averageDailyRate.max) {
+			return `A partir de ${this.mission.averageDailyRate.min} €/j`;
+		}
+		if (!this.mission.averageDailyRate.min && this.mission.averageDailyRate.max) {
+			return `${this.mission.averageDailyRate.max} €/j maximum`;
+		}
+		return `Entre ${this.mission.averageDailyRate.min} et ${this.mission.averageDailyRate.max} €/j`;
+	},
+	"getMissionDuration": function () {
+		if (!this.mission.duration) {
+			return "";
+		}
+		var days = this.mission.duration;
+		if (days >= 20) {
+			var months = days / 20;
+			return `${moment.duration(months, 'months').humanize()} (${days}j)`;
+		}
+		return moment.duration(this.mission.duration, 'days').humanize();
+	},
+	"getMissionStart": function () {
+		if (!!this.mission.isEarliestStart) {
+			return "Début au plus tôt";
+		}
+		return "Début " + Utils.formatDate(this.mission.start);
+	},
 });

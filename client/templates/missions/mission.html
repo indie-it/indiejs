@@ -54,13 +54,6 @@
 
 					<div class="hidden-sm hidden-md hidden-lg">
 						{{> missionLabels }}
-
-						{{#if mission.organization}}<p class="h4"><i class="fa fa-building-o fa-fw"></i> {{mission.organization}}</p>{{/if}}
-						{{#if mission.location}}<p class="h4"><i class="fa fa-map-marker fa-fw"></i> {{mission.location}}</p>{{/if}}
-						<p class="h4"><i class="fa fa-calendar fa-fw"></i> Début {{getMissionStart}}</p>
-						{{#if mission.duration}}<p class="h4"><i class="fa fa-clock-o fa-fw"></i> {{getMissionDuration}}</p>{{/if}}
-						{{#if mission.averageDailyRate}}<p class="h4"><i class="fa fa-eur fa-fw"></i> {{mission.averageDailyRate}}€/j</p>{{/if}}
-
 					</div>
 
 					{{#if mission.shortDescription}}<h4><small>{{mission.shortDescription}}</small></h4>{{/if}}
@@ -72,12 +65,6 @@
 				<!-- A DROITE -->
 				<div class="col-sm-4 col-md-4 hidden-xs">
 					{{> missionLabels }}
-					
-					{{#if mission.organization}}<p class="h4"><i class="fa fa-building-o fa-fw"></i> {{mission.organization}}</p>{{/if}}
-					{{#if mission.location}}<p class="h4"><i class="fa fa-map-marker fa-fw"></i> {{mission.location}}</p>{{/if}}
-					<p class="h4"><i class="fa fa-calendar fa-fw"></i> Début {{getMissionStart}}</p>
-					{{#if mission.duration}}<p class="h4" title="Durée en nombre de jours ouvrables"><i class="fa fa-clock-o fa-fw"></i> {{getMissionDuration}}</p>{{/if}}
-					{{#if mission.averageDailyRate}}<p class="h4"><i class="fa fa-eur fa-fw"></i> {{getTJM}}</p>{{/if}}
 				</div>
 
 			</div>
@@ -152,5 +139,20 @@
 		{{#if mission.level}}<span class="label label-primary">{{mission.level}}</span>{{/if}}
 		{{#if mission.type}}<span class="label label-primary">{{mission.type}}</span>{{/if}}
 	</h4>
+
+	{{#if mission.organization}}
+	<p class="h4"><i class="fa fa-building-o fa-fw"></i> {{mission.organization}}</p>
+	{{/if}}
+	{{#if mission.location}}
+	<p class="h4"><i class="fa fa-map-marker fa-fw"></i> {{mission.location}}</p>
+	{{/if}}
+	<p class="h4"><i class="fa fa-calendar fa-fw"></i> {{getMissionStart}}</p>
+	{{#if mission.duration}}
+	<p class="h4" title="Durée en nombre de jours ouvrables"><i class="fa fa-clock-o fa-fw"></i> {{getMissionDuration}}</p>
+	{{/if}}
+	{{#if mission.averageDailyRate}}
+	<p class="h4"><i class="fa fa-eur fa-fw"></i> {{getTJM}}</p>
+	{{/if}}
+
 
 </template>
