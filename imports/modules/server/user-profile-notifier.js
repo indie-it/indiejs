@@ -28,12 +28,13 @@ function notifyAdmins(profileDoc, actionType) {
 		var email = obj.emails[0].address;
 		var tpldata = {
 			'firstName': obj.username,
-			'newUser': {
+			'user': {
 				'firstName': profileDoc.firstName,
 				'lastName': profileDoc.lastName,
 				'title': profileDoc.title,
 			}
 		};
+		console.log(tpldata);
 		emailNotification.sendEmailForAction(email, actionType, getProfileUri(profileDoc._id), tpldata);
 	});
 }
