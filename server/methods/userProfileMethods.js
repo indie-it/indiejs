@@ -19,31 +19,12 @@ Meteor.methods({
 		Globals.schemas.UserProfilesSchema.validate(insertdoc);
 
 		return UserProfiles.insert(insertdoc, function (err, objectid) {
-
 			if (err) {
 				throw new Meteor.Error(500, err.message);
 			}
-
-			var profileNameAndTitle = insertdoc.firstName + " " + insertdoc.lastName;
-			if (insertdoc.title) {
-				profileNameAndTitle += " (" + insertdoc.title + ")";
-			}
-
-			Actions.insert({
-				actionType: Lists.actions.map.profileFreelancerCreate,
-				userid: Meteor.userId(),
-				options: {
-					profile: profileNameAndTitle,
-					profileid: objectid,
-					username: Meteor.user().username
-				}
-			}, function (err, objId) {
-				if (err) {
-					console.error(err);
-				}
-				console.log("Action enregistrée");
-			});
+			console.log("Update successful!");
 		});
+		return true;
 	},
 	"userprofile.updateWithId": function (updatedoc, docId) {
 		check(docId, String);
@@ -58,27 +39,6 @@ Meteor.methods({
 			if (err) {
 				throw new Meteor.Error(500, err.message);
 			}
-
-			var profileNameAndTitle = updatedoc.$set.firstName + " " + updatedoc.$set.lastName;
-			if (updatedoc.$set.title) {
-				profileNameAndTitle += " (" + updatedoc.$set.title + ")";
-			}
-
-			Actions.insert({
-				actionType: Lists.actions.map.profileFreelancerUpdate,
-				userid: Meteor.userId(),
-				options: {
-					profile: profileNameAndTitle,
-					profileid: updatedoc._id,
-					username: Meteor.user().username
-				}
-			}, function (err, objId) {
-				if (err) {
-					console.error(err);
-				}
-				console.log("Action enregistrée");
-			});
-
 			console.log("Update successful!");
 		});
 		return true;
