@@ -24,6 +24,9 @@ const getAdmins = () => {
 	console.log(`\tgetAdmins: adminRole = ${adminRole}`);
 	return Roles.getUsersInRole(adminRole).fetch();
 };
+const getMissionUri = (missionId) => {
+	return `https://www.indieit.fr${Utils.pathFor('mission', { '_id': missionId })}`;
+}
 
 /**
  * Notifie les utilisateurs potentiellement intéressés par la mission en cours
@@ -47,7 +50,7 @@ function notifyMatchingProfiles(missionDoc, actionType) {
 			'email': obj.userObj.emails[0].address,
 			'firstName': obj.firstName,
 		};
-		emailNotification.sendEmailForAction(user, actionType, missionDoc._id);
+		emailNotification.sendEmailForAction(user, actionType, getMissionUri(missionDoc._id));
 	});
 
 }
@@ -77,7 +80,7 @@ function notifyAdmins(missionDoc, actionType) {
 			'email': obj.emails[0].address,
 			'firstName': obj.username
 		};
-		emailNotification.sendEmailForAction(user, actionType, missionDoc._id);
+		emailNotification.sendEmailForAction(user, actionType, getMissionUri(missionDoc._id));
 	});
 }
 
