@@ -36,7 +36,8 @@ var cloudinarycallback = function (doc, callback) {
 				// cas de la mise à jour ; doc est un objet complexe contenant deux propriétés 
 				// $set et $unset; il faut ajouter la propriété à $set.
 				doc.$set.profilePic = obj;
-			} else {
+			}
+			else {
 				// dans le cas de l'insertion, pas de souci; on met à jour directement l'object doc.
 				doc.profilePic = obj;
 			}
@@ -53,6 +54,7 @@ AutoForm.hooks({
 
 	'userprofile.createorupdate': {
 		onSubmit: function (insertdoc, updatedoc, currentdoc) {
+
 			var self = this;
 
 			var saveProfileCallback = function () {
@@ -68,8 +70,6 @@ AutoForm.hooks({
 			};
 			var updateProfileCallback = function () {
 
-				//console.log(`self.currentDoc.userid: ${self.currentDoc.userid}, Meteor.userId(): ${Meteor.userId()}`);
-
 				var cb = function (error) {
 					if (error) {
 						console.log("error", error);
@@ -80,25 +80,29 @@ AutoForm.hooks({
 				};
 
 				// Mise à jour de profil
-				if (self.currentDoc.userid === Meteor.userId()) {
-					Meteor.call('userprofile.update', updatedoc, cb);
-				} else {
-					Meteor.call('userprofile.updateWithId', updatedoc, self.docId, cb);
-				}
+				Meteor.call('userprofile.updateWithId', updatedoc, self.docId, cb);
 			};
 
 			Modal.show("userprofile-loading-modal", null, { backdrop: 'static', keyboard: false });
 
 			// nouveau profil.
 			if (!currentdoc) {
+
+				// on mémorise le fait qu'on est en insertion
+				Session.set("user-profile", { isInsert: true });
+
 				if (typeof (files) === 'undefined') {
 					saveProfileCallback();
 				} else {
 					cloudinarycallback(insertdoc, saveProfileCallback);
 				}
-			} else {
+			}
+			else {
 				// mise à jour du profil : clean !
 				Globals.schemas.UserProfilesSchema.clean(updatedoc.$set);
+
+				// on mémorise le fait qu'on est en mise à jour
+				Session.set("user-profile", { isUpdate: true });
 
 				if (typeof (files) === 'undefined') {
 					updateProfileCallback();
@@ -110,8 +114,17 @@ AutoForm.hooks({
 		},
 		onSuccess: function () {
 			Modal.hide();
-			sAlert.success("Modifications sauvegardées", { onRouteClose: false });
-			Router.go(Utils.pathFor('home'));
+
+			var obj = Session.get("user-profile");
+			if (obj.isInsert === true) {
+				sAlert.success("Profil enregistré", { onRouteClose: false });
+				Router.go(Utils.pathFor('home'));
+				return;
+			}
+
+			if (obj.isUpdate === true) {
+				sAlert.success("Profil mis à jour");
+			}
 		},
 		onError: function (formType, err) {
 			Modal.hide();

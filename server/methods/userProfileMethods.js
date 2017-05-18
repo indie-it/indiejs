@@ -3,6 +3,7 @@ import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
 
 Meteor.methods({
+
 	"userprofile.insert": function (insertdoc) {
 		console.log("userProfile.insert");
 
@@ -43,42 +44,6 @@ Meteor.methods({
 				console.log("Action enregistrée");
 			});
 		});
-	},
-	"userprofile.update": function (updatedoc) {
-		console.log("userProfile.update");
-
-		// validation via le schéma défini
-		Globals.schemas.UserProfilesSchema.validate(updatedoc.$set);
-
-		// mise à jour
-		UserProfiles.update(updatedoc._id, updatedoc, function (err) {
-			if (err) {
-				throw new Meteor.Error(500, err.message);
-			}
-
-			var profileNameAndTitle = `${updatedoc.$set.firstName} ${updatedoc.$set.lastName}`;
-			if (updatedoc.$set.title) {
-				profileNameAndTitle += ` (${updatedoc.$set.title})`;
-			}
-
-			Actions.insert({
-				actionType: Lists.actions.map.profileFreelancerUpdate,
-				userid: Meteor.userId(),
-				options: {
-					profile: profileNameAndTitle,
-					profileid: updatedoc._id,
-					username: Meteor.user().username
-				}
-			}, function (err, objId) {
-				if (err) {
-					console.error(err);
-				}
-				console.log("Action enregistrée");
-			});
-
-			console.log("Update successful!");
-		});
-		return true;
 	},
 	"userprofile.updateWithId": function (updatedoc, docId) {
 		check(docId, String);

@@ -25,6 +25,7 @@ Meteor.methods({
 			if (err) {
 				throw new Meteor.Error('Erreur', err);
 			}
+			console.log("Missions.insert ");
 		});
 	},
 	"mission.update": function (docid, updateDoc) {
