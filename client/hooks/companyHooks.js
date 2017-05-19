@@ -1,4 +1,5 @@
 ﻿AutoForm.hooks({
+
 	'insertCompanyAccount': {
 
 		onSubmit: function (doc) {
@@ -9,17 +10,14 @@
 				sAlert.error("Veuillez renseigner les champs obligatoires.");
 				return false;
 			}
-			var email = doc.email.address;
 
 			var self = this;
-
 			const newdoc = {
 				username: doc.username,
-				email: email,
+				email: doc.email.address,
 				password: doc.password,
 				profile: doc.profile ? doc.profile : {},
 			};
-
 			Meteor.call('companyAccount.insert', newdoc, function (err, res) {
 				console.log(err);
 				if (!err) {
