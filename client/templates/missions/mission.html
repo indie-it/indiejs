@@ -1,4 +1,5 @@
-﻿<template name="mission">
+﻿<!--mission-->
+<template name="mission">
 	{{setTitle mission.name}}
 
 	<div class="container-fluid missions-background-image">
@@ -14,26 +15,7 @@
 		<div class="container background-layer">
 
 			{{#if isAdmin }}
-
-			<div class="row admin-buttons">
-				<div class="col-md-12">
-					<p class="h4">
-						{{#if canValidate}}<a id="action-validate" class="btn btn-success" href="#" role="button"><i class="fa fa-check" aria-hidden="true"></i> Valider</a>{{/if}}
-						{{#if canAccept}}<a id="action-accept" class="btn btn-primary" href="#" role="button"><i class="fa fa-user-circle" aria-hidden="true"></i> Affecter un indépendant</a>{{/if}}
-						{{#if canArchive}}<a id="action-archive" class="btn btn-danger" href="#" role="button"><i class="fa fa-archive" aria-hidden="true"></i> Archiver</a>{{/if}}
-						{{#if canModify}}<a class="btn btn-primary pull-right" href="{{pathFor route='missionUpdate' _id=mission._id}}" role="button"><i class="fa fa-edit" aria-hidden="true"></i> Modifier</a>{{/if}}
-					</p>
-				</div>
-			</div>
-
-			{{#if canAccept}}
-			<div id="select-freelancer" class="row" style="display: none;">
-				<div class="container">
-					{{> tabular table=TabularTables.UserProfiles class="table table-striped table-bordered"}}
-				</div>
-			</div>
-			{{/if}}
-
+				{{> missionAdminPanel}}
 			{{/if}}
 
 			<!-- Nom mission + état -->
@@ -73,12 +55,13 @@
 
 			<div class="row">
 				<div class="col-md-12">
-					<h3><i class="fa fa-star-o fa-fw" aria-hidden="true"></i>Cette mission vous intéresse ?</h3>
-					<p>Cliquez sur le bouton "Je postule" pour postuler. Sinon, cliquez sur "Je ne suis pas intéressé" pour faire disparaître la mission de la liste.</p>
+					
 
 					{{#if userHasAnswered }}
 					<p><strong><span class="glyphicon glyphicon-thumbs-{{ getAnswerClass }}" aria-hidden="true"></span>&nbsp;{{ getAnswerText }}</strong></p>
 					{{else}}
+					<h3><i class="fa fa-star-o fa-fw" aria-hidden="true"></i>Cette mission vous intéresse ?</h3>
+					<p>Cliquez sur le bouton "Je postule" pour postuler. Sinon, cliquez sur "Je ne suis pas intéressé" pour faire disparaître la mission de la liste.</p>
 					<h3>
 						<a id="interested" class="btn btn-primary" href="#" role="button"> Je postule</a>
 						<a id="notinterested" class="btn btn-default" href="#" role="button">Je ne suis pas intéressé</a>
@@ -117,10 +100,47 @@
 
 </template>
 
-<template name="assignUser">
-	<a href="#" class="btn assign-user"><i class="fa fa-briefcase" aria-hidden="true"></i> Affecter</a>
+
+<!--missionAdminPanel-->
+<template name="missionAdminPanel">
+
+	<div class="row admin-buttons">
+		<div class="col-md-12">
+			<p class="h4">
+
+				{{#each getWorkflowActions}}
+					{{#if this.isSpecific}}
+					<a id="action-{{this.id}}" class="btn {{this.btnclass}}" href="#" role="button"><i class="fa {{this.fa}}" aria-hidden="true"></i> {{this.text}}</a>
+					{{else}}
+					<a id="{{this.id}}" class="btn {{this.btnclass}} workflow" href="#" role="button"><i class="fa {{this.fa}}" aria-hidden="true"></i> {{this.text}}</a>
+					{{/if}}
+				{{/each}}
+
+				{{#if canModify}}<a class="btn btn-primary pull-right" href="{{pathFor route='missionUpdate' _id=mission._id}}" role="button"><i class="fa fa-edit" aria-hidden="true"></i> Modifier</a>{{/if}}
+			</p>
+		</div>
+	</div>
+
+	{{#if actionAccept}}
+	<div id="select-freelancer" class="row" style="display: none;">
+		<div class="container">
+			{{> tabular table=TabularTables.UserProfiles class="table table-striped table-bordered"}}
+		</div>
+	</div>
+	{{/if}}
+
+
+
 </template>
 
+
+<!--assignUser-->
+<template name="assignUser">
+	<a href="#" class="btn btn-primary assign-user"><i class="fa fa-briefcase" aria-hidden="true"></i> Affecter</a>
+</template>
+
+
+<!--missionLabels-->
 <template name="missionLabels">
 
 	{{#if mission.categories}}
@@ -156,3 +176,4 @@
 
 
 </template>
+

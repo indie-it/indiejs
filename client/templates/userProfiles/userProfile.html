@@ -142,17 +142,16 @@
 				<div class="col-md-3 scrollspy">
 					<ul id="nav" class="nav hidden-xs hidden-sm" data-spy="affix">
 						<li><a href="#top">Profil</a></li>
-						<li><!--<a href="#description">Description</a>--></li>
 						<li><a href="#education">Education <span class="badge">{{getCountEducation}}</span></a></li>
+						<li><a href="#skills">Compétences <span class="badge">{{getCountSkills}}</span></a></li>
 						<li>
 							<a href="#experiences">Expériences <span class="badge">{{getCountExperiences}}</span></a>
 							<ul class="nav">
-								{{#each profile.experiences}}
+								{{#each getSortedExperiences}}
 								<li><a href='#{{getSectionIdFromExperience this}}'><span class="fa fa-angle-double-right"></span>{{company}}</a></li>
 								{{/each}}
 							</ul>
 						</li>
-						<li><a href="#skills">Compétences <span class="badge">{{getCountSkills}}</span></a></li>
 					</ul>
 				</div>
 				<!-- /Navigation profil -->

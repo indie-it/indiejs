@@ -1,5 +1,6 @@
 import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
+import { MissionWF } from '../../imports/modules/server/mission-workflow.js';
 
 Meteor.methods({
 
@@ -42,16 +43,14 @@ Meteor.methods({
 
 	},
 
-	"mission.interested": function (missionid) {
-		console.log("mission.interested");
+	"mission.apply": function (missionid) {
+		console.log("mission.apply");
 
 		// validation du paramètre
-		new SimpleSchema({ missionid: { type: String } }).validate({ missionid });
+		check(missionid, String);
 
 		// récupération de la mission
-		var mission = Missions.findOne({
-			_id: missionid
-		});
+		var mission = Missions.findOne({ _id: missionid });
 		if (!mission) {
 			return false;
 		}
@@ -110,30 +109,25 @@ Meteor.methods({
 
 	"mission.getActions": function (missionid) {
 
+		console.log(`mission.getActions: ${missionid}`);
 		check(missionid, String);
 
-		console.log(`mission.getActions: ${missionid}`);
 
-		var mission = Missions.findOne({ _id: missionid });
+		// vérif mission
+		var mission = Missions.findOne(missionid);
 		if (!mission) {
 			throw new Meteor.Error(500, "Mission non trouvée.");
 		}
 
-		if (!Roles.userIsInRole(Meteor.userId(), 'admin')) {
-			return {
-				canArchive: false,
-				canAccept: false,
-				canValidate: false
-			};
-		}
-
-		return MissionWorkflow.getActions(mission.currentState.step);
+		// workflow
+		var wf = new MissionWF(mission);
+		return wf.getActions();
 	},
 
-	"mission.archive": function (missionid) {
-		console.log(`mission.archive: ${missionid}`);
+	"mission.transition": (missionid, actionid) => {
+		console.log(`mission.transition: ${missionid}, ${actionid}`);
 
-		check(missionid, String);
+		check([missionid, actionid], [String]);
 
 		// vérif mission
 		var mission = Missions.findOne(missionid);
@@ -142,14 +136,22 @@ Meteor.methods({
 		}
 
 		// vérif action autorisée
-		var actions = MissionWorkflow.getActions(mission.currentState.step);
-		if (!actions.canArchive) {
-			throw new Meteor.Error("Action non autorisée.");
+		var wf = new MissionWF(mission);
+		if (!wf.can(actionid)) {
+			throw new Meteor.Error(`Action non autorisée (id d'action: ${actionid}).`);
 		}
 
-		Missions.update(missionid, {
+		// enregistrer la transition ds nv var
+		var transition = wf.transition(actionid);
+		if (!transition) {
+			throw new Meteor.Error(500, `Transition "${actionid}" non trouvée.`);
+		}
+
+		// objet de mise à jour (mongo)
+		var updateobj = {
+
 			$set: {
-				"currentState.step": Lists.missionWorkflow.map.STEP_ARCHIVED,
+				"currentState.step": transition,
 				"currentState.date": new Date()
 			},
 
@@ -159,17 +161,19 @@ Meteor.methods({
 			$addToSet: {
 				workflowHistory: mission.currentState
 			}
-		}, function (err) {
+		};
 
+		// Mise à jour 
+		Missions.update(missionid, updateobj, function (err) {
 			if (err) {
 				throw new Meteor.Error(500, err.message);
 			}
-
-			console.log("Mission archivée");
-
+			console.log("Action réalisée");
 			return true;
 		});
+
 	},
+
 	"mission.accept": function (missionid, userid) {
 		console.log(`mission.accept: missionid: ${missionid}, userid: ${userid}`);
 
@@ -184,65 +188,29 @@ Meteor.methods({
 		}
 
 		// vérif action autorisée
-		var actions = MissionWorkflow.getActions(mission.currentState.step);
-		if (!actions.canAccept) {
+		var wf = new MissionWF(mission);
+		if (!wf.can('accept')) {
 			throw new Meteor.Error("Action non autorisée.");
 		}
 
-		Missions.update(missionid, {
+		var updateobj = {
 			$set: {
-				"currentState.step": Lists.missionWorkflow.map.STEP_IN_PROGRESS,
+				"currentState.step": wf.transition('accept'),
 				"currentState.date": new Date(),
 				"currentState.assignedUserId": userid
 			},
 			$addToSet: {
 				workflowHistory: mission.currentState
 			}
-		}, function (err) {
+		};
+
+		Missions.update(missionid, updateobj, function (err) {
 
 			if (err) {
 				throw new Meteor.Error(500, err.message);
 			}
 
 			console.log("Mission acceptée!");
-
-			return true;
-		});
-
-	},
-	"mission.validate": function (missionid) {
-		console.log(`mission.validate: ${missionid}`);
-		check(missionid, String);
-
-		// vérif mission
-		var mission = Missions.findOne(missionid);
-		if (!mission) {
-			throw new Meteor.Error(400, "Mission non trouvée.");
-		}
-
-		// vérif action autorisée
-		var actions = MissionWorkflow.getActions(mission.currentState.step);
-		if (!actions.canValidate) {
-			throw new Meteor.Error("Action non autorisée.");
-		}
-
-		Missions.update(missionid, {
-			$set: {
-				"currentState.step": Lists.missionWorkflow.map.STEP_VALIDATED,
-				"currentState.date": new Date()
-			},
-			// on vire le champ 'currentState.assignedUserId' s'il existe (ne fait rien sinon).
-			$unset: { "currentState.assignedUserId": "" },
-			$addToSet: {
-				workflowHistory: mission.currentState
-			}
-		}, function (err) {
-			console.log(err);
-			if (err) {
-				throw new Meteor.Error(500, err.message);
-			}
-
-			console.log("Mission validée avec succès");
 
 			return true;
 		});
