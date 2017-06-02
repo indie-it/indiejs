@@ -159,9 +159,6 @@ Template.mission.events({
 });
 
 // missionAdminPanel
-Template.missionAdminPanel.created = () => {
-	$('#select-freelancer').hide();
-};
 Template.missionAdminPanel.rendered = () => {
 	console.log("Template.missionAdminPanel.rendered");
 
@@ -188,7 +185,7 @@ Template.missionAdminPanel.helpers({
 		if (!obj) {
 			return false;
 		}
-		return _.findWhere(obj, { 'id': 'accept' });
+		return _.findWhere(obj, { 'id': 'mission-accept' });
 	},
 	"canModify": () => {
 		return Roles.userIsInRole(Meteor.userId(), 'admin');
@@ -196,10 +193,9 @@ Template.missionAdminPanel.helpers({
 });
 Template.missionAdminPanel.events({
 
-	"click #action-accept": (event, template) => {
+	"click #action-mission-accept": (event, template) => {
 		event.preventDefault();
-		console.log("click #action-accept");
-		var self = this;
+		console.log("click #action-mission-accept");
 		$('#select-freelancer').toggle();
 	},
 	"click .workflow": (event, template) => {
