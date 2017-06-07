@@ -30,18 +30,14 @@ Template.profile.helpers({
 		if (!this.profile.profilePic) {
 			return "/img/profile-pic-placeholder.png";
 		}
-		return this.profile.profilePic.url;
+		return this.profile.profilePic.secureUrl;
 	},
-
 	"getIsEmailVerified": function () {
-		//console.log(this.account);
 		if (!this.account || !this.account.emails || this.account.emails.length == 0) {
 			return false;
 		}
-
 		return this.account.emails[0].verified;
 	},
-
 	"hasSkills": function () {
 		return (this.profile.skills && this.profile.skills.length > 0) ? true : false;
 	},
