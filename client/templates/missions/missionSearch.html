@@ -1,0 +1,83 @@
+﻿<template name="missionSearch">
+	{{setTitle 'Recherche de missions'}}
+	<div class="container-fluid missions-background-image">
+
+		<div class="container-fluid hidden-xs breadcrumb-background">
+			<ol class="breadcrumb">
+				<li><a href="{{pathFor route='home'}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+				<li class="active">Recherche de missions</li>
+			</ol>
+		</div>
+
+		<div class="container-fluid background-layer">
+			<div class="row">
+				<div class="col-lg-3">
+
+					<label for="search-name">Nom de la mission</label>
+					<input type="text" name="search-name" class="form-control" placeholder="Le nom contient...">
+
+					<label for="search-description">Description de la mission</label>
+					<input type="text" name="search-description" class="form-control" placeholder="La description contient...">
+
+					<label for="search-techs">Technologies</label>
+					<input type="text" name="search-techs" class="form-control" placeholder="Contient les technos...">
+
+					<label for="search-tjm">TJM de la mission (minimum)</label>
+					<input type="number" name="search-tjm" class="form-control" placeholder="TJM minimum">
+
+					<label for="search-city">Ville de la mission</label>
+					<input type="text" name="search-city" class="form-control" placeholder="Ville...">
+
+					<label for="search-category">Catégorie de la mission</label>
+					<input type="text" name="search-category" class="form-control" placeholder="Saisir une catégorie...">
+
+					<label for="search-start">Démarrage de la mission</label>
+					<input type="date" name="search-start" class="form-control" placeholder="A partir du (aaaa-mm-jj)...">
+
+				</div>
+				<div class="col-lg-9">
+
+					{{#if searching}}
+					{{> loading}}
+					{{else}}
+
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>Catégorie</th>
+								<th>Mission</th>
+								<th>Lieu</th>
+								<th>Niveau</th>
+								<th>Dernière màj</th>
+							</tr>
+						</thead>
+						<tbody>
+							{{#each missions}}
+							<tr>
+								<td>{{getCategories}}</td>
+								<th scope="row">
+									<a href="{{pathFor 'mission' _id=_id}}">{{name}}</a>
+									<p></p>
+								</th>
+								<td>{{location}}</td>
+								<td>{{level}}</td>
+								<td>{{timeFromNow updated}}</td>
+							</tr>
+							{{else}}
+							<tr>
+								<td colspan="5">Il n'y a aucun résultat pour votre recherche.</td>
+							</tr>
+							{{/each}}
+						</tbody>
+					</table>
+
+					{{/if}}
+
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+</template>
