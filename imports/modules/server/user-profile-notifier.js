@@ -14,6 +14,9 @@ const getProfileUri = (profileId) => {
  * @param {any} actionType
  */
 function notifyAdmins(profileDoc, actionType) {
+
+	if (ServerGlobals.alerts.profileUpdate === false) { return; }
+
 	check(actionType, String);
 	console.log(`profileNotifier.notifyAdmins - action.actionType: ${actionType}`);
 

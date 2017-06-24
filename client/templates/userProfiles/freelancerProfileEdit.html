@@ -1,0 +1,115 @@
+﻿<!-- freelancerProfileEdit -->
+<template name="freelancerProfileEdit">
+	<div class="container background-layer">
+		<div class="row">
+
+			<div class="col-md-3">
+				<h4>Mon profil</h4>
+				<ul class="nav">
+					<li><a id="details" href="#">Mon profil</a></li>
+					<li><a id="profilePic" href="#">Ma photo de profil</a></li>
+					<li><a id="skills" href="#">Mes compétences</a></li>
+					<li><a id="xp" href="#">Mes expériences</a></li>
+					<li><a id="education" href="#">Ma formation</a></li>
+					<li><a id="mission-search" href="#">Ma recherche de mission</a></li>
+					<li><a id="alerts" href="#">Mes alertes</a></li>
+				</ul>
+			</div>
+
+			<div class="col-md-9">
+				{{> Template.dynamic template=getTemplateName data=this}}
+			</div>
+
+		</div>
+	</div>
+</template>
+
+<!-- freelancerProfileEdit_details -->
+<template name="freelancerProfileEdit_details">
+	{{#autoForm collection="UserProfiles" id="freelancer.createorupdate" doc=profile type=normal autosave=true }}
+	<h3>Mise à jour de profil</h3>
+	<fieldset>
+		<legend>Coordonnées</legend>
+		{{> afQuickField name='lastName'}}
+		{{> afQuickField name='firstName'}}
+		{{> afQuickField name='birthday'}}
+
+		{{> afQuickField name='telephone'}}
+		{{> afQuickField name='skype'}}
+		{{> afQuickField name='website'}}
+	</fieldset>
+
+	<fieldset>
+		<legend>Profil</legend>
+
+		{{> afQuickField name='isPrivate'}}
+		{{> afQuickField name='title'}}
+		{{> afQuickField name='description' rows=6}}
+
+	</fieldset>
+
+	<!--<button type="submit" class="btn btn-primary">{{#if userHasProfile }}Mettre à jour{{else}}Créer le profil{{/if}}</button>-->
+	{{/autoForm}}
+</template>
+
+<!-- freelancerProfileEdit_profilePic -->
+<template name="freelancerProfileEdit_profilePic">
+
+	<h3>Ma photo de profil</h3>
+	<img id="profile-pic-image" class="profile-pic" src="{{getProfilePicSrc}}" />
+	<input id="profile-pic-file-input" type="file" name="userimage" accept="image/*" />
+	<br />
+	<button id="btn-profile-pic-update" class="btn btn-primary">{{#if userHasProfile }}Mettre à jour{{else}}Créer le profil{{/if}}</button>
+
+</template>
+
+<!-- freelancerProfileEdit_skills -->
+<template name="freelancerProfileEdit_skills">
+	<h3>Mes compétences</h3>
+	<!--{{#autoForm id="freelancer.createorupdate.skills" collection="UserProfiles" type="update-pushArray" scope=skills doc=profile }}-->
+	{{#autoForm id="freelancer.createorupdate.skills" collection="UserProfiles" doc=profile  }}
+		{{> afQuickField name='skills' }}
+		<button type="submit" class="btn btn-primary">{{#if userHasProfile }}Mettre à jour{{else}}Créer le profil{{/if}}</button>
+	{{/autoForm}}
+</template>
+
+<!-- freelancerProfileEdit_xp -->
+<template name="freelancerProfileEdit_xp">
+	<h3>Mes expériences professionnelles</h3>
+	{{#autoForm collection="UserProfiles" id="freelancer.createorupdate" doc=profile }}
+	{{> afQuickField name='experiences' }}
+	<button type="submit" class="btn btn-primary">{{#if userHasProfile }}Mettre à jour{{else}}Créer le profil{{/if}}</button>
+	{{/autoForm}}
+</template>
+
+<!-- freelancerProfileEdit_education -->
+<template name="freelancerProfileEdit_education">
+	<h3>Mes formations</h3>
+	{{#autoForm collection="UserProfiles" id="freelancer.createorupdate" doc=profile }}
+	{{> afQuickField name='education'}}
+	<button type="submit" class="btn btn-primary">{{#if userHasProfile }}Mettre à jour{{else}}Créer le profil{{/if}}</button>
+	{{/autoForm}}
+</template>
+
+<!-- freelancerProfileEdit_mission-search -->
+<template name="freelancerProfileEdit_mission-search">
+	<h3>Ma recherche de mission</h3>
+	{{#autoForm collection="UserProfiles" id="freelancer.createorupdate.alert" doc=profile }}
+	<fieldset>
+		<legend>Recherche</legend>
+		{{> afQuickField name='isEnRecherche'}}
+		{{> afQuickField name='isAvailable'}}
+		{{> afQuickField name='availDate'}}
+		{{> afQuickField name='categories'}}
+	</fieldset>
+	<button type="submit" class="btn btn-primary">{{#if userHasProfile }}Mettre à jour{{else}}Créer le profil{{/if}}</button>
+	{{/autoForm}}
+</template>
+
+<!-- freelancerProfileEdit_alerts -->
+<template name="freelancerProfileEdit_alerts">
+	<h3>Mes alertes et notifications</h3>
+	{{#autoForm collection="UserProfiles" id="freelancer.createorupdate" doc=profile }}
+
+	{{/autoForm}}
+</template>

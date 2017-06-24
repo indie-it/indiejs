@@ -60,6 +60,9 @@ function notifyMatchingProfiles(missionDoc, actionType) {
  * @param {any} action
  */
 function notifyAdmins(missionDoc, actionType) {
+
+	if (ServerGlobals.alerts.missionUpdate === false) { return; }
+
 	check(actionType, String);
 	console.log(`missionNotifier.notifyAdmin - action.actionType: ${actionType}`);
 

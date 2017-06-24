@@ -35,3 +35,21 @@ ServerGlobals.invite.text = (user, guestFirstName, guestLastName, url) => {
 };
 
 
+ServerGlobals.alerts = {
+
+	//envoyer une alerte email à la mise à jour de profil.
+	profileNew: false,
+	profileUpdate: false,
+
+
+	//envoyer une alerte email à la mise à jour de société.
+	companyNew: false,
+	companyUpdate: false,
+
+
+	//envoyer une alerte email à la mise à jour de mission.
+	missionNew: false,
+	missionUpdate: false,
+
+};
+
