@@ -150,4 +150,7 @@ Template.profileHeader.helpers({
 		}
 		return this.account.emails[0].address;
 	},
+	"showPersonalInfo": function () {
+		return false;
+	},
 });

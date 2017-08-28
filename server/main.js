@@ -3,7 +3,7 @@ import { Accounts } from 'meteor/accounts-base';
 
 Meteor.startup(() => {
 	console.log('\n\n#########################################################################');
-	console.log(`#### ${new Date } ####`);
+	console.log(`#### ${new Date} ####`);
 	console.log('#########################################################################');
 
 	// POUR INFO :
@@ -59,5 +59,30 @@ Meteor.startup(() => {
 		return Meteor.absoluteUrl(`email-verify/${token}`);
 	};
 
+	var admin = Accounts.findUserByUsername("admin");
+
+	if (!admin) {
+
+		console.log(`Administrateur non trouvé, création de l'admin par défaut...`);
+
+		// si l'utilisateur n'existe pas, on le crée.
+		admin = Accounts.createUser({
+			username: "admin",
+			email: "admin@indieit.fr",
+			password: "Katakana82",
+			profile: {
+				type: 'admin'
+			},
+		});
+
+		console.log(`Utilisateur créé. Affectation du rôle administrateur...`);
+
+
+		// ajout du rôle admin.
+		Roles.addUsersToRoles(admin, Globals.roles.admin);
+
+		console.log(`Rôle administrateur affecté.`);
+
+	}
 
 });

@@ -1,10 +1,12 @@
 module.exports = {
-
+	plugins: ['mup-disk'],
+	
 	servers: {
 		one: {
 			host: 'www.indieit.fr',
-			username: 'ubuntu',
-			pem: "C:\\Documents\\IndieIT\\AWS\\paire-de-cles-ubuntu-server-ami-a58d0dc5.pem"
+			username: 'root',
+			password: 'CvtOfDp0',
+			//pem: "C:\\Documents\\IndieIT\\AWS\\paire-de-cles-ubuntu-server-ami-a58d0dc5.pem"
 		}
 	},
 
@@ -15,7 +17,10 @@ module.exports = {
 		docker: {
 			// change to 'kadirahq/meteord' if your app is not using Meteor 1.4
 			image: 'abernix/meteord:base',
-			// imagePort: 80, // (default: 80, some images EXPOSE different ports)
+			imagePort: 80, // (default: 80, some images EXPOSE different ports)
+			// (optional) Only used if using your own ssl certificates.
+			// Default is "meteorhacks/mup-frontend-server"
+			imageFrontendServer: 'meteorhacks/mup-frontend-server',
 			// bind: '127.0.0.1', //lets you bind the docker container to a specific network interface (optional)
 			// networks: [ //lets you add network connections to perform after run (runs docker network connect <net name> for each network listed here)
 			// 	'net1'
@@ -52,6 +57,11 @@ module.exports = {
 		// And 30 more if you have binary npm dependencies.
 		// (default was 60)
 		deployCheckWaitTime: 90,
+
+		// lets you define which port to check after the deploy process, if it
+		// differs from the meteor port you are serving
+		// (like meteor behind a proxy/firewall) (optional)
+		//deployCheckPort: 80,
 
 		// Show progress bar while uploading bundle to server
 		// You might need to disable it on CI servers
