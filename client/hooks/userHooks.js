@@ -3,10 +3,16 @@ AutoForm.hooks({
 
 		onSubmit: function (doc) { // Gestion du formulaire d'inscription
 
-			console.log(doc);
+			//console.log(doc);
+			const tosChecked = $('#checkTos').is(':checked');
 
 			if (!doc.username || !doc.password || !doc.email) {
 				sAlert.error("Veuillez renseigner les champs obligatoires.");
+				return false;
+			}
+
+			if (!tosChecked) {
+				sAlert.error("Veuillez accepter les CGU du site.");
 				return false;
 			}
 			

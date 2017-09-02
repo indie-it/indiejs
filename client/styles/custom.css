@@ -417,3 +417,11 @@ a {
 	-moz-transition: color 0.2s linear;
 	-webkit-transition: color 0.2s linear;
 }
+
+	a.footer-link {
+		color: #8e8e8e;
+	}
+
+.div-cgu {
+	height: 200px;
+}

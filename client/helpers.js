@@ -1,4 +1,5 @@
 import SimpleSchema from 'simpl-schema';
+import { check } from 'meteor/check';
 
 Template.registerHelper('getGlobal', function (varName) {
 	return Globals[varName];
@@ -69,4 +70,11 @@ Template.registerHelper("isEmailVerified", function () {
 		return true;
 	}
 	return false;
+});
+Template.registerHelper('getMarkdown', (markdownFile) => {
+	check(markdownFile, String);
+
+	// if there is first no empty line in markdownFile
+	// meteor's markdown helper renders <h1> as <pre>
+	return '\n' + ReactiveMethod.call('getMarkdown', markdownFile);
 });

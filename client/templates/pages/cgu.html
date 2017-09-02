@@ -1,0 +1,19 @@
+﻿<template name="page-cgu">
+	<div class="container-fluid home-background-image">
+		<div class="container-fluid hidden-xs breadcrumb-background">
+			<ol class="breadcrumb">
+				<li><a href="{{pathFor route='home'}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+				<li class="active">CGU</li>
+			</ol>
+		</div>
+		<div class="container background-layer">
+			<div class="row">
+				<div class="col-md-12">{{> cgu}}</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="cgu">
+	{{#markdown}}{{getMarkdown 'cgu.md'}}{{/markdown}}
+</template>

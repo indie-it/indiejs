@@ -1,0 +1,43 @@
+﻿<template name="nos-valeurs">
+	<div class="container-fluid home-background-image">
+		<div class="container-fluid hidden-xs breadcrumb-background">
+			<ol class="breadcrumb">
+				<li><a href="{{pathFor route='home'}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+				<li class="active">Nos valeurs</li>
+			</ol>
+		</div>
+		<div class="container background-layer">
+			<div class="row">
+				<div class="col-md-12">
+					{{> valeurs}}
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="valeurs">
+
+	<br />
+
+	<h1>Nos valeurs</h1>
+	<p>Se regrouper dans une communauté, c'est d'abord partager des valeurs communes.</p>
+
+	<br />
+
+	<div class="row">
+		<div class="col-md-4">
+			<h2>Transparence, honnêteté et respect du client</h2>
+			<p>Partant du principe que "quand on est honnête, on n'a rien à cacher", nous croyons en une transparence totale. Indie IT sera toujours honnête envers les clients et ne sur-vendra pas ses membres du réseau; un profil junior sera présenté comme tel et la relation client-prestataire n'en sera que meilleure.</p>
+		</div>
+		<div class="col-md-4">
+			<h2>Compétence et sérieux</h2>
+			<p>Les collaborateurs d'Indie IT sont sélectionnés selon leurs compétences et leur expérience professionnelle. Ils sont connus pour travailler sérieusement et pour mener à bien leurs missions.</p>
+		</div>
+		<div class="col-md-4">
+			<h2>Convivialité et attractivité</h2>
+			<p>La communauté Indie IT se veut conviviale et attractive; organisation de soirées entre indépendants mais aussi échange et entraide. Enrichissons-nous mutuellement et avançons ensemble!</p>
+		</div>
+	</div>
+
+</template>

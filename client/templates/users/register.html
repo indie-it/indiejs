@@ -12,8 +12,10 @@
 		</div>
 
 		<div class="container background-layer">
+
 			<div class="col-md-6">
 				<h1>Enregistrement</h1>
+				
 				{{#autoForm collection="Meteor.users" id="insertUser"}}
 				<fieldset>
 					<legend>Informations obligatoires</legend>
@@ -21,10 +23,19 @@
 					{{> afQuickField name="password"}}
 					{{> afQuickField name="confirmation"}}
 					{{> afQuickField name="email" }}
+					{{> afTosCheckbox name="profile.acceptCGU" }}
 				</fieldset>
 				<button type="submit" class="btn btn-primary">Valider</button>
 				{{/autoForm}}
 			</div>
 		</div>
+	</div>
+</template>
+
+<template name="afTosCheckbox">
+	<div>
+		<label>
+			<input type="checkbox" id="checkTos" class="control-label" value="true" {{atts}} /> J'accepte les <a href="{{pathFor 'cgu'}}" target="_blank">conditions d'utilisation du site</a>.
+		</label>
 	</div>
 </template>

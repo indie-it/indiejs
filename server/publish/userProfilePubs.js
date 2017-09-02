@@ -35,15 +35,23 @@ Meteor.publish("userprofile.get", function () {
 
 	console.log("userprofile.get");
 
-	if (!this.userId) {
-		this.stop();
-		return;
-	}
+	//if (!this.userId) {
+	//	this.stop();
+	//	return;
+	//}
 
 	// on renvoie un cursor ou un array via find ou find().fetch()
 	// mais jamais l'objet directement (findOne ne marchera pas).
 	return UserProfiles.find({ userid: this.userId });
 });
+Meteor.publish('userprofile.getCount', function () {
+
+	console.log("userprofile.getCount");
+
+	return UserProfiles.find({}, { fields: { id: 1, firstName: 1, lastName: 1 } });
+
+});
+
 
 Meteor.publish("user.getById", function (userProfileId) {
 
