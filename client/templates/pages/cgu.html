@@ -1,4 +1,15 @@
-﻿<template name="page-cgu">
+﻿<template name="pageCgu">
+
+	{{#if currentUser}}
+		{{#if tosNotAccepted }}
+		<div class="container-fluid">
+			<div class="row">
+				{{> cguAlert}}
+			</div>
+		</div>
+		{{/if}}
+	{{/if}}
+
 	<div class="container-fluid home-background-image">
 		<div class="container-fluid hidden-xs breadcrumb-background">
 			<ol class="breadcrumb">
@@ -7,13 +18,37 @@
 			</ol>
 		</div>
 		<div class="container background-layer">
-			<div class="row">
-				<div class="col-md-12">{{> cgu}}</div>
-			</div>
+				<div class="row">
+					<div class="col-md-12">{{> cgu}}</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
+						{{#if currentUser}}
+							{{#if tosNotAccepted }}
+								{{> validateCgu}}
+							{{else}}
+								<p><i class="fa fa-check-square-o" aria-hidden="true"></i> Vous avez accepté les conditions d'utilisation du site {{ getTosDate }}.</p>
+							{{/if}}
+						{{/if}}
+					</div>
+				</div>
 		</div>
 	</div>
+
 </template>
 
 <template name="cgu">
 	{{#markdown}}{{getMarkdown 'cgu.md'}}{{/markdown}}
+</template>
+
+<template name="cguAlert">
+	<div class="alert alert-warning alert-dismissible alert-header" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<strong>Attention!</strong> Vous devez accepter les conditions d'utilisation du site pour pouvoir l'utiliser.
+	</div>
+</template>
+
+<template name="validateCgu">
+	<a id="validateCgu" href="#" class="btn btn-primary assign-user"><i class="fa fa-check-square-o" aria-hidden="true"></i> J'ai lu et j'accepte les conditions d'utilisation du site</a>
 </template>

@@ -1,27 +1,34 @@
 <template name="home">
 	{{setTitle 'Accueil'}}
+
+	{{#if currentUser}}
+		{{#if tosNotAccepted}}
+			{{> homeAcceptTosAlert}}
+		{{/if}}
+	{{/if}}
+
 	<div class="intro-header">
 
 		<div class="jumbotron">
 			<div class="container">
 				<h1>Indie IT</h1>
 				<h3>Le réseau montpelliérain des indépendants IT</h3>
-				
+
 				<br />
 
 				<p>
 					Indie IT, c'est une aide à la recherche de missions, de l'entraide et du partage.
 					C'est aussi la plateforme de mise en relation des indépendants et des entreprises.
 				</p>
-				
+
 				<br/>
-				
+
 				<p>
 					<strong><a href="{{pathFor route='fonctionnement'}}" class="btn btn-primary btn-lg"><i class="fa fa-black-tie fa-fw" aria-hidden="true"></i> Indépendant</a></strong>
 					&nbsp;
 					<strong><a href="{{pathFor route='fonctionnementEntreprise'}}" class="btn btn-primary btn-lg"><i class="fa fa-building fa-fw" aria-hidden="true"></i> Entreprise</a></strong>
 				</p>
-				
+
 
 			</div>
 		</div>
@@ -57,8 +64,12 @@
 
 				</div>
 
+				<br/>
+
 				<div class="row">
-					<p>Il y a actuellement {{profilesCount}} profils répertoriés sur le site. </p>
+					<div class="col-md-12">
+						<p><i class="fa fa-black-tie" aria-hidden="true"></i> Il y a actuellement {{profilesCount}} indépendants répertoriés sur le site. </p>
+					</div>
 				</div>
 
 			</div>
@@ -67,3 +78,9 @@
 	</div>
 </template>
 
+<template name="homeAcceptTosAlert">
+	<div class="alert alert-warning alert-dismissible alert-header" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<strong>Attention!</strong> Vous devez accepter les conditions d'utilisation du site pour pouvoir l'utiliser. <a href="{{pathFor 'cgu'}}"> Cliquez ici pour les consulter</a>.
+	</div>
+</template>

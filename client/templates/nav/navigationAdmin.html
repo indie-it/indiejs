@@ -15,21 +15,12 @@
 
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-
-					{{#if currentUser}}
-
-					<li class="{{getCurrentClass 'admin'}}">
-						<a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='admin'}}">Admin.</a>
-					</li>
-
 					<li class="{{getCurrentClass 'profile.list'}}">
 						<a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='profile.list'}}">Indépendants</a>
 					</li>
-
 					<li class="{{getCurrentClass 'companyList'}}">
 						<a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='companyList'}}">Entreprises</a>
 					</li>
-
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mission <span class="caret"></span></a>
 						<ul class="dropdown-menu">
@@ -47,18 +38,13 @@
 							{{/if}}
 						</ul>
 					</li>
-					{{/if}}
-
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
-					{{#if currentUser}}
-					<li class="{{getCurrentClass 'profile.update'}}">
-						<a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='profile.update'}}">{{#if isInRole 'admin'}}<i class="fa fa-star" aria-hidden="true"></i> {{/if}}Profil ({{currentUser.username}})</a>
+					<li class="{{getCurrentClass 'admin'}}">
+						<a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='admin'}}"><i class="fa fa-star" aria-hidden="true"></i> Admin.</a>
 					</li>
-
 					<li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="#" class="logout">Déconnexion</a></li>
-					{{/if}}
 				</ul>
 			</div>
 

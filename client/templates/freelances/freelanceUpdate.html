@@ -1,0 +1,129 @@
+<template name="freelanceUpdate">
+	{{setTitle 'Mise à jour de profil'}}
+
+	<div class="container-fluid hidden-xs breadcrumb-background">
+		<ol class="breadcrumb">
+			<li><a href="{{pathFor route='home'}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+			<li><a href="{{pathFor route='profile.list'}}">Liste des indépendants</a></li>
+			<li><a href="{{pathFor 'profile' _id=profile._id}}">{{profile.firstName}} {{profile.lastName}}</a></li>
+			<li class="active">Mise à jour de profil</li>
+		</ol>
+	</div>
+
+	{{#autoForm collection="UserProfiles" id="userprofile.createorupdate" doc=profile }}
+	<div class="container-fluid">
+
+
+		<section id="coord-search" class="row">
+			<div class="col-md-4">
+				<img id="profile-pic-image" class="profile-pic" src="{{getProfilePicSrc}}" />
+				<input id="profile-pic-file-input" type="file" name="userimage" accept="image/*" />
+			</div>
+			<div class="col-md-4">
+				<fieldset>
+					<legend>Coordonnées</legend>
+					{{> afQuickField name='lastName'}}
+					{{> afQuickField name='firstName'}}
+					{{> afQuickField name='birthday'}}
+
+					{{> afQuickField name='telephone'}}
+					{{> afQuickField name='skype'}}
+					{{> afQuickField name='website'}}
+				</fieldset>
+			</div>
+			<div class="col-md-4">
+				<fieldset>
+					<legend>Recherche</legend>
+					{{> afQuickField name='isEnRecherche'}}
+					{{> afQuickField name='isAvailable'}}
+					{{> afQuickField name='availDate'}}
+					{{> afQuickField name='categories'}}
+				</fieldset>
+			</div>
+		</section>
+
+		<section id="profile">
+			<fieldset>
+				<legend>Profil</legend>
+				<!--{{> afQuickField name='isPrivate'}}-->
+				{{> afQuickField name='title'}}
+				{{> afQuickField name='description' rows=6}}
+			</fieldset>
+		</section>
+
+
+		<div class="row">
+			<section id="skills" class="col-lg-3">
+				{{> afQuickField name='skills' }}
+			</section>
+
+			<section id="education" class="col-lg-4">
+				{{> afQuickField name='education'}}
+			</section>
+
+			<section id="experiences" class="col-lg-5">
+				{{> afQuickField name='experiences' }}
+			</section>
+		</div>
+
+
+
+		<br />
+
+	</div>
+
+	<div class="container-fluid">
+		<div class="row fixed-footer text-center">
+			<div class="col-sm-12">
+				{{#if userHasProfile }}<a href="{{pathFor 'profile' _id=profile._id}}" class="btn btn-default">Afficher</a>{{/if}}
+				<button type="submit" class="btn btn-primary">{{#if userHasProfile }}Mettre à jour{{else}}Créer le profil{{/if}}</button>
+			</div>
+		</div>
+	</div>
+	{{/autoForm}}
+
+</template>
+
+<template name="freelanceUpdate-loading-modal">
+	<div class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Enregistrement des modifications</h4>
+				</div>
+				<div class="modal-body">
+					<p>Mise à jour du profil en cours. Veuillez patienter</p>
+					<div class="progress">
+						<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="1" style="width: 100%">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="freelanceUpdateSkills">
+	<section id="skills" class="row">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="form-group col-sm-2">
+					<!--<a href="#" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> Ajouter</a>-->
+					<a href="#" class="btn btn-primary"><i class="fa fa-minus-circle" aria-hidden="true"></i> Supprimer</a>
+				</div>
+				<div class="form-group col-sm-6">
+					<div class="input-group">
+						<span class="input-group-addon">Compétence</span>
+						<input type="text" class="form-control" placeholder="Compétence (ex. Entity Framework, JavaScript, etc.)">
+					</div>
+				</div>
+				<div class="form-group col-sm-4">
+					<div class="input-group">
+						<span class="input-group-addon">Niveau (1-10)</span>
+						<input type="number" class="form-control" placeholder="Entre 1 et 10" min="1" max="10">
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</template>

@@ -55,18 +55,20 @@
 
 			<div class="row">
 				<div class="col-md-12">
-					
 
-					{{#if userHasAnswered }}
-					<p><strong><span class="glyphicon glyphicon-thumbs-{{ getAnswerClass }}" aria-hidden="true"></span>&nbsp;{{ getAnswerText }}</strong></p>
-					{{else}}
-					<h3><i class="fa fa-star-o fa-fw" aria-hidden="true"></i>Cette mission vous intéresse ?</h3>
-					<p>Cliquez sur le bouton "Je postule" pour postuler. Sinon, cliquez sur "Je ne suis pas intéressé" pour faire disparaître la mission de la liste.</p>
-					<h3>
-						<a id="interested" class="btn btn-primary" href="#" role="button"> Je postule</a>
-						<a id="notinterested" class="btn btn-default" href="#" role="button">Je ne suis pas intéressé</a>
-					</h3>
+					{{#if isFreelancer}}
+						{{#if userHasAnswered }}
+							<p><strong><span class="glyphicon glyphicon-thumbs-{{ getAnswerClass }}" aria-hidden="true"></span>&nbsp;{{ getAnswerText }}</strong></p>
+						{{else}}
+							<h3><i class="fa fa-star-o fa-fw" aria-hidden="true"></i>Cette mission vous intéresse ?</h3>
+							<p>Cliquez sur le bouton "Je postule" pour postuler. Sinon, cliquez sur "Je ne suis pas intéressé" pour faire disparaître la mission de la liste.</p>
+							<h3>
+								<a id="interested" class="btn btn-primary" href="#" role="button"> Je postule</a>
+								<a id="notinterested" class="btn btn-default" href="#" role="button">Je ne suis pas intéressé</a>
+							</h3>
+						{{/if}}
 					{{/if}}
+
 				</div>
 			</div>
 
@@ -176,4 +178,3 @@
 
 
 </template>
-

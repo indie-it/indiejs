@@ -16,13 +16,13 @@
 
 	<body>
 		{{> sAlert}}
-		
-		{{>navigation}}
-		
+
+		{{> navigation}}
+
 		{{#if isEmailVerified}}{{> emailVerifyAlert}}{{/if}}
 
 		{{> yield}}
-		
+
 		{{> footer}}
 	</body>
 

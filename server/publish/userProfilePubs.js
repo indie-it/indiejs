@@ -52,7 +52,6 @@ Meteor.publish('userprofile.getCount', function () {
 
 });
 
-
 Meteor.publish("user.getById", function (userProfileId) {
 
 	console.log(`user.getById - userProfileId: ${userProfileId}`);
@@ -62,7 +61,7 @@ Meteor.publish("user.getById", function (userProfileId) {
 
 	var profile = UserProfiles.findOne({ _id: userProfileId });
 	if (!profile) {
-		throw new Meteor.Error(500, "Profil non trouvé");
+		throw new Meteor.Error(500, "Profil non trouvï¿½");
 	}
 
 	return Meteor.users.find(profile.userid, {

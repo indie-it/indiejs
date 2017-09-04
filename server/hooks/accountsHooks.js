@@ -19,14 +19,25 @@ Accounts.onCreateUser((options, user) => {
 		}
 	};
 
-	console.log(action);
+	var tos = {
+		'userid': user._id,
+		'username': user.username,
+		'date': new Date,
+		'accepted': true,
+	};
+
+	Tos.insert(tos, function(err, objectid) {
+		if (err) {
+			console.error(err);
+		}
+	});
 
 	// Journalisation de l'action
 	Actions.insert(action, (err, objId) => {
 		if (err) {
 			console.error(err);
 		}
-		console.log("Action enregistrée");
+		console.log("Action enregistrÃ©e");
 	});
 
 	return user;
