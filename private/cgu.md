@@ -1,5 +1,7 @@
 ﻿
-# CGU - Informations légales
+# Termes et conditions d'utilisation
+
+Le texte suivant constitue les termes et conditions d'utilisation de ce site web.
 
 ### Article 1. Présentation du site.
 
@@ -52,7 +54,7 @@ Toute exploitation non autorisée du site ou de l’un quelconque des éléments
 
 La société INDIE IT Freelances ne pourra être tenue responsable des dommages directs et indirects causés au matériel de l’utilisateur, lors de l’accès au site indieit.fr (et tous ses sous-domaines), et résultant soit de l’utilisation d’un matériel ne répondant pas aux spécifications indiquées au point 4, soit de l’apparition d’un bug ou d’une incompatibilité.
 
-INDIE IT Freelances ne pourra également être tenue responsable des dommages indirects (tels par exemple qu’une perte de marché ou perte d’une chance) consécutifs à l’utilisation du site indieit.fr(et tous ses sous domaines)
+INDIE IT Freelances ne pourra également être tenue responsable des dommages indirects (tels par exemple qu’une perte de marché ou perte d’une chance) consécutifs à l’utilisation du site indieit.fr (et tous ses sous domaines).
 
 Des espaces interactifs (possibilité de poser des questions dans l’espace contact) sont à la disposition des utilisateurs. INDIE IT Freelances se réserve le droit de supprimer, sans mise en demeure préalable, tout contenu déposé dans cet espace qui contreviendrait à la législation applicable en France, en particulier aux dispositions relatives à la protection des données. Le cas échéant, INDIE IT Freelances se réserve également la possibilité de mettre en cause la responsabilité civile et/ou pénale de l’utilisateur, notamment en cas de message à caractère raciste, injurieux, diffamant, ou pornographique, quel que soit le support utilisé (texte, photographie…).
 
@@ -69,7 +71,7 @@ Conformément aux dispositions des articles 38 et suivants de la loi 78-17 du 6 
 
 Aucune information personnelle de l’utilisateur du site indieit.fr (et tous ses sous-domaines) n’est publiée à l’insu de l’utilisateur, échangée, transférée, cédée ou vendue sur un support quelconque à des tiers. Seule l’hypothèse du rachat de INDIE IT Freelances et de ses droits permettrait la transmission des dites informations à l’éventuel acquéreur qui serait à son tour tenu de la même obligation de conservation et de modification des données vis à vis de l’utilisateur du site indieit.fr (et tous ses sous-domaines).
 
-Le site est déclaré à la Commission Nationale Informatique et Libertés (CNIL) sous le numéro XXXXX (en cours de déclaration). 
+Le site est déclaré à la Commission Nationale Informatique et Libertés (CNIL) sous le numéro XXXXX (en cours de déclaration).
 
 Les bases de données sont protégées par les dispositions de la loi du 1er juillet 1998 transposant la directive 96/9 du 11 mars 1996 relative à la protection juridique des bases de données.
 

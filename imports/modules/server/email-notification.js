@@ -18,6 +18,7 @@ const sendEmail = (template, { to, from, replyTo, subject, attachments }, payloa
 	Meteor.defer(() => {
 		Email.send(email);
 	});
+
 };
 
 function sendEmailForAction(to, actionType, url, templateData) {

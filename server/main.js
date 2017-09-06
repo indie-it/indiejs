@@ -9,11 +9,11 @@ Meteor.startup(() => {
 	// POUR INFO :
 	// Les objets/propriétés utilisés ici sont définis dans server/ lib / ServerGlobals.js)
 
-	// config cloudinary 
+	// config cloudinary
 	Cloudinary.config(ServerGlobals.cloudinary);
 	Cloudinary.rules.delete = function () { return true; }
 
-	// config serveur email 
+	// config serveur email
 	if (Meteor.absoluteUrl() === 'http://localhost:3000/') {
 		console.log(`Fonctionnement en LOCAL sur ${Meteor.absoluteUrl()}`);
 	} else {
@@ -59,8 +59,8 @@ Meteor.startup(() => {
 		return Meteor.absoluteUrl(`email-verify/${token}`);
 	};
 
+	// configure admin account
 	var admin = Accounts.findUserByUsername("admin");
-
 	if (!admin) {
 
 		console.log(`Administrateur non trouvé, création de l'admin par défaut...`);
@@ -84,5 +84,7 @@ Meteor.startup(() => {
 		console.log(`Rôle administrateur affecté.`);
 
 	}
+
+	// TODO: configure default settings (create them if not exist)
 
 });

@@ -28,7 +28,10 @@ transitions.get = (from, to) => {
 };
 transitions.getFrom = (from) => {
 	check(from, String);
-	return _.where(transitions.values, { 'from': from });
+	// return _.where(transitions.values, { 'from': from });
+	var list = _.where(transitions.values, { 'from': from });
+	console.log(list);
+	return list;
 };
 transitions.getById = (id) => {
 	check(id, String);
@@ -93,7 +96,7 @@ class MissionWF {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param {any} action
 	 */
 	can(action) {

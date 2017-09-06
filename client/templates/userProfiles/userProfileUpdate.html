@@ -21,7 +21,7 @@
 			</div>
 			<div class="col-md-4">
 				<fieldset>
-					<legend>Coordonnées</legend>
+					<legend>Mes coordonnées</legend>
 					{{> afQuickField name='lastName'}}
 					{{> afQuickField name='firstName'}}
 					{{> afQuickField name='birthday'}}
@@ -33,19 +33,20 @@
 			</div>
 			<div class="col-md-4">
 				<fieldset>
-					<legend>Recherche</legend>
+					<legend>Ma recherche</legend>
 					{{> afQuickField name='isEnRecherche'}}
 					{{> afQuickField name='isAvailable'}}
 					{{> afQuickField name='availDate'}}
 					{{> afQuickField name='categories'}}
+					{{> afQuickField name='tjm'}}
 				</fieldset>
 			</div>
 		</section>
 
 		<section id="profile">
 			<fieldset>
-				<legend>Profil</legend>
-				<!--{{> afQuickField name='isPrivate'}}-->
+				<legend>Mon profil</legend>
+				{{> afQuickField name='isPrivate'}}
 				{{> afQuickField name='title'}}
 				{{> afQuickField name='description' rows=6}}
 			</fieldset>

@@ -163,7 +163,7 @@ Meteor.methods({
 			}
 		};
 
-		// Mise à jour 
+		// Mise à jour
 		Missions.update(missionid, updateobj, function (err) {
 			if (err) {
 				throw new Meteor.Error(500, err.message);
@@ -178,24 +178,32 @@ Meteor.methods({
 		console.log(`mission.accept: missionid: ${missionid}, userid: ${userid}`);
 
 		// vérif paramètres entrants !
-		check(missionid, String);
-		check(userid, String);
+		console.log("checking missionid and userid...");
+		check([missionid, userid], [String]);
+		console.log("check done.");
 
 		// vérif mission
+		console.log("verifying mission...");
 		var mission = Missions.findOne(missionid);
+		console.log(mission);
 		if (!mission) {
+			console.error(new Meteor.Error(400, "Mission non trouvée."));
 			throw new Meteor.Error(400, "Mission non trouvée.");
 		}
+		console.log("mission verified.");
 
 		// vérif action autorisée
+		console.log("verifying action...");
 		var wf = new MissionWF(mission);
-		if (!wf.can('accept')) {
+		if (!wf.can('mission-accept')) {
+			console.error(new Meteor.Error("Action non autorisée."));
 			throw new Meteor.Error("Action non autorisée.");
 		}
+		console.log("action verified.");
 
 		var updateobj = {
 			$set: {
-				"currentState.step": wf.transition('accept'),
+				"currentState.step": wf.transition('mission-accept'),
 				"currentState.date": new Date(),
 				"currentState.assignedUserId": userid
 			},
@@ -207,6 +215,7 @@ Meteor.methods({
 		Missions.update(missionid, updateobj, function (err) {
 
 			if (err) {
+				console.error(err);
 				throw new Meteor.Error(500, err.message);
 			}
 
