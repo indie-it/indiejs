@@ -322,8 +322,13 @@ div.experience h3 {
 	background-color: rgba(255,255,255,0.5);
 }
 
+.ul-comma-separated {
+	padding-left: 5px;
+}
+
 .ul-comma-separated li:after {
 	content: ",";
+	padding-right: 5px;
 }
 
 .ul-comma-separated li:before {
@@ -332,6 +337,10 @@ div.experience h3 {
 
 .ul-comma-separated li:last-child:after {
 	content: "";
+}
+.ul-comma-separated li {
+	padding-left: 0;
+	padding-right: 0;
 }
 
 .admin-buttons {
@@ -364,7 +373,7 @@ div.experience h3 {
 	line-height: 1.26em;
 }
 
-/**************************** Profil indépendant ****************************/
+/**************************** Profil indÃ©pendant ****************************/
 .freelance-description {
 	padding-left: 10px;
 	border-left: 1px solid #337ab7;

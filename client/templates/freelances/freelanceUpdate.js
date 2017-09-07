@@ -1,15 +1,37 @@
-Template.freelanceUpdate.helpers({
-	"getProfilePicSrc": function () {
-		if (!this.profile || !this.profile.profilePic) {
-			return "/img/profile-pic-placeholder.png";
-		}
-		return this.profile.profilePic.url;
+Template['freelance-update'].helpers({
+	"getTemplateName": () => {
+        var section = Session.get('freelance-section');
+        if (!section) { section = 'contact'; }
+        console.log(`[getTemplateName] section: ${section}`);
+        return `freelance-update-${section}`;
 	},
+    "isActive": () => {
+        // TODO : coder isActive !
+        var section = Session.get('freelance-section');
+        if (!section) { section = 'contact'; }
+        return "";
+    },
+});
+Template['freelance-update'].events({
+    "click a": function(event, template) {
+        var section = event.target.id;
+        Session.set('freelance-section', section);
+    },
 });
 
-Template.freelanceUpdate.events({
+
+Template['freelance-update-contact'].helpers({
+	"getProfilePicSrc": function () {
+		// console.log(this);
+		if (!this || !this.photo) {
+			return "/img/profile-pic-placeholder.png";
+		}
+		return this.photo.secureUrl;
+	},
+});
+Template['freelance-update-contact'].events({
 	"change input#profile-pic-file-input[type='file']": function (e) {
-		// stocke le fichier en mémoire sur le navigateur
+		// stocke le fichier en mÃ©moire sur le navigateur
 		files = e.currentTarget.files;
 
 		if (!FileReader) { return; }

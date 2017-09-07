@@ -1,87 +1,83 @@
-<template name="freelanceUpdate">
+<template name="freelance-update">
 	{{setTitle 'Mise à jour de profil'}}
-
 	<div class="container-fluid hidden-xs breadcrumb-background">
 		<ol class="breadcrumb">
 			<li><a href="{{pathFor route='home'}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
-			<li><a href="{{pathFor route='profile.list'}}">Liste des indépendants</a></li>
-			<li><a href="{{pathFor 'profile' _id=profile._id}}">{{profile.firstName}} {{profile.lastName}}</a></li>
+			<li><a href="{{pathFor route='freelance-list'}}">Liste des indépendants</a></li>
+			<!--<li><a href="{{pathFor 'freelance-profile' _id=profile._id}}">{{profile.firstName}} {{profile.lastName}}</a></li>-->
 			<li class="active">Mise à jour de profil</li>
 		</ol>
 	</div>
-
-	{{#autoForm collection="UserProfiles" id="userprofile.createorupdate" doc=profile }}
 	<div class="container-fluid">
-
-
-		<section id="coord-search" class="row">
-			<div class="col-md-4">
-				<img id="profile-pic-image" class="profile-pic" src="{{getProfilePicSrc}}" />
-				<input id="profile-pic-file-input" type="file" name="userimage" accept="image/*" />
-			</div>
-			<div class="col-md-4">
-				<fieldset>
-					<legend>Coordonnées</legend>
-					{{> afQuickField name='lastName'}}
-					{{> afQuickField name='firstName'}}
-					{{> afQuickField name='birthday'}}
-
-					{{> afQuickField name='telephone'}}
-					{{> afQuickField name='skype'}}
-					{{> afQuickField name='website'}}
-				</fieldset>
-			</div>
-			<div class="col-md-4">
-				<fieldset>
-					<legend>Recherche</legend>
-					{{> afQuickField name='isEnRecherche'}}
-					{{> afQuickField name='isAvailable'}}
-					{{> afQuickField name='availDate'}}
-					{{> afQuickField name='categories'}}
-				</fieldset>
-			</div>
-		</section>
-
-		<section id="profile">
-			<fieldset>
-				<legend>Profil</legend>
-				<!--{{> afQuickField name='isPrivate'}}-->
-				{{> afQuickField name='title'}}
-				{{> afQuickField name='description' rows=6}}
-			</fieldset>
-		</section>
-
-
-		<div class="row">
-			<section id="skills" class="col-lg-3">
-				{{> afQuickField name='skills' }}
-			</section>
-
-			<section id="education" class="col-lg-4">
-				{{> afQuickField name='education'}}
-			</section>
-
-			<section id="experiences" class="col-lg-5">
-				{{> afQuickField name='experiences' }}
-			</section>
+		<div class="col-sm-4 col-md-3 col-lg-2">
+			<ul class="nav">
+				<!-- <li><a href="#" class="{{isActive}}" id="photo"><i class="fa fa-user" aria-hidden="true"></i> Ma photo de profil</a></li> -->
+				<li><a href="#" class="{{isActive}}" id="contact"><i class="fa fa-user" aria-hidden="true"></i> Mes coordonnées</a></li>
+				<li><a href="#" class="{{isActive}}" id="search"><i class="fa fa-search" aria-hidden="true"></i> Ma recherche</a></li>
+				<li><a href="#" class="{{isActive}}" id="profile"><i class="fa fa-user" aria-hidden="true"></i> Mon profil</a></li>
+				<li><a href="#" class="{{isActive}}" id="skills"><i class="fa fa-user" aria-hidden="true"></i> Mes compétences</a></li>
+				<li><a href="#" class="{{isActive}}" id="education"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Ma formation</a></li>
+				<li><a href="#" class="{{isActive}}" id="jobs"><i class="fa fa-briefcase"></i> Mes expériences</a></li>
+			</ul>
 		</div>
-
-
-
-		<br />
-
-	</div>
-
-	<div class="container-fluid">
-		<div class="row fixed-footer text-center">
-			<div class="col-sm-12">
-				{{#if userHasProfile }}<a href="{{pathFor 'profile' _id=profile._id}}" class="btn btn-default">Afficher</a>{{/if}}
-				<button type="submit" class="btn btn-primary">{{#if userHasProfile }}Mettre à jour{{else}}Créer le profil{{/if}}</button>
+		<div class="col-sm-8 col-md-8 col-lg-8">
+			<div class="row">
+				{{#autoForm collection="FreelanceProfile" id="freelance.createorupdate" doc=profile }}
+					{{> Template.dynamic template=getTemplateName data=profile}}
+					<button type="submit" class="btn btn-primary">Mettre à jour mon profil</button>
+				{{/autoForm}}
 			</div>
 		</div>
 	</div>
-	{{/autoForm}}
+	<br/>
+</template>
 
+<template name="freelance-update-contact">
+	<fieldset>
+		<legend><i class="fa fa-user" aria-hidden="true"></i> Ma photo de profil</legend>
+		<img id="profile-pic-image" class="profile-pic" src="{{getProfilePicSrc}}" />
+		<input id="profile-pic-file-input" type="file" name="userimage" accept="image/*" />
+	</fieldset>
+	<br/>
+	<fieldset>
+		<legend><i class="fa fa-user" aria-hidden="true"></i> Mes coordonnées</legend>
+		{{> afQuickField name='contact'}}
+	</fieldset>
+</template>
+
+<template name="freelance-update-search">
+	<fieldset>
+		<legend><i class="fa fa-search" aria-hidden="true"></i> Ma recherche</legend>
+		{{> afQuickField name='search'}}
+	</fieldset>
+</template>
+
+<template name="freelance-update-profile">
+	<fieldset>
+		<legend><i class="fa fa-user" aria-hidden="true"></i> Mon profil</legend>
+		{{> afQuickField name='profile'}}
+	</fieldset>
+</template>
+
+<template name="freelance-update-skills">
+	<fieldset>
+		<legend><i class="fa fa-user" aria-hidden="true"></i> Mes compétences</legend>
+		{{> afQuickField name='skills'}}
+	</fieldset>
+</template>
+
+<template name="freelance-update-education">
+	<fieldset>
+		<legend><i class="fa fa-graduation-cap" aria-hidden="true"></i> Ma formation</legend>
+		{{> afQuickField name='education'}}
+	</fieldset>
+</template>
+
+<template name="freelance-update-jobs">
+	<fieldset>
+		<legend><i class="fa fa-briefcase" aria-hidden="true"></i> Mes expériences professionnelles</legend>
+		{{> afQuickField name='experience'}}
+	</fieldset>
 </template>
 
 <template name="freelanceUpdate-loading-modal">
@@ -101,29 +97,4 @@
 			</div>
 		</div>
 	</div>
-</template>
-
-<template name="freelanceUpdateSkills">
-	<section id="skills" class="row">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="form-group col-sm-2">
-					<!--<a href="#" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> Ajouter</a>-->
-					<a href="#" class="btn btn-primary"><i class="fa fa-minus-circle" aria-hidden="true"></i> Supprimer</a>
-				</div>
-				<div class="form-group col-sm-6">
-					<div class="input-group">
-						<span class="input-group-addon">Compétence</span>
-						<input type="text" class="form-control" placeholder="Compétence (ex. Entity Framework, JavaScript, etc.)">
-					</div>
-				</div>
-				<div class="form-group col-sm-4">
-					<div class="input-group">
-						<span class="input-group-addon">Niveau (1-10)</span>
-						<input type="number" class="form-control" placeholder="Entre 1 et 10" min="1" max="10">
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
 </template>
