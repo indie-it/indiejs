@@ -1,19 +1,5 @@
 <template name="navigation">
-
-	{{#if currentUser}}
-		{{#if isAdmin }}
-			{{> navigationAdmin}}
-		{{else}}
-			{{#if isFreelancer}}
-				{{> navigationFreelancer}}
-			{{else}}
-				{{> navigationRecruiter}}
-			{{/if}}
-		{{/if}}
-	{{else}}
-		{{> navigationNotConnected}}
-	{{/if}}
-
+	{{> Template.dynamic template=getNavigationSubTemplate }}
 </template>
 
 <template name="navigationHeaderHomeLink">
