@@ -11,9 +11,5 @@ Meteor.publish("user.getByFreelanceProfileId", function (userProfileId) {
 		throw new Meteor.Error(500, "Profil non trouvé");
 	}
 
-	return Meteor.users.find(profile.userid, {
-		fields: {
-			emails: 1
-		}
-	});
+	return Meteor.users.find(profile.userid, { fields: { emails: 1 } });
 });

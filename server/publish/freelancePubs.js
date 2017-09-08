@@ -14,3 +14,13 @@ Meteor.publish('freelance.getTabular', function () {
 	console.log(`[freelance.getTabular]`);
 	return FreelanceProfile.find({}); //, { fields: { userid: 1, profile: 1, updated: 1, contact: 1, skills: 1, } });
 });
+Meteor.publish("freelance.get", function () {
+	console.log("[freelance.get]");
+	// on renvoie un cursor ou un array via find ou find().fetch()
+	// mais jamais l'objet directement (findOne ne marchera pas).
+	return FreelanceProfile.find({ userid: this.userId });
+});
+Meteor.publish('freelance.getCount', function () {
+	console.log("[freelance.getCount]");
+	return FreelanceProfile.find({}, { fields: { id: 1, contact: 1 } });
+});
