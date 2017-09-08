@@ -75,6 +75,7 @@ h3.profile-title {
 img.profile-pic {
 	width: 200px;
 	height: 200px;
+	margin: 5px;
 }
 
 section.profile-header {

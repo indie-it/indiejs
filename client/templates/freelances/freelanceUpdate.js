@@ -40,8 +40,14 @@ Template['freelance-update-contact'].events({
 		var reader = new FileReader();
 		reader.onload = function () {
 			document.getElementById('profile-pic-image').src = this.result;
+
+			Modal.hide();
+
 		};
 
 		reader.readAsDataURL(file);
+
+		Modal.show("loading-modal-generic", { title: "Chargement", text: "Chargement de l'image dans le navigateur. Veuillez patienter..."}, { backdrop: 'static', keyboard: false });
+
 	}
 });

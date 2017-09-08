@@ -50,9 +50,7 @@ var cloudinarycallback = function (doc, callback) {
 	});
 };
 
-
 AutoForm.hooks({
-
 	'freelance.createorupdate': {
 		onSubmit: function (insertdoc, updatedoc, currentdoc) {
             console.log("[freelance.createorupdate] onSubmit");
@@ -83,7 +81,7 @@ AutoForm.hooks({
 				});
 			};
 
-			Modal.show("userprofile-loading-modal", null, { backdrop: 'static', keyboard: false });
+			Modal.show("loading-modal-generic", { title: "Enregistrement des modifications", text: "Mise à jour du profil en cours. Veuillez patienter..."}, { backdrop: 'static', keyboard: false });
 
             var callback = null;
             var doc = null;

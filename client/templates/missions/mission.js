@@ -2,7 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import changeCase from 'change-case';
 
-
 // mission
 Template.mission.helpers({
 
@@ -192,7 +191,6 @@ Template.missionAdminPanel.helpers({
 	},
 });
 Template.missionAdminPanel.events({
-
 	"click #action-mission-accept": (event, template) => {
 		event.preventDefault();
 		console.log("click #action-mission-accept");
@@ -222,15 +220,11 @@ Template.missionAdminPanel.events({
 			});
 		});
 	},
-
 });
-
 
 // assignUser
 Template.assignUser.events({
-
 	"click a": function (event, template) {
-
 		// récupération de l'id d'utilisateur.
 		var userid = this.userid;
 		console.log(`userid: ${userid}`);
@@ -256,11 +250,8 @@ Template.assignUser.events({
 				Session.set("actions", result);
 			});
 		});
-
 	},
-
 });
-
 
 // missionLabels
 Template.missionLabels.helpers({

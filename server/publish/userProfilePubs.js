@@ -51,23 +51,3 @@ Meteor.publish('userprofile.getCount', function () {
 	return UserProfiles.find({}, { fields: { id: 1, firstName: 1, lastName: 1 } });
 
 });
-
-Meteor.publish("user.getById", function (userProfileId) {
-
-	console.log(`user.getById - userProfileId: ${userProfileId}`);
-
-	// We need to check the `listId` is the type we expect
-	check(userProfileId, String);
-
-	var profile = UserProfiles.findOne({ _id: userProfileId });
-	if (!profile) {
-		throw new Meteor.Error(500, "Profil non trouv�");
-	}
-
-	return Meteor.users.find(profile.userid, {
-		fields: {
-			emails: 1
-		}
-	});
-
-});
