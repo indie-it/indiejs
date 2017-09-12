@@ -9,7 +9,27 @@
 		</div>
 		<div class="container background-layer">
 			<h2>Liste des indépendants IndieIT</h2>
-			{{> tabular table=TabularTables.FreelanceList id="tableFreelanceList" class="table table-striped table-hover" }}
+
+			<a id="toggle-filter" class="btn btn-default">
+			  <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Filter par technologies
+		  	</a>
+
+			<div id="nav-skills" style="display: none;">
+				<ul class="nav nav-pills" role="tablist">
+					{{#each getAllSkills}}
+					<li role="presentation" class="{{getClassForSkillFilter this.name}}"><a href="#" id="{{this.name}}" class="skill-filter">{{this.name}} <span class="badge">{{this.count}}</span></a></li>
+					{{/each}}
+				</ul>
+			</div>
+
+			{{#if getSkillFilter}}
+				<p>
+					<i class="fa fa-code fa-fw" aria-hidden="true"></i> Technologie sélectionnée:
+					<a href=# id="close-filter"><i class="fa fa-times-circle fa-fw" aria-hidden="true"></i> {{getSkillFilter}}</a></p>
+				{{/if}}
+
+			{{> tabular table=TabularTables.FreelanceList id="tableFreelanceList" class="table table-striped table-hover" selector=selector }}
+
 		</div>
 	</div>
 </template>
@@ -18,5 +38,5 @@
 	<strong>
         <a href="{{pathFor route='freelance-profile' _id=_id }}">{{getFreelanceTitle}}</a>
     </strong>
-	{{#if hasSkills}}<p><ul class="list-inline ul-comma-separated">{{#each skills}}<li class="no-space">{{this.name}}</li>{{/each}}</ul></p>{{/if}}
+	{{#if hasSkills}}<p><ul class="list-inline ul-comma-separated">{{#each skills}}<li>{{this.name}}</li>{{/each}}</ul></p>{{/if}}
 </template>

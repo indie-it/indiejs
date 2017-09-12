@@ -40,6 +40,16 @@ body {
 	box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
 }
 
+li.label > a {
+	color: #fff;
+	text-decoration: none;
+}
+
+li.label > a:hover {
+	color: #337ab7;
+	text-decoration: none;
+}
+
 .toFade {
 	color: #919191;
 }
@@ -434,4 +444,12 @@ a {
 
 .div-cgu {
 	height: 200px;
+}
+
+.nav > li > a.skill-filter {
+	position: relative;
+	display: block;
+	padding: 5px;
+	margin: 1px;
+	background-color: lightgray;
 }

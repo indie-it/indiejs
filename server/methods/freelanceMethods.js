@@ -2,6 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
 
+
+
 Meteor.methods({
 
 	"freelance.insert": function (insertdoc) {
@@ -23,7 +25,6 @@ Meteor.methods({
 		});
 		return true;
 	},
-
     "freelance.updateWithId": function (updatedoc, docId) {
 
         console.log("freelance.updateWithId");
@@ -43,6 +44,36 @@ Meteor.methods({
 			console.log("Update successful!");
 		});
 		return true;
+	},
+	"freelance.getAllSkills": function () {
+
+		console.log(`[freelance.getAllSkills]`);
+
+		var profiles = FreelanceProfile.find({ skills: { $exists: true } }, { fields: { skills: 1 } });
+		var count = 0;
+
+		var allSkillsAndCount = [];
+
+		profiles.forEach((profile) => {
+			for (var i in profile.skills) {
+				var skillname = profile.skills[i].name;
+
+				// récupération des clés
+				var keys = _.map(allSkillsAndCount, (obj) => { return obj.name; });
+
+				// recherche de l'indice de la techno courante
+				var elem = _.findWhere(allSkillsAndCount, { 'name': skillname.toLowerCase() });
+				if (elem) {
+					elem.count++;
+				} else {
+					allSkillsAndCount.push({ 'name' : skillname.toLowerCase(), 'count': 1 });
+				}
+			}
+		});
+		count = allSkillsAndCount.length;
+		console.log(`\tcount: ${count}`);
+
+		return _.sortBy(allSkillsAndCount, 'name');
 	},
 
 });

@@ -10,8 +10,17 @@ Meteor.publish('freelance.getByUserId', function (userid) {
 	check(userid, String);
 	return FreelanceProfile.find({ 'userid': userid });
 });
-Meteor.publish('freelance.getTabular', function () {
+Meteor.publish('freelance.getTabular', function (tableName, ids, fields) {
+
 	console.log(`[freelance.getTabular]`);
+
+	check(tableName, String);
+    check(ids, Array);
+
+	console.log(tableName);
+	console.log(ids);
+	console.log(fields);
+
 	return FreelanceProfile.find({}); //, { fields: { userid: 1, profile: 1, updated: 1, contact: 1, skills: 1, } });
 });
 Meteor.publish("freelance.get", function () {
