@@ -38,7 +38,9 @@ Template['freelance-list'].helpers({
 	selector() {
 		var skill = Template.instance().skillsFilter.get();
 		if (skill) {
-			var regexObj = { $regex: escapeStringRegexp(skill), $options: "i"};
+			const regexStr = `^${escapeStringRegexp(skill)}$`
+			// console.log(regexStr);
+			var regexObj = { $regex: regexStr, $options: "i"};
 			return { "skills": { $elemMatch: { "name": regexObj } } };
 		}
 		return {};
