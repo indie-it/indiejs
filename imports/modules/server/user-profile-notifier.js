@@ -5,7 +5,7 @@ const getAdmins = () => {
 	return Roles.getUsersInRole(Globals.roles.admin).fetch();
 };
 const getProfileUri = (profileId) => {
-	return `https://www.indieit.fr${Utils.pathFor('profile', { '_id': profileId })}`;
+	return `https://www.indieit.fr${Utils.pathFor('freelance-profile', { '_id': profileId })}`;
 }
 
 /**
@@ -29,9 +29,9 @@ function notifyAdmins(profileDoc, actionType) {
 		var tpldata = {
 			'firstName': obj.username,
 			'user': {
-				'firstName': profileDoc.firstName,
-				'lastName': profileDoc.lastName,
-				'title': profileDoc.title,
+				'firstName': profileDoc.contact.firstName,
+				'lastName': profileDoc.contact.lastName,
+				'title': profileDoc.profile.title,
 			}
 		};
 		console.log(tpldata);
@@ -42,4 +42,3 @@ function notifyAdmins(profileDoc, actionType) {
 export default {
 	notifyAdmins,
 };
-

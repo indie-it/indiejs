@@ -1,21 +1,32 @@
 ﻿import { check } from 'meteor/check';
 import emailNotification from './email-notification.js';
+import escapeStringRegexp from 'escape-string-regexp';
 
 const getUserProfiles = (skills) => {
+
 	check(skills, Array);
+
+	for (var i = 0; i < skills.length; i++) {
+		skills[i] = escapeStringRegexp(skills[i]);
+	}
+
+	const regexStr = skills.join("|");
+	console.log(regexStr);
+	var regexObj = { $regex: regexStr, $options: "i"};
 	const selector = {
-		isEnRecherche: true,
-		"skills.name": { $in: skills }
+		"search.isEnRecherche": true,
+		"skills": { $elemMatch: { "name": regexObj } },
+		"notifications.newMissions": true,
 	};
 	const options = {
-		'fields': { userid: 1, firstName: 1, },
+		'fields': { userid: 1, contact: 1, search: 1, },
 		'transform': (doc) => {
 			// on rajoute une propriété au document retourné
 			doc.userObj = Meteor.users.findOne(doc.userid, { fields: { emails: 1 } });
 			return doc;
 		}
 	};
-	return UserProfiles
+	return FreelanceProfile
 		.find(selector, options)
 		.fetch();
 };
@@ -43,13 +54,16 @@ function notifyMatchingProfiles(missionDoc, actionType) {
 		return;
 	}
 
+	// console.log(`profiles.length: ${profiles.length}`);
+
 	_.each(profiles, (obj) => {
 		var email = obj.userObj.emails[0].address;
 		var tpldata = {
-			'firstName': obj.firstName,
-			'missionName': missionName,
+			'firstName': obj.contact.firstName,
+			'missionName': missionDoc.name,
 		};
-		emailNotification.sendEmailForAction(email, actionType, getMissionUri(missionDoc._id), tpldata);
+		console.log(tpldata);
+		// emailNotification.sendEmailForAction(email, actionType, getMissionUri(missionDoc._id), tpldata);
 	});
 
 }
@@ -82,6 +96,5 @@ function notifyAdmins(missionDoc, actionType) {
 
 export default {
 	notifyAdmins,
-	//notifyMatchingProfiles,
+	notifyMatchingProfiles,
 };
-

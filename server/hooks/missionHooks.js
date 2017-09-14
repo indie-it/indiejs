@@ -37,8 +37,6 @@ Missions.after.update(function (userId, doc, fieldNames, modifier, options) {
 	// identifier l'action réalisée...
 	var actionType = Lists.actions.map.missionUpdate;
 
-
-
 	// si les étapes ont changé, on va inscrire un action validé/archivé/accepté et non une mise à jour...
 	if (this.previous.currentState.step !== doc.currentState.step) {
 		console.log("[collection-hook] this.previous.currentState.step !== doc.currentState.step");
@@ -67,7 +65,7 @@ Missions.after.update(function (userId, doc, fieldNames, modifier, options) {
 			'mission': doc.name,
 			'missionid': doc._id,
 			'username': Meteor.user().username
-		}
+		},
 	};
 
 	console.log(action);
@@ -83,8 +81,9 @@ Missions.after.update(function (userId, doc, fieldNames, modifier, options) {
 	// notification des admins
 	missionNotifier.notifyAdmins(doc, action.actionType);
 
-	// notification des utilisateurs
-	//missionNotifier.notifyMatchingProfiles(doc, action);
+	// notification des utilisateurs (uniquement pour une validation de mission)
+	if (actionType == 'mission-validate') {
+		missionNotifier.notifyMatchingProfiles(doc, action.actionType);
+	}
 
 });
-

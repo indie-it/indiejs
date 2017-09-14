@@ -1,7 +1,3 @@
-//import dataTablesBootstrap from 'datatables.net-bs';
-//import 'datatables.net-bs/css/dataTables.bootstrap.css';
-
-//dataTablesBootstrap(window, $);
 
 Meteor.startup(function () {
 
@@ -35,20 +31,14 @@ Meteor.startup(function () {
 		// }
 	});
 
-
 	// async loader for fonts
 	// https://github.com/typekit/webfontloader
 	WebFontConfig = {
 		google: {
 			families: [
 				'Fira+Sans:200',
-				'Lobster',
-				'Pacifico',
-				'Baloo',
-				//'Fira+Sans:500',
-				//'Roboto Slab:700,400:latin',
-				//'Oswald:400',
-				//'Mouse Memoirs'
+				'Fira+Sans+Condensed:800',
+				'Fira+Sans+Condensed:500',
 			]
 		}
 	};
@@ -60,11 +50,9 @@ Meteor.startup(function () {
 		wf.async = 'true';
 		var s = document.getElementsByTagName('script')[0];
 		s.parentNode.insertBefore(wf, s);
-		//console.log("async fonts loaded", WebFontConfig);
 	})();
 
-
-
+	// chechbox pour la validation des conditions d'utilisation
 	AutoForm.addInputType("tos-checkbox", {
 		template: "afTosCheckbox",
 		valueOut: function () {

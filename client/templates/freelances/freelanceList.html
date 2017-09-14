@@ -11,7 +11,7 @@
 			<h2>Liste des indépendants IndieIT</h2>
 
 			<a id="toggle-filter" class="btn btn-default">
-			  <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Filter par technologies
+			  <i class="fa fa-code fa-fw" aria-hidden="true"></i> Filter par technologies
 		  	</a>
 
 			<div id="nav-skills" style="display: none;">
@@ -23,10 +23,10 @@
 			</div>
 
 			{{#if getSkillFilter}}
-				<p>
-					<i class="fa fa-code fa-fw" aria-hidden="true"></i> Technologie sélectionnée:
-					<a href=# id="close-filter"><i class="fa fa-times-circle fa-fw" aria-hidden="true"></i> {{getSkillFilter}}</a></p>
-				{{/if}}
+				<p>Technologie sélectionnée:
+					<a href=# id="close-filter">{{getSkillFilter}}&nbsp;<i class="fa fa-times-circle fa-fw" aria-hidden="true"></i></a>
+				</p>
+			{{/if}}
 
 			{{> tabular table=TabularTables.FreelanceList id="tableFreelanceList" class="table table-striped table-hover" selector=selector }}
 

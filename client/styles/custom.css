@@ -9,6 +9,15 @@ body {
 	font-family: 'Fira Sans', sans-serif;
 }
 
+a.navbar-brand {
+	font-family: 'Fira Sans Condensed', sans-serif;
+}
+
+.site-title {
+	font-family: 'Fira Sans', sans-serif;
+	font-weight: 300;
+}
+
 .jumbotron {
 	background-color: rgba(36, 36, 36, 0.3);
 	padding-top: 50px;
