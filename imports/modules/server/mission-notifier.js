@@ -54,8 +54,6 @@ function notifyMatchingProfiles(missionDoc, actionType) {
 		return;
 	}
 
-	// console.log(`profiles.length: ${profiles.length}`);
-
 	_.each(profiles, (obj) => {
 		var email = obj.userObj.emails[0].address;
 		var tpldata = {
@@ -63,7 +61,7 @@ function notifyMatchingProfiles(missionDoc, actionType) {
 			'missionName': missionDoc.name,
 		};
 		console.log(tpldata);
-		// emailNotification.sendEmailForAction(email, actionType, getMissionUri(missionDoc._id), tpldata);
+		emailNotification.sendEmailForAction(email, actionType, getMissionUri(missionDoc._id), tpldata);
 	});
 
 }
