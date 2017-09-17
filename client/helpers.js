@@ -46,7 +46,6 @@ Template.registerHelper("getCurrentClass", function (route) {
 	var currentRoute = Router.current().route.getName();
 	return route === currentRoute ? "active" : "";
 });
-
 Template.registerHelper("isAdmin", function (route) {
 	return Roles.userIsInRole(Meteor.userId(), Globals.roles.admin);
 });
@@ -56,7 +55,6 @@ Template.registerHelper("isFreelancer", function (route) {
 Template.registerHelper("isRecruiter", function (route) {
 	return Roles.userIsInRole(Meteor.userId(), Globals.roles.recruiter);
 });
-
 Template.registerHelper("getEmailLink", function () {
 	return `mailto:${Globals.contact}`;
 });

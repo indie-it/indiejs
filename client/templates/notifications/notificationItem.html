@@ -1,0 +1,13 @@
+<template name="notificationItem">
+    <li>
+        <a href="{{getAbsoluteUri actionid action.route objectid}}">
+            {{#if read}}
+                <i class="fa fa-envelope-open-o fa-fw" aria-hidden="true"></i> {{action.text}} ({{timeFromNow date}})
+            {{else}}
+                <strong><i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i> {{action.text}}</strong> ({{timeFromNow date}})
+            {{/if}}
+
+            <!-- <i class="fa {{getIconForAction actionid}} fa-fw" aria-hidden="true"></i> {{text}} ({{timeFromNow date}}) -->
+        </a>
+    </li>
+</template>

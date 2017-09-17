@@ -1,5 +1,7 @@
 ﻿import { check } from 'meteor/check';
 import emailNotification from './email-notification.js';
+import notificationManager from './notification-manager.js';
+import utils from './utils.js';
 import escapeStringRegexp from 'escape-string-regexp';
 
 const getUserProfiles = (skills) => {
@@ -13,13 +15,17 @@ const getUserProfiles = (skills) => {
 	const regexStr = skills.join("|");
 	console.log(regexStr);
 	var regexObj = { $regex: regexStr, $options: "i"};
+
+	// définition du sélecteur
 	const selector = {
 		"search.isEnRecherche": true,
 		"skills": { $elemMatch: { "name": regexObj } },
-		"notifications.newMissions": true,
+		// "notifications.newMissions": true,
 	};
+
+	// définition des options
 	const options = {
-		'fields': { userid: 1, contact: 1, search: 1, },
+		'fields': { userid: 1, contact: 1, search: 1, notifications: 1, },
 		'transform': (doc) => {
 			// on rajoute une propriété au document retourné
 			doc.userObj = Meteor.users.findOne(doc.userid, { fields: { emails: 1 } });
@@ -30,14 +36,7 @@ const getUserProfiles = (skills) => {
 		.find(selector, options)
 		.fetch();
 };
-const getAdmins = () => {
-	var adminRole = Globals.roles.admin;
-	console.log(`\tgetAdmins: adminRole = ${adminRole}`);
-	return Roles.getUsersInRole(adminRole).fetch();
-};
-const getMissionUri = (missionId) => {
-	return `https://www.indieit.fr${Utils.pathFor('mission', { '_id': missionId })}`;
-}
+
 
 /**
  * Notifie les utilisateurs potentiellement intéressés par la mission en cours
@@ -45,25 +44,48 @@ const getMissionUri = (missionId) => {
  * @param {any} action
  */
 function notifyMatchingProfiles(missionDoc, actionType) {
-	check(actionType, String);
-	console.log(`missionNotifier.notifyMatchingProfiles - action.actionType: ${actionType}`);
 
-	var profiles = getUserProfiles(missionDoc.technos);
-	if (!profiles || profiles.length == 0) {
-		console.log("aucun profil ne correspond...");
+	check(actionType, String);
+
+	console.log(`[mission-notifier.notifyMatchingProfiles] - action.actionType: ${actionType}`);
+
+	// on récupère l'action à partir de l'id
+	const action = Lists.actions.get(actionType);
+	if (!action) {
+		console.error(new Meteor.Error(500, `[mission-notifier.notifyMatchingProfiles] - Action non trouvée. [Id de l'action: ${actionType}]`));
 		return;
 	}
 
-	_.each(profiles, (obj) => {
-		var email = obj.userObj.emails[0].address;
-		var tpldata = {
-			'firstName': obj.contact.firstName,
-			'missionName': missionDoc.name,
-		};
-		console.log(tpldata);
-		emailNotification.sendEmailForAction(email, actionType, getMissionUri(missionDoc._id), tpldata);
-	});
+	// on teste cette action : existe-t-il une propriété notifyUsers ?
+	if (!action.notifyUsers || action.notifyUsers === false) {
+		console.log("[mission-notifier.notifyMatchingProfiles] - Pas de notification pour cette action.");
+		return;
+	}
 
+	// y a-t-il des profils correspondants aux technos de cette mission ?
+	var profiles = getUserProfiles(missionDoc.technos);
+	if (!profiles || profiles.length == 0) {
+		console.log("[mission-notifier.notifyMatchingProfiles] - Aucun profil ne correspond...");
+		return;
+	}
+
+	// parcours des profils
+	_.each(profiles, (obj) => {
+		// création de la notif
+		notificationManager.create(actionType, obj.userid, missionDoc._id);
+
+		// si l'utilisateur est abonné aux notifs par e-mail, on le crée.
+		if (obj.notifications && obj.notifications.newMissions && obj.notifications.newMissions === true) {
+			emailNotification.sendEmailForAction(
+				obj.userObj.emails[0].address,
+				actionType,
+				utils.getAbsoluteMissionUri(missionDoc._id),
+				{
+					'firstName': obj.contact.firstName,
+					'missionName': missionDoc.name,
+				});
+		}
+	});
 }
 
 /**
@@ -73,22 +95,35 @@ function notifyMatchingProfiles(missionDoc, actionType) {
  */
 function notifyAdmins(missionDoc, actionType) {
 	check(actionType, String);
-	console.log(`missionNotifier.notifyAdmin - action.actionType: ${actionType}`);
+	console.log(`[mission-notifier.notifyAdmins] - action.actionType: ${actionType}`);
 
-	var admins = getAdmins();
+	var admins = utils.getAdmins();
 	if (!admins || admins.length == 0) {
-		console.log("\tAucun administrateur trouvé");
+		console.log("[mission-notifier.notifyAdmins] - Aucun administrateur trouvé");
+		return;
+	}
+
+	// on récupère l'action à partir de l'id
+	const action = Lists.actions.get(actionType);
+	if (!action) {
+		console.error(new Meteor.Error(500, `[mission-notifier.notifyAdmins] - Action non trouvée. [Id de l'action: ${actionType}]`));
 		return;
 	}
 
 	// on parcourt le tableau des admins
 	_.each(admins, (obj) => {
-		var email = obj.emails[0].address;
-		var tpldata = {
-			'firstName': obj.username,
-			'missionName': missionDoc.name,
-		};
-		emailNotification.sendEmailForAction(email, actionType, getMissionUri(missionDoc._id), tpldata);
+		// création de la notif
+		notificationManager.create(actionType, obj._id, missionDoc._id);
+
+		// création des données pour l'envoi du mail.
+		emailNotification.sendEmailForAction(
+			obj.emails[0].address,
+			actionType,
+			utils.getAbsoluteMissionUri(missionDoc._id),
+			{
+				'firstName': obj.username,
+				'missionName': missionDoc.name,
+			});
 	});
 }
 

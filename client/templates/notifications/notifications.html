@@ -1,0 +1,21 @@
+<template name="notifications">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <i class="fa fa-bell fa-fw" aria-hidden="true"></i> Notifications
+        {{#if notificationsCount}}
+            <span class="badge badge-inverse">{{notificationsCount}}</span>
+        {{/if}}
+        <b class="caret"></b>
+    </a>
+    <ul class="notification dropdown-menu">
+        {{#if notificationsCount}}
+            {{#each notifications}}
+                {{> notificationItem}}
+            {{/each}}
+        {{else}}
+            <!-- <li><span>Pas de notification</span></li> -->
+            <li>
+                <a href="#">Pas de notification</a>
+            </li>
+        {{/if}}
+    </ul>
+</template>

@@ -82,8 +82,6 @@ Missions.after.update(function (userId, doc, fieldNames, modifier, options) {
 	missionNotifier.notifyAdmins(doc, action.actionType);
 
 	// notification des utilisateurs (uniquement pour une validation de mission)
-	if (actionType == 'mission-validate') {
-		missionNotifier.notifyMatchingProfiles(doc, action.actionType);
-	}
+	missionNotifier.notifyMatchingProfiles(doc, action.actionType);
 
 });

@@ -42,10 +42,15 @@
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
+
+					<li class="dropdown">{{> notifications}}</li>
+
 					<li class="{{getCurrentClass 'profile.update'}}">
 						<a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='freelance-update'}}">
-							<i class="fa fa-user fa-fw" aria-hidden="true"></i> Profil ({{currentUser.username}})</a>
+							<i class="fa fa-user fa-fw" aria-hidden="true"></i> Profil ({{currentUser.username}})
+						</a>
 					</li>
+
 					<li>
 						<a data-toggle="collapse" data-target=".navbar-collapse.in" href="#" class="logout">Déconnexion</a>
 					</li>
