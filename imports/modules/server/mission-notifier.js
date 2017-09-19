@@ -36,16 +36,20 @@ const getUserProfiles = (skills) => {
 		.find(selector, options)
 		.fetch();
 };
-
+const getCompany = (companyId) => {
+	check(companyId, String);
+	return Companies.findOne({ _id: companyId });
+};
 
 /**
  * Notifie les utilisateurs potentiellement intéressés par la mission en cours
  * @param {any} missionDoc
  * @param {any} action
  */
-function notifyMatchingProfiles(missionDoc, actionType) {
+function notifyMatchingProfiles(missionDoc, actionType, obj) {
 
 	check(actionType, String);
+	// check(obj, Object);
 
 	console.log(`[mission-notifier.notifyMatchingProfiles] - action.actionType: ${actionType}`);
 
@@ -93,7 +97,7 @@ function notifyMatchingProfiles(missionDoc, actionType) {
  * @param {any} missionDoc
  * @param {any} action
  */
-function notifyAdmins(missionDoc, actionType) {
+function notifyAdmins(missionDoc, actionType, obj) {
 	check(actionType, String);
 	console.log(`[mission-notifier.notifyAdmins] - action.actionType: ${actionType}`);
 
@@ -127,7 +131,52 @@ function notifyAdmins(missionDoc, actionType) {
 	});
 }
 
+/**
+ * Notifie la société à l'origine d'une mission
+ * @param {any} missionDoc
+ * @param {any} action
+ */
+function notifyCompany(missionDoc, actionType, obj) {
+	console.log("[mission-notifier.notifyCompany]");
+
+	if (!missionDoc.companyId) { return; }
+
+	var company = getCompany(missionDoc.companyId);
+
+	// on récupère l'action à partir de l'id
+	const action = Lists.actions.get(actionType);
+	if (!action) {
+		console.error(new Meteor.Error(500, `[mission-notifier.notifyCompany] - Action non trouvée. [Id de l'action: ${actionType}]`));
+		return;
+	}
+
+	if (!action.notifyCompany) {
+		console.log(`[mission-notifier.notifyCompany] - Action ne donnant pas lieu à une notification. [Id de l'action: ${actionType}]`);
+		return;
+	}
+
+	// création de la notif :
+	notificationManager.create(actionType, company.userid, missionDoc._id);
+}
+
+/**
+ * Notifie tout le monde (admins, freelances et société).
+ * @param {any} missionDoc
+ * @param {any} action
+ */
+function notify(missionDoc, actionType, obj) {
+	console.log("[mission-notifier.notify]");
+
+	console.log(obj);
+
+	notifyMatchingProfiles(missionDoc, actionType, obj);
+	notifyCompany(missionDoc, actionType, obj);
+	notifyAdmins(missionDoc, actionType, obj);
+}
+
 export default {
 	notifyAdmins,
 	notifyMatchingProfiles,
+	notifyCompany,
+	notify,
 };

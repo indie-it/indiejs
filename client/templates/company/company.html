@@ -1,26 +1,19 @@
 ﻿<template name="company">
 	<div class="container-fluid companies-background-image">
-
 		<div class="container-fluid hidden-xs breadcrumb-background">
 			<ol class="breadcrumb">
 				<li><a href="{{pathFor route='home'}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
 				<li><a href="{{pathFor route='companyList'}}">Liste des entreprises</a></li>
-				<li class="active">{{name}}</li>
+				<li class="active">{{company.name}}</li>
 			</ol>
 		</div>
-
 		<div class="container company background-layer">
-
 			{{> companyHeader }}
-
 			{{> companySummary }}
-
-			<!--{{> companyComments }}
-
-			{{> companyMissions }}-->
-
+			{{> companyComments }}
+			{{> companyMissions }}
 		</div>
-		</div>
+	</div>
 </template>
 
 <template name="companyHeader">
@@ -53,16 +46,16 @@
 </template>
 
 <template name="companySummary">
-		<h2>Présentation de la société</h2>
-		{{#markdown}}{{description}}{{/markdown}}
+	<h2>Présentation de la société</h2>
+	{{#markdown}}{{company.description}}{{/markdown}}
 </template>
 
 <template name="companyMissions">
-		<h2>Missions proposées</h2>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mauris nisi, viverra id mauris a, laoreet interdum arcu. Nullam non lorem volutpat mi sollicitudin accumsan. Curabitur pulvinar maximus nibh id pretium. Etiam viverra eros sagittis mi pellentesque ullamcorper. Morbi rutrum semper lectus eget congue. Sed vitae ipsum ullamcorper, tincidunt ipsum posuere, bibendum ipsum. Vivamus finibus dolor vitae libero ullamcorper facilisis. Duis mauris quam, sodales a faucibus nec, pretium et velit. Aliquam ac pulvinar est.</p>
+	<h2>Missions proposées</h2>
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mauris nisi, viverra id mauris a, laoreet interdum arcu. Nullam non lorem volutpat mi sollicitudin accumsan. Curabitur pulvinar maximus nibh id pretium. Etiam viverra eros sagittis mi pellentesque ullamcorper. Morbi rutrum semper lectus eget congue. Sed vitae ipsum ullamcorper, tincidunt ipsum posuere, bibendum ipsum. Vivamus finibus dolor vitae libero ullamcorper facilisis. Duis mauris quam, sodales a faucibus nec, pretium et velit. Aliquam ac pulvinar est.</p>
 </template>
 
 <template name="companyComments">
-		<h2>Commentaires</h2>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mauris nisi, viverra id mauris a, laoreet interdum arcu. Nullam non lorem volutpat mi sollicitudin accumsan. Curabitur pulvinar maximus nibh id pretium. Etiam viverra eros sagittis mi pellentesque ullamcorper. Morbi rutrum semper lectus eget congue. Sed vitae ipsum ullamcorper, tincidunt ipsum posuere, bibendum ipsum. Vivamus finibus dolor vitae libero ullamcorper facilisis. Duis mauris quam, sodales a faucibus nec, pretium et velit. Aliquam ac pulvinar est.</p>
+	<h2>Commentaires</h2>
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mauris nisi, viverra id mauris a, laoreet interdum arcu. Nullam non lorem volutpat mi sollicitudin accumsan. Curabitur pulvinar maximus nibh id pretium. Etiam viverra eros sagittis mi pellentesque ullamcorper. Morbi rutrum semper lectus eget congue. Sed vitae ipsum ullamcorper, tincidunt ipsum posuere, bibendum ipsum. Vivamus finibus dolor vitae libero ullamcorper facilisis. Duis mauris quam, sodales a faucibus nec, pretium et velit. Aliquam ac pulvinar est.</p>
 </template>

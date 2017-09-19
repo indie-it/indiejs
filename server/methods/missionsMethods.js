@@ -3,8 +3,17 @@ import { check } from 'meteor/check';
 import { MissionWF } from '../../imports/modules/server/mission-workflow.js';
 
 Meteor.methods({
-
 	"mission.insert": function (doc) {
+
+		var isRecruiter = Roles.userIsInRole(this.userId, Globals.roles.recruiter);
+		if (isRecruiter) {
+			console.log("recruteur!");
+			var company = Companies.findOne({ 'userid': this.userId });
+			if (company) {
+				console.log("on stocke son id: ", company._id);
+				doc.companyId = company._id;
+			}
+		}
 
 		doc.currentState = {
 			step: Lists.missionWorkflow.map.STEP_NEW,

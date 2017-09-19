@@ -7,15 +7,10 @@
         <b class="caret"></b>
     </a>
     <ul class="notification dropdown-menu">
-        {{#if notificationsCount}}
-            {{#each notifications}}
-                {{> notificationItem}}
-            {{/each}}
+        {{#each notifications}}
+            {{> notificationItem}}
         {{else}}
-            <!-- <li><span>Pas de notification</span></li> -->
-            <li>
-                <a href="#">Pas de notification</a>
-            </li>
-        {{/if}}
+            <li><a href="#">Pas de notification</a></li>
+        {{/each}}
     </ul>
 </template>

@@ -1,7 +1,7 @@
-Template.layout.events({
+Template.applicationLayout.events({
 	'click .logout': function(event) {
 		event.preventDefault();
 		Meteor.logout();
-		Router.go(Utils.pathFor('home'))
+		Router.go(Utils.pathFor('home'));
 	}
 });
