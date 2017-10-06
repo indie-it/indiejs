@@ -1,6 +1,6 @@
 module.exports = {
 	plugins: ['mup-disk'],
-	
+
 	servers: {
 		one: {
 			host: 'www.indieit.fr',
@@ -38,7 +38,6 @@ module.exports = {
 		},
 
 		env: {
-			// TODO: Change to your app's url
 			// If you are using ssl, it needs to start with https://
 			ROOT_URL: 'https://www.indieit.fr',
 			MONGO_URL: 'mongodb://localhost/meteor',
