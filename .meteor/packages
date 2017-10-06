@@ -53,3 +53,5 @@ mdg:validated-method
 dburles:collection-helpers
 simple:reactive-method
 dynamic-import@0.1.1
+reywood:publish-composite
+meteorhacks:unblock

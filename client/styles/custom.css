@@ -12,6 +12,14 @@ body {
 a.navbar-brand {
 	font-family: 'Fira Sans Condensed', sans-serif;
 }
+.navbar-brand {
+	margin: 0;
+}
+
+.navbar-brand > img {
+    display: inline;
+		margin-top: -5px;
+}
 
 .site-title {
 	font-family: 'Fira Sans', sans-serif;
@@ -461,4 +469,8 @@ a {
 	padding: 5px;
 	margin: 1px;
 	background-color: lightgray;
+}
+
+.nav > li.active {
+	background-color: #ddd;
 }

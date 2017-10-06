@@ -1,28 +1,87 @@
-﻿<template name="admin">
-	<div class="container-fluid admin-background-image">
+<template name="admin">
 
-		<div class="container-fluid hidden-xs breadcrumb-background">
-			<ol class="breadcrumb">
-				<li><a href="{{pathFor route='home'}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
-				<li class="active">Administration Indie IT</li>
-			</ol>
-		</div>
+	{{setTitle 'Administration'}}
 
-		<div class="container background-layer">
-			<div class="row">
-				<div class="col-md-12">
-					<h2><i class="fa fa-gavel fa-fw" aria-hidden="true"></i> Administration Indie IT</h2>
-					{{#if isAdmin}}
-					<br />
-
-					{{> tabular table=TabularTables.Actions class="table table-striped table-bordered"}}
-
-					{{else}}
-					<p>Non autorisé</p>
-					{{/if}}
-				</div>
-			</div>
-		</div>
+	<div class="container-fluid hidden-xs breadcrumb-background">
+		<ol class="breadcrumb">
+			<li><a href="{{pathFor route='home'}}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+			<li class="active">Page d'admin</li>
+		</ol>
 	</div>
 
+	<div class="container-fluid admin">
+		{{#if isAdmin}}
+
+			<div class="col-sm-4 col-md-3 col-lg-2 admin-pane">
+				<ul class="nav" role="tablist">
+					<li role="presentation" class="{{isActive 'actions'}}">
+						<a href="#" id="actions"><i class="fa fa-flash" aria-hidden="true"></i> Actions</a>
+					</li>
+					<li role="presentation" class="{{isActive 'users'}}">
+						<a href="#" id="users"><i class="fa fa-user" aria-hidden="true"></i> Utilisateurs</a>
+					</li>
+					<li role="presentation" class="{{isActive 'freelances'}}">
+						<a href="#" id="freelances"><i class="fa fa-user" aria-hidden="true"></i> Profils Freelance</a>
+					</li>
+					<li role="presentation" class="{{isActive 'companies'}}">
+						<a href="#" id="companies"><i class="fa fa-user" aria-hidden="true"></i> Profils Société</a>
+					</li>
+					<li role="presentation" class="{{isActive 'missions'}}">
+						<a href="#" id="missions"><i class="fa fa-briefcase"></i> Missions</a>
+					</li>
+					<li role="presentation" class="{{isActive 'notifs'}}">
+						<a href="#" id="notifs"><i class="fa fa-bell"></i> Notifications</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="col-sm-8 col-md-9 col-lg-10">
+				<!-- <div class="row"> -->
+					{{> Template.dynamic template=getAdminTemplateName}}
+				<!-- </div> -->
+			</div>
+		{{else}}
+			<p>Non autorisé</p>
+		{{/if}}
+	</div>
+
+</template>
+
+<template name="admin-actions">
+	<h1>[Admin] Actions</h1>
+	{{> tabular id="tabular-admin-actions" table=TabularTables.Actions class="table table-striped table-bordered"}}
+</template>
+
+<template name="admin-users">
+	<h1>[Admin] Utilisateurs et profils</h1>
+	{{> tabular id="tabular-admin-users" table=TabularTables.AdminUsersList class="table table-striped table-bordered"}}
+</template>
+
+<template name="admin-freelances">
+	<h1>[Admin] Profils Freelance</h1>
+	{{> tabular id="tabular-admin-freelances" table=TabularTables.AdminFreelanceList class="table table-striped table-bordered"}}
+</template>
+
+<template name="admin-companies">
+	<h1>[Admin] Profils Société</h1>
+	<!-- <p>Page de gestion des sociétés</p> -->
+	{{> tabular id="tabular-admin-companies" table=TabularTables.AdminCompanyList class="table table-striped table-bordered"}}
+</template>
+
+<template name="admin-missions">
+	<h1>[Admin] Missions</h1>
+	<div class="container-fluid background-layer">
+		{{setTitle '[Admin] Missions'}}
+		{{> tabular id="tabular-admin-missions" table=TabularTables.MissionsAdmin class="table table-hover table-striped table-bordered table-condensed"}}
+	</div>
+</template>
+
+<template name="missionName">
+	<a href="{{pathFor 'mission' _id=item._id }}">{{item.name}}</a>
+</template>
+
+
+<template name="admin-notifs">
+	<h1>[Admin] Notifications</h1>
+	<p>Page de gestion des notifications administrateur</p>
 </template>

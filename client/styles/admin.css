@@ -1,0 +1,27 @@
+/** admin **/
+.admin {
+	min-height: 800px;
+	padding-left: 0;
+	/*padding-right: 0;*/
+}
+
+.admin-pane {
+	color: #fff;
+	background-color: rgba(16, 16, 16, 0.7);
+	min-height: 800px;
+}
+.admin-pane a {
+	color: #fff;
+}
+.admin-pane a:hover {
+	color: #337ab7;
+	background-color: #fff;
+}
+.admin .nav > li.active {
+  background-color: #337ab7;
+  font-weight: bold;
+}
+.admin .nav > li > a:focus {
+  background-color: #337ab7;
+  color: #fff;
+}

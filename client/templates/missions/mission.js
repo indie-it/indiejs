@@ -256,42 +256,15 @@ Template.assignUser.events({
 // missionLabels
 Template.missionLabels.helpers({
 	"getTJM": () => {
-		console.log("Template.missionLabels.getTJM");
-
 		var mission = Template.instance().data.mission;
-		if (!mission.averageDailyRate || (!mission.averageDailyRate.min && !mission.averageDailyRate.max)) {
-			return "Non renseigné";
-		}
-		if (mission.averageDailyRate.min && !mission.averageDailyRate.max) {
-			return `A partir de ${mission.averageDailyRate.min} €/j`;
-		}
-		if (!mission.averageDailyRate.min && mission.averageDailyRate.max) {
-			return `${mission.averageDailyRate.max} €/j maximum`;
-		}
-		return `Entre ${mission.averageDailyRate.min} et ${mission.averageDailyRate.max} €/j`;
+		return Utils.getTjmText(mission);
 	},
 	"getMissionDuration": () => {
-		console.log("Template.missionLabels.getMissionDuration");
-
 		var mission = Template.instance().data.mission;
-
-		if (!mission.duration) {
-			return "";
-		}
-		var days = mission.duration;
-		if (days >= 20) {
-			var months = days / 20;
-			return `${moment.duration(months, 'months').humanize()} (${days}j)`;
-		}
-		return moment.duration(mission.duration, 'days').humanize();
+		return Utils.getMissionDurationText(mission);
 	},
 	"getMissionStart": () => {
-		console.log("Template.missionLabels.getMissionStart");
-
 		var mission = Template.instance().data.mission;
-		if (!!mission.isEarliestStart) {
-			return "Début au plus tôt";
-		}
-		return "Début " + Utils.formatDate(mission.start);
+		return Utils.getMissionStartText(mission);
 	},
 });

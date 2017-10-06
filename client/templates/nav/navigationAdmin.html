@@ -33,9 +33,6 @@
 							<li class="{{getCurrentClass 'missionSearch'}}">
 								<a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='missionSearch'}}">Recherche avancée</a>
 							</li>
-							{{#if isInRole 'admin'}}
-							<li class="{{getCurrentClass 'missionsListAdmin'}}"><a data-toggle="collapse" data-target=".navbar-collapse.in" href="{{pathFor route='missionsListAdmin'}}">Toutes les missions</a></li>
-							{{/if}}
 						</ul>
 					</li>
 				</ul>
