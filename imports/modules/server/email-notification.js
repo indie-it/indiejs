@@ -2,9 +2,9 @@
 import { Email } from 'meteor/email';
 import SimpleSchema from 'simpl-schema';
 import templateToHTML from './template-to-html.js';
+import { check } from 'meteor/check';
 
 const sendEmail = (template, { to, from, replyTo, subject, attachments }, payload) => {
-
 	const email = {
 		to,
 		from: from || 'Indie IT <noreply@indieit.fr>',
@@ -12,13 +12,10 @@ const sendEmail = (template, { to, from, replyTo, subject, attachments }, payloa
 		subject,
 		html: templateToHTML(template, payload),
 	};
-
-	if (attachments) email.attachments = attachments;
-
+	if (attachments) { email.attachments = attachments; }
 	Meteor.defer(() => {
 		Email.send(email);
 	});
-
 };
 
 function sendEmailForAction(to, actionType, url, templateData) {
@@ -45,6 +42,36 @@ function sendEmailForAction(to, actionType, url, templateData) {
 	sendEmail('standard', emailobj, payload);
 }
 
+function sendAdminEmail(mailinglist, title, html) {
+
+	if (!mailinglist ) { mailinglist = 'test' };
+
+	check([mailinglist, title, html], [String]);
+
+	let to = '';
+	if (mailinglist === 'test') {
+		to = 'indieitblog@gmail.com';
+	}
+	else if (mailinglist === 'freelances') {
+
+	}
+	else if (mailinglist === 'admins') {
+
+	}
+
+	var emailobj = {
+		'to': to,
+		'replyTo': ServerGlobals.smtp.username,
+		'subject': `Indie IT - ${title}`,
+	};
+	var payload = {
+		'title': title,
+		'body': html,
+	};
+	sendEmail('standard', emailobj, payload);
+}
+
 export default {
 	sendEmailForAction,
+	sendAdminEmail,
 };

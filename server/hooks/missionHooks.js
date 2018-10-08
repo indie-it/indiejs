@@ -104,7 +104,7 @@ Missions.after.update(function (userId, doc, fieldNames, modifier, options) {
 	if (doc.companyId) {
 		obj.companyid = doc.companyId;
 	}
-	if (user != null) {
+	if (Meteor.user() != null) {
 		//'profileid'
 		var profile = FreelanceProfile.findOne({ _id: userid });
 		if (profile) {

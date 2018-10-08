@@ -2,6 +2,7 @@ import { check } from 'meteor/check';
 import { Match } from 'meteor/check';
 import { publishComposite } from 'meteor/reywood:publish-composite';
 
+
 Meteor.publish("user.getByFreelanceProfileId", function (userProfileId) {
 	console.log(`[user.getByFreelanceProfileId] - userProfileId: ${userProfileId}`);
 
@@ -15,6 +16,8 @@ Meteor.publish("user.getByFreelanceProfileId", function (userProfileId) {
 
 	return Meteor.users.find(profile.userid, { fields: { emails: 1 } });
 });
+
+// Publish Composite Meteor Methods
 
 Meteor.publishComposite("tabular_UserAndFreelanceProfiles", function (tableName, ids, fields) {
 

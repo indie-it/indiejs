@@ -17,3 +17,29 @@ Template.admin.events({
         Session.set('admin-section', section);
     },
 });
+
+
+
+
+Template["admin-contact"].events({
+	"click #btn-send": (event, template) => {
+		let title = MarkdownEditor.getPostTitle();
+		let html = MarkdownEditor.getHtml();
+		let tags = MarkdownEditor.getTags();
+
+		if (!title || !html){
+			sAlert.error("Merci de renseigner le titre et le corps du message");
+			return;
+		}
+
+		Meteor.call("admin.email.send", title, html, (error, result) => {
+			if (error) {
+				sAlert.error(error);
+			}
+			if (result) {
+			 	console.log(result);
+				sAlert.success("Le courriel a bien été envoyé.");
+			}
+		});
+	},
+});
